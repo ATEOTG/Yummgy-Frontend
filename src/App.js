@@ -7,12 +7,13 @@ import Navigation from "./components/Navigation";
 function App() {
   return (
     <div>
-      <header className="border border-2 p-2 w-95 rounded m-auto mt-4">
-        <h1 className="text-center fw-bold">Yummgy</h1>
+      <header>
+        <div className="border border-2 p-2 w-95 rounded m-auto mt-4">
+          <h1 className="text-center fw-bold">Yummgy</h1>
+        </div>
+
+        <Navigation />
       </header>
-
-      <Navigation />
-
       <Routes>
         <Route path="/" element={<Home />} exact />
         <Route path="/recipe" element={<AllRecipes />} />
