@@ -11,6 +11,7 @@ const dummy = [
     image:
       "https://www.saltandlavender.com/wp-content/uploads/2016/05/potato-salad-with-bacon-1-500x500.jpg",
     ingredients: "paprika,sweet onion, salt and pepper, mayonnaise",
+    directions: "yappington",
   },
   {
     title: "Nuggets",
@@ -19,6 +20,7 @@ const dummy = [
     image:
       "https://lilluna.com/wp-content/uploads/2023/07/chicken-nuggets3-resize-13-480x270.jpg",
     ingredients: "bread crums, cheese, chicken, butter, seasonings",
+    direction: "yappity yap yap",
   },
 ];
 
@@ -66,6 +68,7 @@ function AllRecipes(props) {
                   author={recipe.author}
                   image={recipe.image}
                   ingredients={recipe.ingredients}
+                  directions={recipe.directions}
                 />
               );
             })
