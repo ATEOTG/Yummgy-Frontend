@@ -1,0 +1,13 @@
+.search-form {
+  position: relative;
+}
+.text-input {
+  padding-left: 2.8rem;
+}
+
+svg {
+  z-index: 999;
+  position: absolute;
+  top: 10%;
+  left: 0.5%;
+}
