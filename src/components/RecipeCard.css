@@ -5,3 +5,15 @@
 .recipe-card-text-cont {
   background-color: #f1dcab;
 }
+
+@media (min-width: 992px) {
+  .recipe-card-text-cont {
+    width: 100%;
+  }
+}
+
+@media (min-width: 767px) {
+  .recipe-card a {
+    width: 25% !important;
+  }
+}

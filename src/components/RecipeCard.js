@@ -10,7 +10,7 @@ function RecipeCard(props) {
     <Fragment>
       {props.notInRecipePage && (
         <li className="list-unstyled p-3 d-flex gap-4 border border-2 border-black rounded recipe-card">
-          <Link className="w-25" to={`${pathName}`}>
+          <Link className="w-50" to={`${pathName}`}>
             <img
               src={props.image}
               alt={`${props.title}`}
