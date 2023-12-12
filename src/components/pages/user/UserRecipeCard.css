@@ -2,9 +2,16 @@
   max-width: 116px;
 }
 
-.edit-btn {
+.del-btn {
   position: absolute;
   top: -10%;
   right: -5%;
   background-color: #e64040;
+}
+
+.edit-btn {
+  position: absolute;
+  top: 25%;
+  right: -5%;
+  background-color: #405ee6;
 }
