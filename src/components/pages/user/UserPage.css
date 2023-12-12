@@ -1,14 +1,13 @@
-.user-main-info-cont {
-}
-
 .user-page-list-cont {
   max-height: 566px;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .user-page-list {
   max-height: 281.8px;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .user-main-info-username {

@@ -19,7 +19,17 @@
   background-color: #f1dcab;
 }
 
+@media (min-width: 1400px) {
+  .recipe-card-icon {
+    top: -7% !important;
+  }
+}
+
 @media (min-width: 992px) {
+  .recipe-card-icon {
+    left: -2.3%;
+  }
+
   .recipe-card-text-cont {
     width: 100%;
   }
