@@ -23,8 +23,8 @@ function App() {
           <Route path="/" element={<Home />} exact />
           <Route path="/recipe/*" element={<AllRecipes />} />
           <Route path="/user" element={<UserPage />} />
-          <Route path="/user/login" element={<Login />} />
-          <Route path="/user/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

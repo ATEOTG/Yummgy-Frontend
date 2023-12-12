@@ -10,13 +10,13 @@ function Home(props) {
       <div className="d-flex flex-column justify-content-between w-50">
         <Link
           className="btn  btn-lg    home-btn  border border-2 border-black"
-          to="/user/login"
+          to="/login"
         >
           Login
         </Link>
         <Link
           className="btn btn-lg py-4 px-3 home-btn border border-2 border-black"
-          to="/user/register"
+          to="/register"
         >
           New User? Register
         </Link>

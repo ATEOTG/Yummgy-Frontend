@@ -20,11 +20,7 @@ function Navigation(props) {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: false, myRecipe: false };
       });
-    } else if (
-      path === "/user/login" ||
-      path === "/user/register" ||
-      path === "/user"
-    ) {
+    } else if (path === "/login" || path === "/register" || path === "/user") {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: true, myRecipe: false };
       });
@@ -54,7 +50,7 @@ function Navigation(props) {
       {renderLink.myRecipe && (
         <Link
           className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
-          to="#"
+          to="/user"
         >
           My Recipes
         </Link>
