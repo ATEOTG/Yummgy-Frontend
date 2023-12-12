@@ -36,12 +36,11 @@ function AllRecipes(props) {
 
   return (
     <div className="d-flex">
-      <div className="w-25 filler-cont"></div>
       <div className="w-100">
         <form className="input-group search-form" onSubmit={onSubmitHandler}>
           <SearchIcon />
           <input
-            className="form-control border-end-0 border rounded-pill text-input"
+            className="form-control border border-2 border-black rounded-pill text-input"
             type="text"
             value={searchValue}
             name="search"
@@ -50,7 +49,7 @@ function AllRecipes(props) {
           />
         </form>
 
-        <ul>
+        <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.map((recipe, i) => {
             return (
               <RecipeCard
