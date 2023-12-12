@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <header>
-        <div className="border border-2 p-2 w-95 rounded m-auto mt-4">
+        <div className="border border-2 p-2 w-95 rounded m-auto mt-4 title-cont border-black">
           <h1 className="text-center fw-bold">Yummgy</h1>
         </div>
 
