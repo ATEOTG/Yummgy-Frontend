@@ -14,10 +14,12 @@ function App() {
 
         <Navigation />
       </header>
-      <Routes>
-        <Route path="/" element={<Home />} exact />
-        <Route path="/recipe" element={<AllRecipes />} />
-      </Routes>
+      <main className="w-95 mt-4 m-auto mb-4">
+        <Routes>
+          <Route path="/" element={<Home />} exact />
+          <Route path="/recipe" element={<AllRecipes />} />
+        </Routes>
+      </main>
     </div>
   );
 }

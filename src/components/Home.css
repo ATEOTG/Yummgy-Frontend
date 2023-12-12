@@ -1,0 +1,15 @@
+.home-cont {
+  background-image: linear-gradient(
+      rgba(24, 24, 24, 0.7),
+      rgba(24, 24, 24, 0.7)
+    ),
+    url("../images/food-hero.jpg");
+  background-size: cover;
+  background-position: 50%;
+  padding: 20.5em;
+  height: 75vh;
+}
+
+.gap-10 {
+  gap: 10rem;
+}
