@@ -1,0 +1,19 @@
+.modal-btn-cls {
+  background-color: #f1dcab;
+  color: black;
+}
+
+.modal-btn-cls:hover {
+  background-color: #f1dcab;
+  color: black;
+}
+
+.modal-btn-add {
+  background-color: #abceab;
+  color: black;
+}
+
+.modal-btn-add:hover {
+  background-color: #abceab;
+  color: black;
+}

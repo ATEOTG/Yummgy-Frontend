@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
-import RecipeCard from "../../RecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import RecipeModal from "../../RecipeModal";
+import AddRecipe from "../../RecipeModal";
 
 const dummyUser = {
   username: "user1",
@@ -66,6 +69,7 @@ function UserPage(props) {
   const [searchValue, setSearchValue] = useState("");
   const [favoriteRecipes, setFavoriteRecipes] = useState(user.favoritedRecipes);
   const [viewMore, setViewMore] = useState(false);
+  const [recipeModalShow, setRecipeModalShow] = useState(false);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -99,9 +103,17 @@ function UserPage(props) {
           </div>
         </div>
         <div>
-          <button className="border border-2 border-black rounded w-100">
+          <button
+            onClick={() => setRecipeModalShow(true)}
+            className="border border-2 border-black rounded w-100"
+          >
             Add Recipe
           </button>
+
+          <RecipeModal
+            show={recipeModalShow}
+            onHide={() => setRecipeModalShow(false)}
+          />
         </div>
         <ul className="p-0 d-flex flex-column gap-1 user-page-list">
           {user.userRecipe.map((recipe, i) => {
