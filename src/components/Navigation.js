@@ -20,7 +20,11 @@ function Navigation(props) {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: false, myRecipe: false };
       });
-    } else if (path === "/user/login" || path === "/user/register") {
+    } else if (
+      path === "/user/login" ||
+      path === "/user/register" ||
+      path === "/user"
+    ) {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: true, myRecipe: false };
       });

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const usernameValueHandler = (e) => {
     setUsername(e.target.value);
@@ -15,6 +18,13 @@ function Login(props) {
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
+
+    // testing out
+    if (true) {
+      setTimeout(() => {
+        navigate("/user", { replace: true });
+      }, 1000);
+    }
   };
 
   return (
@@ -58,10 +68,7 @@ function Login(props) {
         </div>
       </form>
 
-      <div className="d-flex justify-content-between mt-4 w-90 m-auto">
-        <button className="border border-2 border-black rounded p-3 fs-5">
-          Forgot Password
-        </button>
+      <div className="d-flex justify-content-center mt-4 w-90 m-auto">
         <button
           onClick={loginSubmitHandler}
           className="border border-2 border-black rounded p-3 px-5 fs-5 login-btn"

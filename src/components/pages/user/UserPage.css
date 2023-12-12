@@ -1,0 +1,15 @@
+.user-main-info-cont {
+}
+
+.user-page-list {
+  max-height: 281.8px;
+  overflow: scroll;
+}
+
+.user-main-info-username {
+  background-color: #dae1b6;
+}
+
+.user-main-info-user {
+  background-color: #f1dcab;
+}

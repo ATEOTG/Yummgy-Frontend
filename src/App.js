@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import Login from "./components/pages/user/Login";
 import Register from "./components/pages/user/Register";
 import NotFound from "./components/pages/NotFound";
+import UserPage from "./components/pages/user/UserPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/recipe/*" element={<AllRecipes />} />
+          <Route path="/user" element={<UserPage />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
