@@ -3,10 +3,7 @@ import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import RecipeModal from "../../RecipeModal";
-import AddRecipe from "../../RecipeModal";
 
 const dummyUser = {
   username: "user1",
@@ -23,22 +20,23 @@ const dummyUser = {
       directions: "yappington",
     },
     {
-      title: "Potato Salad",
-      prepTime: "2 hours",
-      author: "Debbie",
+      title: "Grilled Chicken",
+      prepTime: "1.5 hours",
+      author: "John",
       image:
-        "https://www.saltandlavender.com/wp-content/uploads/2016/05/potato-salad-with-bacon-1-500x500.jpg",
-      ingredients: "paprika,sweet onion, salt and pepper, mayonnaise",
-      directions: "yappington",
+        "https://www.jocooks.com/wp-content/uploads/2022/07/grilled-chicken-breast-1-21-500x500.jpg",
+      ingredients: "chicken breasts, olive oil, garlic, lemon, thyme",
+      directions:
+        "Preheat the grill. Mix olive oil, minced garlic, lemon juice, and thyme. Marinate chicken and grill until cooked through.",
     },
     {
-      title: "Potato Salad",
-      prepTime: "2 hours",
+      title: "Nuggets",
+      prepTime: "30 mins",
       author: "Debbie",
       image:
-        "https://www.saltandlavender.com/wp-content/uploads/2016/05/potato-salad-with-bacon-1-500x500.jpg",
-      ingredients: "paprika,sweet onion, salt and pepper, mayonnaise",
-      directions: "yappington",
+        "https://lilluna.com/wp-content/uploads/2023/07/chicken-nuggets3-resize-13-480x270.jpg",
+      ingredients: "bread crums, cheese, chicken, butter, seasonings",
+      directions: "yappity yap yap",
     },
   ],
   favoritedRecipes: [
@@ -125,6 +123,8 @@ function UserPage(props) {
                     title={recipe.title}
                     image={recipe.image}
                     ingredients={recipe.ingredients}
+                    prepTime={recipe.prepTime}
+                    directions={recipe.directions}
                     notInRecipePage={true}
                   />
                 );
@@ -135,6 +135,8 @@ function UserPage(props) {
                   key={`${recipe.title} + ${i}`}
                   title={recipe.title}
                   image={recipe.image}
+                  prepTime={recipe.prepTime}
+                  directions={recipe.directions}
                   ingredients={recipe.ingredients}
                   notInRecipePage={true}
                 />
