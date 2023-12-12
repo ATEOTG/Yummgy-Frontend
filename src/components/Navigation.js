@@ -13,12 +13,16 @@ function Navigation(props) {
 
   useEffect(() => {
     if (path === "/recipe") {
-      setRenderLink((r) => {
-        return { ...r, homeRender: true, myRecipe: true };
+      setRenderLink(() => {
+        return { allRecipeRender: true, homeRender: true, myRecipe: true };
       });
     } else if (path === "/") {
-      setRenderLink((r) => {
-        return { ...r, homeRender: false, myRecipe: false };
+      setRenderLink(() => {
+        return { allRecipeRender: true, homeRender: false, myRecipe: false };
+      });
+    } else if (path === "/user/login") {
+      setRenderLink(() => {
+        return { allRecipeRender: true, homeRender: true, myRecipe: false };
       });
     }
   }, [path]);

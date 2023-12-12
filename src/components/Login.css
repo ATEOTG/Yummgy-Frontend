@@ -1,0 +1,23 @@
+.login-cont {
+  background-color: #f1dcab;
+  padding-bottom: 5rem !important;
+}
+
+.login-label {
+  background-color: #e7b790;
+  flex: 70%;
+  align-self: stretch;
+}
+
+.login-btn {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+button {
+  background-color: #e7b790;
+}

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import AllRecipes from "./components/AllRecipes";
 import Navigation from "./components/Navigation";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/recipe" element={<AllRecipes />} />
+          <Route path="/user/login" element={<Login />} />
         </Routes>
       </main>
     </div>

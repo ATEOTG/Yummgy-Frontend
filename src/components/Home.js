@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function Home(props) {
       <div className="d-flex flex-column justify-content-between w-50">
         <Link
           className="btn  btn-lg    home-btn  border border-2 border-black"
-          to="#"
+          to="/user/login"
         >
           Login
         </Link>
