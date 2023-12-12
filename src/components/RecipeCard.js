@@ -1,26 +1,52 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./RecipeCard.css";
+import { Link, Route, Routes } from "react-router-dom";
+import RecipePage from "./RecipePage";
 
 function RecipeCard(props) {
-  return (
-    <li className="list-unstyled p-3 d-flex gap-4 border border-2 border-black rounded recipe-card">
-      <img
-        src={props.image}
-        alt={`${props.name}`}
-        className="w-25 border border-2 border-black rounded"
-      />
-      <div className="border border-2 border-black rounded recipe-card-text-cont p-3">
-        <h2 className="text-center fw-bold">{props.title}</h2>
-        <div className="mt-4">
-          {/* <p className="text-center">Prep Time: {props.prepTime}</p> */}
-          <div>
-            <p className="text-center">Ingredients: {props.ingredients}</p>
-          </div>
+  const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
-          {/* <p className="text-center">Author: {props.author}</p> */}
-        </div>
-      </div>
-    </li>
+  return (
+    <Fragment>
+      {props.notInRecipePage && (
+        <li className="list-unstyled p-3 d-flex gap-4 border border-2 border-black rounded recipe-card">
+          <Link className="w-25" to={`${pathName}`}>
+            <img
+              src={props.image}
+              alt={`${props.title}`}
+              className="w-100 h-100 border border-2 border-black rounded"
+            />
+          </Link>
+
+          <div className="border border-2 border-black rounded recipe-card-text-cont p-3">
+            <h2 className="text-center fw-bold">{props.title}</h2>
+            <div className="mt-4">
+              {/* <p className="text-center">Prep Time: {props.prepTime}</p> */}
+              <div>
+                <p className="text-center">Ingredients: {props.ingredients}</p>
+              </div>
+
+              {/* <p className="text-center">Author: {props.author}</p> */}
+            </div>
+          </div>
+        </li>
+      )}
+      <Routes>
+        <Route
+          path={`${pathName}`}
+          element={
+            <RecipePage
+              title={props.title}
+              prepTime={props.prepTime}
+              author={props.author}
+              image={props.image}
+              ingredients={props.ingredients}
+              directions={props.directions}
+            />
+          }
+        />
+      </Routes>
+    </Fragment>
   );
 }
 

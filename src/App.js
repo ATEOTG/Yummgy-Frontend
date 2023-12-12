@@ -20,7 +20,7 @@ function App() {
       <main className="w-95 mt-4 m-auto mb-4">
         <Routes>
           <Route path="/" element={<Home />} exact />
-          <Route path="/recipe" element={<AllRecipes />} />
+          <Route path="/recipe/*" element={<AllRecipes />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
