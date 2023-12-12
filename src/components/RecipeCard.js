@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "./RecipeCard.css";
 import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./RecipePage";
+import FavIcon from "../svg/FavIcon";
 
 function RecipeCard(props) {
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
@@ -18,15 +19,13 @@ function RecipeCard(props) {
             />
           </Link>
 
-          <div className="border border-2 border-black rounded recipe-card-text-cont p-3">
+          <div className="border border-2 border-black rounded recipe-card-text-cont p-3  position-relative">
+            <FavIcon className={"recipe-card-icon"} />
             <h2 className="text-center fw-bold">{props.title}</h2>
             <div className="mt-4">
-              {/* <p className="text-center">Prep Time: {props.prepTime}</p> */}
               <div>
                 <p className="text-center">Ingredients: {props.ingredients}</p>
               </div>
-
-              {/* <p className="text-center">Author: {props.author}</p> */}
             </div>
           </div>
         </li>

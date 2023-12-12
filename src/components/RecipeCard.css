@@ -2,6 +2,19 @@
   background-color: #e7b790;
 }
 
+.recipe-card-icon {
+  position: absolute !important;
+  top: -10% !important;
+  left: -4%;
+  border: 5px;
+  border-color: black;
+}
+
+.recipe-card-icon path {
+  fill: transparent;
+  stroke: black;
+}
+
 .recipe-card-text-cont {
   background-color: #f1dcab;
 }
