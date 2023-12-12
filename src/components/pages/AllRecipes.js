@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SearchIcon from "../svg/SearchIcon";
+import SearchIcon from "../../svg/SearchIcon";
 import "./AllRecipes.css";
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "../RecipeCard";
 import { useLocation } from "react-router-dom";
 
 const dummy = [

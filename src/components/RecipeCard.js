@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import "./RecipeCard.css";
 import { Link, Route, Routes } from "react-router-dom";
-import RecipePage from "./RecipePage";
+import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
 
 function RecipeCard(props) {
