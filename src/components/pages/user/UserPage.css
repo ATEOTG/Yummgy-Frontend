@@ -1,6 +1,11 @@
 .user-main-info-cont {
 }
 
+.user-page-list-cont {
+  max-height: 566px;
+  overflow: scroll;
+}
+
 .user-page-list {
   max-height: 281.8px;
   overflow: scroll;

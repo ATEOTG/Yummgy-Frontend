@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
+import RecipeCard from "../../RecipeCard";
+import UserFavoriteCard from "./UserFavoriteCard";
 
 const dummyUser = {
   username: "user1",
@@ -69,7 +71,7 @@ function UserPage(props) {
     e.preventDefault();
 
     setFavoriteRecipes(() => {
-      return favoriteRecipes.filter((el) =>
+      return user.favoritedRecipes.filter((el) =>
         el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
       );
     });
@@ -136,7 +138,10 @@ function UserPage(props) {
         </button>
       </div>
       <div className="w-75">
-        <form className="input-group search-form" onSubmit={onSubmitHandler}>
+        <form
+          className="input-group search-form mb-2"
+          onSubmit={onSubmitHandler}
+        >
           <SearchIcon />
           <input
             className="form-control border border-2 border-black rounded-pill text-input"
@@ -147,6 +152,23 @@ function UserPage(props) {
             onChange={onChangeHandler}
           />
         </form>
+        <ul className="p-0 d-flex flex-column gap-2 user-page-list-cont">
+          {favoriteRecipes.length !== 0 ? (
+            favoriteRecipes.map((recipe, i) => {
+              return (
+                <UserFavoriteCard
+                  key={`${recipe.title} + ${i}`}
+                  title={recipe.title}
+                  author={recipe.author}
+                  image={recipe.image}
+                  ingredients={recipe.ingredients}
+                />
+              );
+            })
+          ) : (
+            <h2 className="fw-bold text-center">No Results Found!</h2>
+          )}
+        </ul>
       </div>
     </div>
   );
