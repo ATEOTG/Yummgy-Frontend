@@ -16,7 +16,7 @@ function Home(props) {
         </Link>
         <Link
           className="btn btn-lg py-4 px-3 home-btn border border-2 border-black"
-          to="#"
+          to="/user/register"
         >
           New User? Register
         </Link>

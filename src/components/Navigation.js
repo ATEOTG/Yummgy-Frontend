@@ -20,7 +20,7 @@ function Navigation(props) {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: false, myRecipe: false };
       });
-    } else if (path === "/user/login") {
+    } else if (path === "/user/login" || path === "/user/register") {
       setRenderLink(() => {
         return { allRecipeRender: true, homeRender: true, myRecipe: false };
       });

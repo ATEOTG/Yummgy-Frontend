@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import AllRecipes from "./components/AllRecipes";
 import Navigation from "./components/Navigation";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} exact />
           <Route path="/recipe" element={<AllRecipes />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/user/register" element={<Register />} />
         </Routes>
       </main>
     </div>
