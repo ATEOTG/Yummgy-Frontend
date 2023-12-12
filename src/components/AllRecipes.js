@@ -28,6 +28,12 @@ function AllRecipes(props) {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    setRecipeList(() => {
+      return dummy.filter((el) =>
+        el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      );
+    });
   };
 
   const onChangeHandler = (e) => {
@@ -50,18 +56,22 @@ function AllRecipes(props) {
         </form>
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
-          {recipeList.map((recipe, i) => {
-            return (
-              <RecipeCard
-                key={`${recipe.title} + ${i}`}
-                title={recipe.title}
-                prepTime={recipe.prepTime}
-                author={recipe.author}
-                image={recipe.image}
-                ingredients={recipe.ingredients}
-              />
-            );
-          })}
+          {recipeList.length != 0 ? (
+            recipeList.map((recipe, i) => {
+              return (
+                <RecipeCard
+                  key={`${recipe.title} + ${i}`}
+                  title={recipe.title}
+                  prepTime={recipe.prepTime}
+                  author={recipe.author}
+                  image={recipe.image}
+                  ingredients={recipe.ingredients}
+                />
+              );
+            })
+          ) : (
+            <h2 className="fw-bold text-center">No Results Found!</h2>
+          )}
         </ul>
       </div>
     </div>
