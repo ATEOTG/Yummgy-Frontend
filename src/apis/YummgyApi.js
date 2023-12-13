@@ -32,7 +32,21 @@ const YummgyApi = {
     });
   },
 
-  loginUser: () => {},
+  loginUser: (credentials, setUser) => {
+    fetch(URL + "/authenticate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default YummgyApi;

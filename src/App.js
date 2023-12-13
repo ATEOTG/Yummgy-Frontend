@@ -7,8 +7,11 @@ import Login from "./components/pages/user/Login";
 import Register from "./components/pages/user/Register";
 import NotFound from "./components/pages/NotFound";
 import UserPage from "./components/pages/user/UserPage";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState({});
+
   return (
     <div>
       <header>
@@ -16,14 +19,23 @@ function App() {
           <h1 className="text-center fw-bold">Yummgy</h1>
         </div>
 
-        <Navigation />
+        <Navigation user={user} setUser={setUser} />
       </header>
       <main className="w-95 mt-4 m-auto mb-4">
         <Routes>
           <Route path="/" element={<Home />} exact />
-          <Route path="/recipe/*" element={<AllRecipes />} />
-          <Route path="/user" element={<UserPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/recipe/*"
+            element={<AllRecipes user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/user"
+            element={<UserPage user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/login"
+            element={<Login user={user} setUser={setUser} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

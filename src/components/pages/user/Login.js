@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import YummgyApi from "../../../apis/YummgyApi";
 
 function Login(props) {
   const [username, setUsername] = useState("");
@@ -21,15 +22,18 @@ function Login(props) {
   const loginSubmitHandler = (e) => {
     e.preventDefault();
 
-    // testing out
+    YummgyApi.loginUser(
+      { username: username, password: password },
+      props.setUser
+    );
 
-    setLoginSuccess(true);
-    if (true) {
-      setTimeout(() => {
-        setLoginSuccess(false);
-        navigate("/user", { replace: true });
-      }, 2000);
-    }
+    // setLoginSuccess(true);
+    // if (true) {
+    //   setTimeout(() => {
+    //     setLoginSuccess(false);
+    //     navigate("/user", { replace: true });
+    //   }, 2000);
+    // }
   };
 
   return (
