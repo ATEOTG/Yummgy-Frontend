@@ -32,7 +32,7 @@ const YummgyApi = {
     });
   },
 
-  loginUser: (credentials) => {
+  loginUser: (credentials, setJwt) => {
     fetch(URL + "/authenticate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,14 +40,15 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.jwt);
         localStorage.setItem(
           "jwt",
           JSON.stringify({
             token: data.jwt,
           })
         );
+        setJwt(localStorage.getItem("jwt"));
       })
+
       .catch((err) => {
         console.log(err);
       });

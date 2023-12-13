@@ -25,7 +25,7 @@ function Login(props) {
     if (username !== "" || password !== "") {
       YummgyApi.loginUser(
         { username: username, password: password },
-        props.setUser
+        props.setJwt
       );
     }
 
