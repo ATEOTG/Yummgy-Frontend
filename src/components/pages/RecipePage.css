@@ -1,3 +1,7 @@
+div.border {
+  scrollbar-width: thin;
+}
+
 .recipe-page-cont {
   margin-top: -45px;
 }

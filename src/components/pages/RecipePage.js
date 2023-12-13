@@ -23,7 +23,7 @@ function RecipePage(props) {
             <p>{props.ingredients}</p>
           </div>
         </div>
-        <div className="border border-2 border-black rounded w-50 directions-cont p-2">
+        <div className="border border-2 border-black rounded w-50 directions-cont p-2 overflow-y-scroll">
           <p className="fw-bold">Directions </p>
           <br />
           <p>{props.directions}</p>
