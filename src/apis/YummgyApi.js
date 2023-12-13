@@ -131,9 +131,24 @@ const YummgyApi = {
       });
   },
 
-  // addRecipe: () => {
+  addRecipe: (recipe) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
-  // }
+    fetch(URL + `/api/add/recipe`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token}),
+      body: JSON.stringify(recipe),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Recipe Created: " + data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 
   registerUser: (user) => {
     fetch(URL + "/api/add/user", {
