@@ -118,6 +118,15 @@ function Register(props) {
             required
           />
         </div>
+        <div className="d-flex justify-content-center mt-5 w-90 m-auto">
+          <button
+            type="submit"
+            onClick={registerSubmitHandler}
+            className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn"
+          >
+            Register
+          </button>
+        </div>
       </form>
       {registerSuccess && (
         <div className="w-100 d-flex justify-content-center mt-4">
@@ -134,15 +143,6 @@ function Register(props) {
           </div>
         </div>
       )}
-
-      <div className="d-flex justify-content-center mt-5 w-90 m-auto">
-        <button
-          onClick={registerSubmitHandler}
-          className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn"
-        >
-          Register
-        </button>
-      </div>
     </div>
   );
 }

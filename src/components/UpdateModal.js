@@ -31,22 +31,33 @@ function UpdateModal(props) {
   };
 
   const submitFormHandler = (e) => {
-    e.preventDefault();
-
-    YummgyApi.updateRecipe({
+    const formInfo = {
       prepTime: prepTime,
       directions: directions,
       recipeId: props.id,
       title: recipeName,
       ingredients: ingredients,
       foodImageUrl: imageUrl,
-    });
+    };
 
+    if (
+      recipeName === "" ||
+      directions === "" ||
+      recipeName === "" ||
+      ingredients === "" ||
+      imageUrl === ""
+    ) {
+      alert("None of the fields must be empty!");
+      return null;
+    }
+
+    YummgyApi.updateRecipe(formInfo);
+
+    props.updatedValueHandler(formInfo);
+    e.preventDefault();
     props.onHide();
   };
 
-  console.log("imageurl: " + imageUrl);
-  console.log("preptime: " + prepTime);
   return (
     <Modal
       {...props}
@@ -97,7 +108,6 @@ function UpdateModal(props) {
               required
             />
           </div>
-
           <div className="d-flex gap-4 mb-3">
             <label
               htmlFor="prep"
@@ -152,23 +162,24 @@ function UpdateModal(props) {
               cols="30"
               rows="4"
             ></textarea>
-          </div>
+          </div>{" "}
+          <Modal.Footer>
+            <Button
+              className="border border-2 border-black modal-btn-cls fw-bold"
+              onClick={props.onHide}
+            >
+              Close
+            </Button>
+            <Button
+              type="submit"
+              onClick={submitFormHandler}
+              className="border border-2 border-black modal-btn-add fw-bold"
+            >
+              Update
+            </Button>
+          </Modal.Footer>
         </form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button
-          className="border border-2 border-black modal-btn-cls fw-bold"
-          onClick={props.onHide}
-        >
-          Close
-        </Button>
-        <Button
-          onClick={submitFormHandler}
-          className="border border-2 border-black modal-btn-add fw-bold"
-        >
-          Update
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }
