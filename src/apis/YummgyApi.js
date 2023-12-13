@@ -31,7 +31,7 @@ const YummgyApi = {
       });
   },
 
-  getUserFavoriteRecipes: (setFavoriteRecipes) => {
+  getUserFavoriteRecipes: (setFavoriteRecipes, setSearchRecipeList) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
     fetch(URL + "/api/users/favorites", {
@@ -43,7 +43,7 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         setFavoriteRecipes(data);
-        console.log(data);
+        setSearchRecipeList(data);
       })
       .catch((err) => {
         console.log(err);

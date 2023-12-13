@@ -9,58 +9,6 @@ import YummgyApi from "../../../apis/YummgyApi";
 const dummyUser = {
   username: "user1",
   recipesAuthored: 1,
-  recipesFavorited: 5,
-  userRecipe: [
-    {
-      title: "Potato Salad",
-      prepTime: "2 hours",
-      author: "Debbie",
-      image:
-        "https://www.saltandlavender.com/wp-content/uploads/2016/05/potato-salad-with-bacon-1-500x500.jpg",
-      ingredients: "paprika,sweet onion, salt and pepper, mayonnaise",
-      directions: "yappington",
-    },
-    {
-      title: "Grilled Chicken",
-      prepTime: "1.5 hours",
-      author: "John",
-      image:
-        "https://www.jocooks.com/wp-content/uploads/2022/07/grilled-chicken-breast-1-21-500x500.jpg",
-      ingredients: "chicken breasts, olive oil, garlic, lemon, thyme",
-      directions:
-        "Preheat the grill. Mix olive oil, minced garlic, lemon juice, and thyme. Marinate chicken and grill until cooked through.",
-    },
-    {
-      title: "Nuggets",
-      prepTime: "30 mins",
-      author: "Debbie",
-      image:
-        "https://lilluna.com/wp-content/uploads/2023/07/chicken-nuggets3-resize-13-480x270.jpg",
-      ingredients: "bread crums, cheese, chicken, butter, seasonings",
-      directions: "yappity yap yap",
-    },
-  ],
-  favoritedRecipes: [
-    {
-      title: "Grilled Chicken",
-      prepTime: "1.5 hours",
-      author: "John",
-      image:
-        "https://www.jocooks.com/wp-content/uploads/2022/07/grilled-chicken-breast-1-21-500x500.jpg",
-      ingredients: "chicken breasts, olive oil, garlic, lemon, thyme",
-      directions:
-        "Preheat the grill. Mix olive oil, minced garlic, lemon juice, and thyme. Marinate chicken and grill until cooked through.",
-    },
-    {
-      title: "Nuggets",
-      prepTime: "30 mins",
-      author: "Debbie",
-      image:
-        "https://lilluna.com/wp-content/uploads/2023/07/chicken-nuggets3-resize-13-480x270.jpg",
-      ingredients: "bread crums, cheese, chicken, butter, seasonings",
-      directions: "yappity yap yap",
-    },
-  ],
 };
 
 function UserPage(props) {
@@ -68,6 +16,7 @@ function UserPage(props) {
   const [userInfo, setUserInfo] = useState("");
   const [userRecipe, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
   const [recipeModalShow, setRecipeModalShow] = useState(false);
@@ -75,16 +24,19 @@ function UserPage(props) {
   useEffect(() => {
     YummgyApi.getUserRecipes(setUserRecipe);
     YummgyApi.getLoggedInUser(setUserInfo);
-    YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes);
+    YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setSearchRecipeList);
   }, []);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    setFavoriteRecipes(() => {
-      return user.favoritedRecipes.filter((el) =>
-        el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-      );
+    setSearchRecipeList(() => {
+      return favoriteRecipes.filter((el) => {
+        const recipe = el.recipe;
+        return recipe.title
+          .toLocaleLowerCase()
+          .includes(searchValue.toLocaleLowerCase());
+      });
     });
   };
 
@@ -180,8 +132,8 @@ function UserPage(props) {
           />
         </form>
         <ul className="p-0 d-flex flex-column gap-2 user-page-list-cont">
-          {favoriteRecipes.length !== 0 ? (
-            favoriteRecipes.map((recipe, i) => {
+          {searchRecipeList.length !== 0 ? (
+            searchRecipeList.map((recipe, i) => {
               const recipeObj = recipe.recipe;
               return (
                 <UserFavoriteCard

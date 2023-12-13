@@ -30,12 +30,12 @@ function Login(props) {
     }
 
     // setLoginSuccess(true);
-    // if (true) {
-    //   setTimeout(() => {
-    //     setLoginSuccess(false);
-    //     navigate("/user", { replace: true });
-    //   }, 2000);
-    // }
+    if (true) {
+      setTimeout(() => {
+        // setLoginSuccess(false);
+        navigate("/user", { replace: true });
+      }, 1000);
+    }
   };
 
   return (
