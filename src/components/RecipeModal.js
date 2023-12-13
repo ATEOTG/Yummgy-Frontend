@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./RecipeModal.css";
+import YummgyApi from "../apis/YummgyApi";
 
 function RecipeModal(props) {
   const [recipeName, setRecipeName] = useState("");
@@ -9,6 +10,12 @@ function RecipeModal(props) {
   const [directions, setDirections] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [userInfo, setUserInfo] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {    
+    YummgyApi.getLoggedInUser(setUserInfo);    
+  }, []);
 
   const recipeNameHandler = (e) => {
     setRecipeName(e.target.value);
@@ -32,6 +39,28 @@ function RecipeModal(props) {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
+
+    try{
+      if(recipeName === "" || ingredients === "" || directions === "" || prepTime ===""|| imageUrl === "") {
+        throw new Error(
+          "Please complete all recipe fields.");
+        }
+
+        YummgyApi.addRecipe({ 
+          title: recipeName,
+          prepTime: prepTime,
+          ingredients: ingredients,
+          directions: directions,
+          foodImageUrl: imageUrl,
+          author: userInfo
+        })
+
+    }
+    catch (err) {
+      const errorMessage = err.message;
+      setErrorMessage(errorMessage);      
+
+    }
 
     props.onHide();
   };
