@@ -11,6 +11,7 @@ import { useState } from "react";
 
 function App() {
   const [user, setUser] = useState({});
+  const [jwt, setJwt] = useState("");
 
   return (
     <div>
@@ -26,15 +27,15 @@ function App() {
           <Route path="/" element={<Home />} exact />
           <Route
             path="/recipe/*"
-            element={<AllRecipes user={user} setUser={setUser} />}
+            element={<AllRecipes user={user} setUser={setUser} jwt={jwt} />}
           />
           <Route
             path="/user"
-            element={<UserPage user={user} setUser={setUser} />}
+            element={<UserPage user={user} setUser={setUser} jwt={jwt} />}
           />
           <Route
             path="/login"
-            element={<Login user={user} setUser={setUser} />}
+            element={<Login user={user} setUser={setUser} setJwt={setJwt} />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />

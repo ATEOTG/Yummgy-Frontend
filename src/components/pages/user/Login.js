@@ -22,10 +22,12 @@ function Login(props) {
   const loginSubmitHandler = (e) => {
     e.preventDefault();
 
-    YummgyApi.loginUser(
-      { username: username, password: password },
-      props.setUser
-    );
+    if (username !== "" || password !== "") {
+      YummgyApi.loginUser(
+        { username: username, password: password },
+        props.setUser
+      );
+    }
 
     // setLoginSuccess(true);
     // if (true) {

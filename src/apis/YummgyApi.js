@@ -32,7 +32,7 @@ const YummgyApi = {
     });
   },
 
-  loginUser: (credentials, setUser) => {
+  loginUser: (credentials, setJwt) => {
     fetch(URL + "/authenticate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setUser(data);
+        setJwt(data);
       })
       .catch((err) => {
         console.log(err);
