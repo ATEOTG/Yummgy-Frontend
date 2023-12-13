@@ -65,6 +65,7 @@ const dummyUser = {
 
 function UserPage(props) {
   const [user, setUser] = useState(dummyUser);
+  const [userInfo, setUserInfo] = useState("");
   const [userRecipe, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [favoriteRecipes, setFavoriteRecipes] = useState(user.favoritedRecipes);
@@ -73,6 +74,7 @@ function UserPage(props) {
 
   useEffect(() => {
     YummgyApi.getUserRecipes(setUserRecipe);
+    YummgyApi.getLoggedInUser(setUserInfo);
   }, []);
 
   const onSubmitHandler = (e) => {
@@ -102,7 +104,7 @@ function UserPage(props) {
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
         <div>
           <h2 className="text-center border border-2 border-black rounded p-1 user-main-info-username">
-            {user.username}
+            {userInfo.yumUsername}
           </h2>
           <div className="border border-2 border-black rounded text-center user-main-info-user">
             <h2>User Info</h2>
