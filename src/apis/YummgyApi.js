@@ -1,8 +1,8 @@
-const URL = "http://localhost:8080/api";
+const URL = "http://localhost:8080";
 
 const YummgyApi = {
   getAllRecipes: (setRecipeList) => {
-    fetch(URL + "/recipes/search/")
+    fetch(URL + "/api/recipes/search/")
       .then((res) => res.json())
       .then((data) => {
         setRecipeList(data);
@@ -12,7 +12,7 @@ const YummgyApi = {
       });
   },
   searchRecipes: (search, setRecipeList) => {
-    fetch(URL + `/recipes/search/${search == null ? null : search}`)
+    fetch(URL + `/api/recipes/search/${search == null ? null : search}`)
       .then((res) => res.json())
       .then((data) => {
         setRecipeList(data);
@@ -23,7 +23,7 @@ const YummgyApi = {
   },
 
   registerUser: (user) => {
-    fetch(URL + "/add/user", {
+    fetch(URL + "/api/add/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
@@ -32,7 +32,7 @@ const YummgyApi = {
     });
   },
 
-  loginUser: (credentials, setJwt) => {
+  loginUser: (credentials) => {
     fetch(URL + "/authenticate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,8 +40,13 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setJwt(data);
+        console.log(data.jwt);
+        localStorage.setItem(
+          "jwt",
+          JSON.stringify({
+            token: data.jwt,
+          })
+        );
       })
       .catch((err) => {
         console.log(err);
