@@ -42,6 +42,28 @@ const YummgyApi = {
       });
   },
 
+  getLoggedInUser: (setUserInfo) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+    fetch(URL + "/api/users/loggedin", {
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUserInfo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  // addRecipe: () => {
+
+  // }
+
   registerUser: (user) => {
     fetch(URL + "/api/add/user", {
       method: "POST",
