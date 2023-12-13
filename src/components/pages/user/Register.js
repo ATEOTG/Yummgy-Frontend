@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
+import YummgyApi from "../../../apis/YummgyApi";
 
 function Register(props) {
   const [username, setUsername] = useState("");
@@ -21,7 +22,16 @@ function Register(props) {
   const registerSubmitHandler = (e) => {
     e.preventDefault();
 
+    console.log(username + "," + password);
     if (password === confirmPassword) {
+      YummgyApi.registerUser({
+        yumUsername: username,
+        yumPassword: password,
+      });
+
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
     }
   };
 

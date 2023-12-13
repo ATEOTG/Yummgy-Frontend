@@ -6,7 +6,9 @@ function RecipePage(props) {
     <div className="recipe-page-cont">
       <div className="d-flex justify-content-between border border-2 border-black rounded recipe-header p-2">
         <h3>{props.title}</h3>
-        <h3 style={{ marginRight: "3rem" }}>Prep Time: {props.prepTime}</h3>
+        <h3 style={{ marginRight: "3rem" }}>
+          Prep Time: {props.prepTime} Minutes
+        </h3>
       </div>
       <div className="d-flex mt-3 gap-5 recipe-main-page-cont">
         <div className="w-50 d-flex flex-column gap-4">

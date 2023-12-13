@@ -3,41 +3,11 @@ import SearchIcon from "../../svg/SearchIcon";
 import "./AllRecipes.css";
 import RecipeCard from "../RecipeCard";
 import { useLocation } from "react-router-dom";
-
-const dummy = [
-  {
-    title: "Potato Salad",
-    prepTime: "2 hours",
-    author: "Debbie",
-    image:
-      "https://www.saltandlavender.com/wp-content/uploads/2016/05/potato-salad-with-bacon-1-500x500.jpg",
-    ingredients: "paprika,sweet onion, salt and pepper, mayonnaise",
-    directions: "yappington",
-  },
-  {
-    title: "Grilled Chicken",
-    prepTime: "1.5 hours",
-    author: "John",
-    image:
-      "https://www.jocooks.com/wp-content/uploads/2022/07/grilled-chicken-breast-1-21-500x500.jpg",
-    ingredients: "chicken breasts, olive oil, garlic, lemon, thyme",
-    directions:
-      "Preheat the grill. Mix olive oil, minced garlic, lemon juice, and thyme. Marinate chicken and grill until cooked through.",
-  },
-  {
-    title: "Nuggets",
-    prepTime: "30 mins",
-    author: "Debbie",
-    image:
-      "https://lilluna.com/wp-content/uploads/2023/07/chicken-nuggets3-resize-13-480x270.jpg",
-    ingredients: "bread crums, cheese, chicken, butter, seasonings",
-    directions: "yappity yap yap",
-  },
-];
+import YummgyApi from "../../apis/YummgyApi";
 
 function AllRecipes(props) {
   const [searchValue, setSearchValue] = useState("");
-  const [recipeList, setRecipeList] = useState(dummy);
+  const [recipeList, setRecipeList] = useState([]);
   const [notInRecipePage, setNotInRecipePage] = useState(true);
 
   const location = useLocation();
@@ -51,14 +21,14 @@ function AllRecipes(props) {
     }
   }, [path]);
 
+  useEffect(() => {
+    YummgyApi.getAllRecipes(setRecipeList);
+  }, []);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    setRecipeList(() => {
-      return dummy.filter((el) =>
-        el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-      );
-    });
+    YummgyApi.searchRecipes(searchValue, setRecipeList);
   };
 
   const onChangeHandler = (e) => {
@@ -95,7 +65,7 @@ function AllRecipes(props) {
                   title={recipe.title}
                   prepTime={recipe.prepTime}
                   author={recipe.author}
-                  image={recipe.image}
+                  image={recipe.foodImageUrl}
                   ingredients={recipe.ingredients}
                   directions={recipe.directions}
                   notInRecipePage={notInRecipePage}
