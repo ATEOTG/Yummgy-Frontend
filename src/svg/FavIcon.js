@@ -3,6 +3,9 @@ import React from "react";
 function FavIcon(props) {
   return (
     <svg
+      onClick={
+        props.deleteFavoriteHandler ? props.deleteFavoriteHandler : () => {}
+      }
       className={props.className}
       width="38px"
       height="38px"

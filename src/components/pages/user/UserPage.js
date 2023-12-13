@@ -87,6 +87,10 @@ function UserPage(props) {
     setViewMore(!viewMore);
   };
 
+  const deleteFavoriteHandler = () => {
+    // code here
+  };
+
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
@@ -176,6 +180,7 @@ function UserPage(props) {
                   author={recipe.author}
                   image={recipe.image}
                   ingredients={recipe.ingredients}
+                  deleteFavoriteHandler={deleteFavoriteHandler}
                 />
               );
             })

@@ -12,7 +12,10 @@ function UserFavoriteCard(props) {
       />
 
       <div className="border border-2 border-black rounded recipe-card-text-cont  position-relative">
-        <FavIcon className={"recipe-card-icon"} />
+        <FavIcon
+          className={"fav-card-icon"}
+          deleteFavoriteHandler={props.deleteFavoriteHandler}
+        />
         <h2 className="text-center fw-bold">{props.title}</h2>
         <div className="mt-4">
           <div>

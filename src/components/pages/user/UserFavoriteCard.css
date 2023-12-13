@@ -1,3 +1,11 @@
 .user-fav-img {
   max-height: 155px;
 }
+
+.fav-card-icon {
+  position: absolute !important;
+  top: -10% !important;
+  left: -4%;
+  border: 5px;
+  border-color: black;
+}
