@@ -5,6 +5,7 @@ import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
 import RecipeModal from "../../RecipeModal";
 import YummgyApi from "../../../apis/YummgyApi";
+import { useNavigate } from "react-router-dom";
 
 const dummyUser = {
   username: "user1",
@@ -20,6 +21,9 @@ function UserPage(props) {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
   const [recipeModalShow, setRecipeModalShow] = useState(false);
+  const [deletedRecipe, setDeletedRecipe] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     YummgyApi.getUserRecipes(setUserRecipe);
@@ -50,6 +54,10 @@ function UserPage(props) {
 
   const deleteFavoriteHandler = (id) => {
     console.log("clicked");
+  };
+
+  const deleteUserRecipeHandler = (id) => {
+    YummgyApi.deleteRecipe(id, setUserRecipe);
   };
 
   return (
@@ -92,6 +100,7 @@ function UserPage(props) {
                     prepTime={recipe.prepTime}
                     directions={recipe.directions}
                     notInRecipePage={true}
+                    deleteUserRecipeHandler={deleteUserRecipeHandler}
                   />
                 );
               } else return null;
@@ -106,6 +115,7 @@ function UserPage(props) {
                   directions={recipe.directions}
                   ingredients={recipe.ingredients}
                   notInRecipePage={true}
+                  deleteUserRecipeHandler={deleteUserRecipeHandler}
                 />
               );
             }

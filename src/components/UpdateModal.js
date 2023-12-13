@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import YummgyApi from "../apis/YummgyApi";
 
 function UpdateModal(props) {
   const [recipeName, setRecipeName] = useState(props.title);
@@ -32,10 +33,17 @@ function UpdateModal(props) {
   const submitFormHandler = (e) => {
     e.preventDefault();
 
+    YummgyApi.updateRecipe({
+      prep_time: prepTime,
+      directions: directions,
+      recipeId: props.id,
+      title: recipeName,
+      ingredients: ingredients,
+      food_image_url: imageUrl,
+    });
     props.onHide();
   };
 
-  console.log(imageUrl);
   return (
     <Modal
       {...props}

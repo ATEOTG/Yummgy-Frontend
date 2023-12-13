@@ -24,6 +24,7 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         setUserRecipe(data);
+        console.log("USER RECIPES ----");
         console.log(data);
       })
       .catch((err) => {
@@ -79,7 +80,36 @@ const YummgyApi = {
       });
   },
 
-  deleteRecipe: (id) => {
+  updateRecipe: (recipeObj) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+    fetch(
+      URL +
+        "/api/patch/recipe/?" +
+        new URLSearchParams({
+          prep_time: recipeObj.prep_time,
+          directions: recipeObj.directions,
+          recipeId: recipeObj.recipeId,
+          title: recipeObj.title,
+          ingredients: recipeObj.ingredients,
+          food_image_url: recipeObj.food_image_url,
+        }),
+      {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  deleteRecipe: (id, setUserRecipe) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
     fetch(URL + `/api/delete/recipe/${id}`, {
@@ -92,6 +122,9 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         console.log("Recipe Deleted: " + data);
+      })
+      .then(() => {
+        this.getUserRecipes(setUserRecipe);
       })
       .catch((err) => {
         console.log(err);
