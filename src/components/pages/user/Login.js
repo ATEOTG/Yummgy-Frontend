@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loginFailure, setLoginFailure] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,10 +22,13 @@ function Login(props) {
     e.preventDefault();
 
     // testing out
+
+    setLoginSuccess(true);
     if (true) {
       setTimeout(() => {
+        setLoginSuccess(false);
         navigate("/user", { replace: true });
-      }, 1000);
+      }, 2000);
     }
   };
 
@@ -67,7 +72,13 @@ function Login(props) {
           />
         </div>
       </form>
-
+      {loginSuccess && (
+        <div className="w-100 d-flex justify-content-center mt-4">
+          <div className="alert alert-success w-50 text-center" role="alert">
+            Login Successful!
+          </div>
+        </div>
+      )}
       <div className="d-flex justify-content-center mt-4 w-90 m-auto">
         <button
           onClick={loginSubmitHandler}
