@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
 import RecipeModal from "../../RecipeModal";
+import YummgyApi from "../../../apis/YummgyApi";
 
 const dummyUser = {
   username: "user1",
@@ -64,10 +65,15 @@ const dummyUser = {
 
 function UserPage(props) {
   const [user, setUser] = useState(dummyUser);
+  const [userRecipe, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [favoriteRecipes, setFavoriteRecipes] = useState(user.favoritedRecipes);
   const [viewMore, setViewMore] = useState(false);
   const [recipeModalShow, setRecipeModalShow] = useState(false);
+
+  useEffect(() => {
+    YummgyApi.getUserRecipes(setUserRecipe);
+  }, []);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -118,7 +124,7 @@ function UserPage(props) {
           />
         </div>
         <ul className="p-0 d-flex flex-column gap-1 user-page-list">
-          {user.userRecipe.map((recipe, i) => {
+          {userRecipe.map((recipe, i) => {
             if (!viewMore) {
               if (i < 2) {
                 return (

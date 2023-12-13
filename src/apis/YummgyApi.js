@@ -11,6 +11,26 @@ const YummgyApi = {
         alert(err);
       });
   },
+
+  getUserRecipes: (setUserRecipe) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + "/api/users/recipes", {
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserRecipe(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   searchRecipes: (search, setRecipeList) => {
     fetch(URL + `/api/recipes/search/${search == null ? null : search}`)
       .then((res) => res.json())
@@ -40,13 +60,13 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem(
+        sessionStorage.setItem(
           "jwt",
           JSON.stringify({
             token: data.jwt,
           })
         );
-        setJwt(localStorage.getItem("jwt"));
+        setJwt(sessionStorage.getItem("jwt"));
       })
 
       .catch((err) => {
