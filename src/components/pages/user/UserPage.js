@@ -13,7 +13,6 @@ const dummyUser = {
 };
 
 function UserPage(props) {
-  const [user, setUser] = useState(dummyUser);
   const [userInfo, setUserInfo] = useState("");
   const [userRecipes, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -21,9 +20,6 @@ function UserPage(props) {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
   const [recipeModalShow, setRecipeModalShow] = useState(false);
-  const [deletedRecipe, setDeletedRecipe] = useState(false);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     YummgyApi.getUserRecipes(setUserRecipe);

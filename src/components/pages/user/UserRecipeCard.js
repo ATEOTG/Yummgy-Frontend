@@ -4,16 +4,23 @@ import UpdateModal from "../../UpdateModal";
 
 function UserRecipeCard(props) {
   const [userRecipeModal, setUserRecipeModal] = useState(false);
+  const [recipeInfo, setRecipeInfo] = useState({
+    prepTime: props.prepTime,
+    directions: props.directions,
+    title: props.title,
+    ingredients: props.ingredients,
+    foodImageUrl: props.image,
+  });
 
-  const editButtonHandler = (e) => {
-    // code here
+  const updatedValueHandler = (updatedObj) => {
+    setRecipeInfo(updatedObj);
   };
 
   return (
     <li className="list-unstyled p-3 d-flex gap-2 border border-2 border-black rounded recipe-card w-100">
       <img
-        src={props.image}
-        alt={`${props.title}`}
+        src={recipeInfo.foodImageUrl}
+        alt={`${recipeInfo.title}`}
         className="w-50 h-50 border border-2 border-black rounded"
       />
 
@@ -34,16 +41,18 @@ function UserRecipeCard(props) {
         </button>
         <UpdateModal
           id={props.recipeId}
-          title={props.title}
-          ingredients={props.ingredients}
-          image={props.image}
-          directions={props.directions}
-          prepTime={props.prepTime}
+          title={recipeInfo.title}
+          ingredients={recipeInfo.ingredients}
+          image={recipeInfo.foodImageUrl}
+          directions={recipeInfo.directions}
+          prepTime={recipeInfo.prepTime}
           show={userRecipeModal}
+          editRecipeHandler={props.editRecipeHandler}
+          updatedValueHandler={updatedValueHandler}
           onHide={() => setUserRecipeModal(false)}
         />
         <h4 className="text-center fw-bold mt-3 overflow-hidden user-recipe-title">
-          {props.title}
+          {recipeInfo.title}
         </h4>
       </div>
     </li>

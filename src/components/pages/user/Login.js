@@ -77,6 +77,14 @@ function Login(props) {
             required
           />
         </div>
+        <div className="d-flex justify-content-center mt-4 w-90 m-auto">
+          <button
+            onClick={loginSubmitHandler}
+            className="border border-2 border-black rounded p-3 px-5 fs-5 login-btn"
+          >
+            Login
+          </button>
+        </div>
       </form>
       {loginSuccess && (
         <div className="w-100 d-flex justify-content-center mt-4">
@@ -85,14 +93,6 @@ function Login(props) {
           </div>
         </div>
       )}
-      <div className="d-flex justify-content-center mt-4 w-90 m-auto">
-        <button
-          onClick={loginSubmitHandler}
-          className="border border-2 border-black rounded p-3 px-5 fs-5 login-btn"
-        >
-          Login
-        </button>
-      </div>
     </div>
   );
 }
