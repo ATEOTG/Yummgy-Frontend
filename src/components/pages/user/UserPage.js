@@ -68,7 +68,7 @@ function UserPage(props) {
   const [userInfo, setUserInfo] = useState("");
   const [userRecipe, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [favoriteRecipes, setFavoriteRecipes] = useState(user.favoritedRecipes);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
   const [recipeModalShow, setRecipeModalShow] = useState(false);
 
@@ -110,7 +110,7 @@ function UserPage(props) {
           <div className="border border-2 border-black rounded text-center user-main-info-user">
             <h2>User Info</h2>
             <p>Recipes Authored: {user.recipesAuthored}</p>
-            <p>Recipes Favorited: {user.recipesFavorited}</p>
+            <p>Recipes Favorited: {favoriteRecipes.length}</p>
           </div>
         </div>
         <div>
@@ -182,13 +182,14 @@ function UserPage(props) {
         <ul className="p-0 d-flex flex-column gap-2 user-page-list-cont">
           {favoriteRecipes.length !== 0 ? (
             favoriteRecipes.map((recipe, i) => {
+              const recipeObj = recipe.recipe;
               return (
                 <UserFavoriteCard
-                  key={`${recipe.title} + ${i}`}
-                  title={recipe.title}
-                  author={recipe.author}
-                  image={recipe.image}
-                  ingredients={recipe.ingredients}
+                  key={`${recipeObj.id} + ${i}`}
+                  title={recipeObj.title}
+                  author={recipeObj.author}
+                  image={recipeObj.foodImageUrl}
+                  ingredients={recipeObj.ingredients}
                   deleteFavoriteHandler={deleteFavoriteHandler}
                 />
               );
