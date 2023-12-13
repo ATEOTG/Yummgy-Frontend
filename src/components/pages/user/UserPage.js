@@ -75,6 +75,7 @@ function UserPage(props) {
   useEffect(() => {
     YummgyApi.getUserRecipes(setUserRecipe);
     YummgyApi.getLoggedInUser(setUserInfo);
+    YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes);
   }, []);
 
   const onSubmitHandler = (e) => {

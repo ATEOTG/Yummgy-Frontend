@@ -31,6 +31,25 @@ const YummgyApi = {
       });
   },
 
+  getUserFavoriteRecipes: (setFavoriteRecipes) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + "/api/users/favorites", {
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setFavoriteRecipes(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   searchRecipes: (search, setRecipeList) => {
     fetch(URL + `/api/recipes/search/${search == null ? null : search}`)
       .then((res) => res.json())
@@ -54,6 +73,25 @@ const YummgyApi = {
       .then((data) => {
         console.log(data);
         setUserInfo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  deleteRecipe: (id) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + `/api/delete/recipe/${id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Recipe: " + data);
       })
       .catch((err) => {
         console.log(err);
