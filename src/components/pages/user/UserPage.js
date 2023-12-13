@@ -14,7 +14,7 @@ const dummyUser = {
 function UserPage(props) {
   const [user, setUser] = useState(dummyUser);
   const [userInfo, setUserInfo] = useState("");
-  const [userRecipe, setUserRecipe] = useState([]);
+  const [userRecipes, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -48,8 +48,8 @@ function UserPage(props) {
     setViewMore(!viewMore);
   };
 
-  const deleteFavoriteHandler = () => {
-    // code here
+  const deleteFavoriteHandler = (id) => {
+    console.log("clicked");
   };
 
   return (
@@ -61,7 +61,7 @@ function UserPage(props) {
           </h2>
           <div className="border border-2 border-black rounded text-center user-main-info-user">
             <h2>User Info</h2>
-            <p>Recipes Authored: {user.recipesAuthored}</p>
+            <p>Recipes Authored: {userRecipes.length}</p>
             <p>Recipes Favorited: {favoriteRecipes.length}</p>
           </div>
         </div>
@@ -79,14 +79,15 @@ function UserPage(props) {
           />
         </div>
         <ul className="p-0 d-flex flex-column gap-1 user-page-list">
-          {userRecipe.map((recipe, i) => {
+          {userRecipes.map((recipe, i) => {
             if (!viewMore) {
               if (i < 2) {
                 return (
                   <UserRecipeCard
-                    key={`${recipe.title} + ${i}`}
+                    key={`${recipe.recipeId} + ${i}`}
+                    recipeId={recipe.recipeId}
                     title={recipe.title}
-                    image={recipe.image}
+                    image={recipe.foodImageUrl}
                     ingredients={recipe.ingredients}
                     prepTime={recipe.prepTime}
                     directions={recipe.directions}
@@ -97,9 +98,10 @@ function UserPage(props) {
             } else {
               return (
                 <UserRecipeCard
-                  key={`${recipe.title} + ${i}`}
+                  key={`${recipe.recipeId} + ${i}`}
+                  recipeId={recipe.recipeId}
                   title={recipe.title}
-                  image={recipe.image}
+                  image={recipe.foodImageUrl}
                   prepTime={recipe.prepTime}
                   directions={recipe.directions}
                   ingredients={recipe.ingredients}
@@ -138,6 +140,7 @@ function UserPage(props) {
               return (
                 <UserFavoriteCard
                   key={`${recipeObj.id} + ${i}`}
+                  id={recipeObj.id}
                   title={recipeObj.title}
                   author={recipeObj.author}
                   image={recipeObj.foodImageUrl}

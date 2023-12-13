@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./UserRecipeCard.css";
 import UpdateModal from "../../UpdateModal";
+import YummgyApi from "../../../apis/YummgyApi";
 
 function UserRecipeCard(props) {
   const [userRecipeModal, setUserRecipeModal] = useState(false);
 
-  const deleteButtonHandler = (e) => {
-    // code here
+  const deleteButtonHandler = (id) => {
+    console.log("clicked id: " + id);
+    YummgyApi.deleteRecipe(id);
   };
 
   const editButtonHandler = (e) => {
@@ -23,7 +25,9 @@ function UserRecipeCard(props) {
 
       <div className="border border-2 border-black rounded recipe-card-text-cont position-relative d-flex justify-content-center">
         <button
-          onClick={deleteButtonHandler}
+          onClick={() => {
+            deleteButtonHandler(props.recipeId);
+          }}
           className="del-btn border border-2 border-black rounded"
         >
           Delete

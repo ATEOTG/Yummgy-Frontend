@@ -35,6 +35,7 @@ function UpdateModal(props) {
     props.onHide();
   };
 
+  console.log(imageUrl);
   return (
     <Modal
       {...props}

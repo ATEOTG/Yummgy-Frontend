@@ -91,7 +91,7 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Recipe: " + data);
+        console.log("Recipe Deleted: " + data);
       })
       .catch((err) => {
         console.log(err);
