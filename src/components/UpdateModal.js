@@ -35,7 +35,6 @@ function UpdateModal(props) {
     props.onHide();
   };
 
-  console.log(props.title);
   return (
     <Modal
       {...props}
