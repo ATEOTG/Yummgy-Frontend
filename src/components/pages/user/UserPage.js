@@ -57,7 +57,12 @@ function UserPage(props) {
   };
 
   const deleteUserRecipeHandler = (id) => {
-    YummgyApi.deleteRecipe(id, setUserRecipe);
+    setUserRecipe(() => {
+      return userRecipes.filter((el) => {
+        return el.recipeId !== id;
+      });
+    });
+    YummgyApi.deleteRecipe(id);
   };
 
   return (

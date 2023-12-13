@@ -109,7 +109,7 @@ const YummgyApi = {
         console.log(err);
       });
   },
-  deleteRecipe: (id, setUserRecipe) => {
+  deleteRecipe: (id) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
     fetch(URL + `/api/delete/recipe/${id}`, {
@@ -123,9 +123,6 @@ const YummgyApi = {
       .then((data) => {
         console.log("Recipe Deleted: " + data);
       })
-      .then(() => {
-        this.getUserRecipes(setUserRecipe);
-      })
       .catch((err) => {
         console.log(err);
       });
@@ -138,7 +135,8 @@ const YummgyApi = {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token}),
+        Authorization: "Bearer " + token,
+      }),
       body: JSON.stringify(recipe),
     })
       .then((res) => res.json())
@@ -149,6 +147,8 @@ const YummgyApi = {
         console.log(err);
       });
   },
+
+  favoriteRecipe: () => {},
 
   registerUser: (user) => {
     fetch(URL + "/api/add/user", {
