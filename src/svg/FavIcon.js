@@ -4,7 +4,11 @@ function FavIcon(props) {
   return (
     <svg
       onClick={
-        props.deleteFavoriteHandler ? props.deleteFavoriteHandler : () => {}
+        props.deleteFavoriteHandler
+          ? props.deleteFavoriteHandler
+          : props.favoriteHandler
+          ? props.favoriteHandler
+          : () => {}
       }
       className={props.className}
       width="38px"

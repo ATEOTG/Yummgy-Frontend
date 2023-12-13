@@ -20,7 +20,10 @@ function RecipeCard(props) {
           </Link>
 
           <div className="border border-2 border-black rounded recipe-card-text-cont p-3  position-relative">
-            <FavIcon className={"recipe-card-icon"} />
+            <FavIcon
+              className={"recipe-card-icon"}
+              favoriteHandler={props.favoriteHandler}
+            />
             <h2 className="text-center fw-bold">{props.title}</h2>
             <div className="mt-4">
               <div>
