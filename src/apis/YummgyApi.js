@@ -82,25 +82,14 @@ const YummgyApi = {
 
   updateRecipe: (recipeObj) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
-    fetch(
-      URL +
-        "/api/patch/recipe/?" +
-        new URLSearchParams({
-          prep_time: recipeObj.prep_time,
-          directions: recipeObj.directions,
-          recipeId: recipeObj.recipeId,
-          title: recipeObj.title,
-          ingredients: recipeObj.ingredients,
-          food_image_url: recipeObj.food_image_url,
-        }),
-      {
-        method: "PATCH",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        }),
-      }
-    )
+    fetch(URL + "/api/patch/recipe", {
+      method: "PATCH",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+      body: JSON.stringify(recipeObj),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

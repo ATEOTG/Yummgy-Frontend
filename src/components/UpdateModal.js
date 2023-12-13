@@ -34,16 +34,19 @@ function UpdateModal(props) {
     e.preventDefault();
 
     YummgyApi.updateRecipe({
-      prep_time: prepTime,
+      prepTime: prepTime,
       directions: directions,
       recipeId: props.id,
       title: recipeName,
       ingredients: ingredients,
-      food_image_url: imageUrl,
+      foodImageUrl: imageUrl,
     });
+
     props.onHide();
   };
 
+  console.log("imageurl: " + imageUrl);
+  console.log("preptime: " + prepTime);
   return (
     <Modal
       {...props}
