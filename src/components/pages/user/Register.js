@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import "./Register.css";
 import YummgyApi from "../../../apis/YummgyApi";
+import { useNavigate } from "react-router-dom";
 
 function Register(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [registerFailure, setRegisterFailure] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const usernameValueHandler = (e) => {
     setUsername(e.target.value);
@@ -22,8 +28,15 @@ function Register(props) {
   const registerSubmitHandler = (e) => {
     e.preventDefault();
 
-    console.log(username + "," + password);
-    if (password === confirmPassword) {
+    try {
+      if (confirmPassword === "" || password === "" || username === "") {
+        throw new Error(
+          "Username, Password, or Confirm Password cannot be Blank!"
+        );
+      } else if (confirmPassword !== password) {
+        throw new Error("Password and Confirm Password do not Match!");
+      }
+
       YummgyApi.registerUser({
         yumUsername: username,
         yumPassword: password,
@@ -32,6 +45,19 @@ function Register(props) {
       setUsername("");
       setPassword("");
       setConfirmPassword("");
+
+      setRegisterSuccess(true);
+      setTimeout(() => {
+        setRegisterSuccess(false);
+        navigate("/login", { replace: true });
+      }, 2000);
+    } catch (err) {
+      const errorMessage = err.message;
+      setErrorMessage(errorMessage);
+      setRegisterFailure(true);
+      setTimeout(() => {
+        setRegisterFailure(false);
+      }, 3000);
     }
   };
 
@@ -93,6 +119,21 @@ function Register(props) {
           />
         </div>
       </form>
+      {registerSuccess && (
+        <div className="w-100 d-flex justify-content-center mt-4">
+          <div className="alert alert-success w-50 text-center" role="alert">
+            Successfully Registered!
+          </div>
+        </div>
+      )}
+
+      {registerFailure && (
+        <div className="w-100 d-flex justify-content-center mt-4">
+          <div className="alert alert-danger w-50 text-center" role="alert">
+            {errorMessage}
+          </div>
+        </div>
+      )}
 
       <div className="d-flex justify-content-center mt-5 w-90 m-auto">
         <button
