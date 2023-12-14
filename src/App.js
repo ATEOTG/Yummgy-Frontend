@@ -20,7 +20,7 @@ function App() {
           <h1 className="text-center fw-bold">Yummgy</h1>
         </div>
 
-        <Navigation user={user} setUser={setUser} />
+        <Navigation user={user} setUser={setUser} jwt={jwt} />
       </header>
       <main className="w-95 mt-4 m-auto mb-4">
         <Routes>

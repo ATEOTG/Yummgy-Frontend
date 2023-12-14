@@ -47,7 +47,7 @@ function Navigation(props) {
         </Link>
       )}
 
-      {renderLink.myRecipe && (
+      {props.jwt && renderLink.myRecipe && (
         <Link
           className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
           to="/user"
