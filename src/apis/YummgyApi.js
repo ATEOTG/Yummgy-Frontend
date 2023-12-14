@@ -24,8 +24,6 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         setUserRecipe(data);
-        console.log("USER RECIPES ----");
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +70,6 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setUserInfo(data);
       })
       .catch((err) => {
@@ -143,8 +140,6 @@ const YummgyApi = {
         console.log(err);
       });
   },
-
-  favoriteRecipe: () => {},
 
   registerUser: (user) => {
     fetch(URL + "/api/add/user", {
