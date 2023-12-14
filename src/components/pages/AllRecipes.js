@@ -9,6 +9,8 @@ function AllRecipes(props) {
   const [searchValue, setSearchValue] = useState("");
   const [recipeList, setRecipeList] = useState([]);
   const [notInRecipePage, setNotInRecipePage] = useState(true);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [placeholder, setPlaceholder] = useState([]);
 
   const location = useLocation();
   const path = location.pathname;
@@ -23,6 +25,7 @@ function AllRecipes(props) {
 
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
+    YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
   }, []);
 
   const onSubmitHandler = (e) => {
@@ -61,7 +64,8 @@ function AllRecipes(props) {
             recipeList.map((recipe, i) => {
               return (
                 <RecipeCard
-                  key={`${recipe.title} + ${i}`}
+                  key={`${recipe.recipeId} + ${i}`}
+                  id={recipe.recipeId}
                   title={recipe.title}
                   prepTime={recipe.prepTime}
                   author={recipe.author}
@@ -70,6 +74,7 @@ function AllRecipes(props) {
                   directions={recipe.directions}
                   notInRecipePage={notInRecipePage}
                   favoriteHandler={favoriteHandler}
+                  favoriteRecipes={favoriteRecipes}
                 />
               );
             })

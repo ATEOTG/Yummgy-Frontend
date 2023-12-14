@@ -1,12 +1,36 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./RecipeCard.css";
 import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
+import YummgyApi from "../apis/YummgyApi";
 
 function RecipeCard(props) {
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    console.log(props.favoriteRecipes);
+    for (let i = 0; i < props.favoriteRecipes.length; i++) {
+      if (props.id === props.favoriteRecipes[i].recipe.recipeId) {
+        setFavorite(true);
+      } else {
+        setFavorite(false);
+      }
+    }
+  }, []);
+
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
+  const clickFavoriteHandler = () => {
+    console.log("called?");
+    setFavorite(!favorite);
+
+    if (favorite) {
+      YummgyApi.addFavorite(props.id);
+    } else {
+      YummgyApi.deleteFavorite(props.id);
+    }
+  };
   return (
     <Fragment>
       {props.notInRecipePage && (
@@ -23,6 +47,8 @@ function RecipeCard(props) {
             <FavIcon
               className={"recipe-card-icon"}
               favoriteHandler={props.favoriteHandler}
+              clickHandler={clickFavoriteHandler}
+              iconColor={favorite ? "#005161" : "transparent"}
             />
             <h2 className="text-center fw-bold">{props.title}</h2>
             <div className="mt-4">
