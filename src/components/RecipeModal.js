@@ -13,8 +13,8 @@ function RecipeModal(props) {
   const [userInfo, setUserInfo] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {    
-    YummgyApi.getLoggedInUser(setUserInfo);    
+  useEffect(() => {
+    YummgyApi.getLoggedInUser(setUserInfo);
   }, []);
 
   const recipeNameHandler = (e) => {
@@ -38,28 +38,36 @@ function RecipeModal(props) {
   };
 
   const submitFormHandler = (e) => {
-    e.preventDefault();
+    try {
+      if (
+        recipeName === "" ||
+        ingredients === "" ||
+        directions === "" ||
+        prepTime === "" ||
+        imageUrl === ""
+      ) {
+        throw new Error("Please complete all recipe fields.");
+      }
 
-    try{
-      if(recipeName === "" || ingredients === "" || directions === "" || prepTime ===""|| imageUrl === "") {
-        throw new Error(
-          "Please complete all recipe fields.");
-        }
+      YummgyApi.addRecipe({
+        title: recipeName,
+        prepTime: prepTime,
+        ingredients: ingredients,
+        directions: directions,
+        foodImageUrl: imageUrl,
+        author: userInfo,
+      });
 
-        YummgyApi.addRecipe({ 
-          title: recipeName,
-          prepTime: prepTime,
-          ingredients: ingredients,
-          directions: directions,
-          foodImageUrl: imageUrl,
-          author: userInfo
-        })
+      setRecipeName("");
+      setDirections("");
+      setImageUrl("");
+      setPrepTime("");
+      setIngredients("");
 
-    }
-    catch (err) {
+      e.preventDefault();
+    } catch (err) {
       const errorMessage = err.message;
-      setErrorMessage(errorMessage);      
-
+      setErrorMessage(errorMessage);
     }
 
     props.onHide();

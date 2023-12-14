@@ -8,6 +8,9 @@ function Navigation(props) {
     allRecipeRender: true,
     myRecipe: false,
   });
+  const [userIsLogged, setUserIsLogged] = useState(
+    sessionStorage.getItem("jwt")
+  );
   const location = useLocation();
   const path = location.pathname;
 
@@ -47,7 +50,7 @@ function Navigation(props) {
         </Link>
       )}
 
-      {props.jwt && renderLink.myRecipe && (
+      {userIsLogged && renderLink.myRecipe && (
         <Link
           className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
           to="/user"
