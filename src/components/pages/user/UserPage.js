@@ -5,12 +5,6 @@ import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
 import RecipeModal from "../../RecipeModal";
 import YummgyApi from "../../../apis/YummgyApi";
-import { useNavigate } from "react-router-dom";
-
-const dummyUser = {
-  username: "user1",
-  recipesAuthored: 1,
-};
 
 function UserPage(props) {
   const [userInfo, setUserInfo] = useState("");
@@ -49,7 +43,16 @@ function UserPage(props) {
   };
 
   const deleteFavoriteHandler = (recipeId) => {
-    console.log("hey");
+    setFavoriteRecipes(() => {
+      return favoriteRecipes.filter((el) => {
+        return el.recipe.recipeId !== recipeId;
+      });
+    });
+    setSearchRecipeList(() => {
+      return favoriteRecipes.filter((el) => {
+        return el.recipe.recipeId !== recipeId;
+      });
+    });
     YummgyApi.deleteFavorite(recipeId);
   };
 
