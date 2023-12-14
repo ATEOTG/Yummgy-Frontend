@@ -9,7 +9,6 @@ function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    console.log(props.favoriteRecipes);
     for (let i = 0; i < props.favoriteRecipes.length; i++) {
       if (props.id === props.favoriteRecipes[i].recipe.recipeId) {
         setFavorite(true);
@@ -22,10 +21,9 @@ function RecipeCard(props) {
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
   const clickFavoriteHandler = () => {
-    console.log("called?");
     setFavorite(!favorite);
 
-    if (favorite) {
+    if (!favorite) {
       YummgyApi.addFavorite(props.id);
     } else {
       YummgyApi.deleteFavorite(props.id);
@@ -48,7 +46,7 @@ function RecipeCard(props) {
               className={"recipe-card-icon"}
               favoriteHandler={props.favoriteHandler}
               clickHandler={clickFavoriteHandler}
-              iconColor={favorite ? "#005161" : "transparent"}
+              favorite={favorite}
             />
             <h2 className="text-center fw-bold">{props.title}</h2>
             <div className="mt-4">
