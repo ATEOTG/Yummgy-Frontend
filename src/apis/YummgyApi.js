@@ -90,7 +90,14 @@ const YummgyApi = {
       }),
       body: JSON.stringify(recipeObj),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          alert("Did not update since Prep Time must be a string!");
+          throw new Error("Invalid input in prep time");
+        }
+
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
       })
