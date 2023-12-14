@@ -25,7 +25,9 @@ function AllRecipes(props) {
 
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
-    YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
+    if (props.jwt) {
+      YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
+    }
   }, []);
 
   const onSubmitHandler = (e) => {
