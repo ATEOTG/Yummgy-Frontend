@@ -44,9 +44,7 @@ const YummgyApi = {
         setFavoriteRecipes(data);
         setSearchRecipeList(data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   },
 
   searchRecipes: (search, setRecipeList) => {
@@ -135,6 +133,44 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         console.log("Recipe Created: " + data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  addFavorite: (recipeId) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + `/api/add/recipe/favorite/${recipeId}`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Recipe Favorited: " + data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  deleteFavorite: (id) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + `/api/add/recipe/favorite/${id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Favorite Deleted: " + data);
       })
       .catch((err) => {
         console.log(err);
