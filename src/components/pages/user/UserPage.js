@@ -48,8 +48,9 @@ function UserPage(props) {
     setViewMore(!viewMore);
   };
 
-  const deleteFavoriteHandler = (id) => {
-    console.log("clicked");
+  const deleteFavoriteHandler = (recipeId) => {
+    console.log("hey");
+    YummgyApi.deleteFavorite(recipeId);
   };
 
   const deleteUserRecipeHandler = (id) => {
@@ -151,12 +152,13 @@ function UserPage(props) {
               return (
                 <UserFavoriteCard
                   key={`${recipeObj.id} + ${i}`}
-                  id={recipeObj.id}
+                  id={recipeObj.recipeId}
                   title={recipeObj.title}
                   author={recipeObj.author}
                   image={recipeObj.foodImageUrl}
                   ingredients={recipeObj.ingredients}
                   deleteFavoriteHandler={deleteFavoriteHandler}
+                  isUserFavoriteCard={true}
                 />
               );
             })

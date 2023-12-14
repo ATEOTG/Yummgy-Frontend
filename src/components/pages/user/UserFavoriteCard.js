@@ -16,6 +16,8 @@ function UserFavoriteCard(props) {
           className={"fav-card-icon"}
           deleteFavoriteHandler={props.deleteFavoriteHandler}
           favorite={true}
+          id={props.id}
+          isUserFavoriteCard={props.isUserFavoriteCard}
         />
         <h2 className="text-center fw-bold">{props.title}</h2>
         <div className="mt-4">
