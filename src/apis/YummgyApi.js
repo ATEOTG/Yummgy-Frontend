@@ -150,25 +150,33 @@ const YummgyApi = {
   },
 
   loginUser: (credentials, setJwt) => {
-    fetch(URL + "/authenticate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        sessionStorage.setItem(
-          "jwt",
-          JSON.stringify({
-            token: data.jwt,
-          })
-        );
-        setJwt(sessionStorage.getItem("jwt"));
+    return new Promise((resolve, reject) => {
+      fetch(URL + "/authenticate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
       })
+        .then((res) => {
+          if (res.status !== 201) {
+            throw new Error("invalid login");
+          }
 
-      .catch((err) => {
-        console.log(err);
-      });
+          return res.json();
+        })
+        .then((data) => {
+          sessionStorage.setItem(
+            "jwt",
+            JSON.stringify({
+              token: data.jwt,
+            })
+          );
+          setJwt(sessionStorage.getItem("jwt"));
+          resolve(); // Resolve the promise if login is successful
+        })
+        .catch((err) => {
+          reject(err); // Reject the promise if there is an error
+        });
+    });
   },
 };
 

@@ -8,6 +8,7 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginFailure, setLoginFailure] = useState(false);
+  const [failureMessage, setFailureMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,22 +20,35 @@ function Login(props) {
     setPassword(e.target.value);
   };
 
-  const loginSubmitHandler = (e) => {
+  const loginSubmitHandler = async (e) => {
     e.preventDefault();
 
-    if (username !== "" || password !== "") {
-      YummgyApi.loginUser(
+    if (username === "" || password === "") {
+      setFailureMessage("Cannot leave fields blank!");
+      setLoginFailure(true);
+      setTimeout(() => {
+        setLoginFailure(false);
+      }, 2000);
+      return;
+    }
+
+    try {
+      await YummgyApi.loginUser(
         { username: username, password: password },
         props.setJwt
       );
-    }
 
-    // setLoginSuccess(true);
-    if (true) {
+      setLoginSuccess(true);
       setTimeout(() => {
-        // setLoginSuccess(false);
+        setLoginSuccess(false);
         navigate("/user", { replace: true });
-      }, 1000);
+      }, 2000);
+    } catch (err) {
+      setFailureMessage("Username and Password Do Not Match.");
+      setLoginFailure(true);
+      setTimeout(() => {
+        setLoginFailure(false);
+      }, 2000);
     }
   };
 
@@ -90,6 +104,14 @@ function Login(props) {
         <div className="w-100 d-flex justify-content-center mt-4">
           <div className="alert alert-success w-50 text-center" role="alert">
             Login Successful!
+          </div>
+        </div>
+      )}
+
+      {loginFailure && (
+        <div className="w-100 d-flex justify-content-center mt-4">
+          <div className="alert alert-danger w-50 text-center" role="alert">
+            {failureMessage}
           </div>
         </div>
       )}
