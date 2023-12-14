@@ -45,9 +45,9 @@ function UpdateModal(props) {
       directions === "" ||
       recipeName === "" ||
       ingredients === "" ||
-      imageUrl === ""
+      prepTime === ""
     ) {
-      alert("None of the fields must be empty!");
+      alert("The fields must not be empty!");
       return null;
     }
 
@@ -166,7 +166,14 @@ function UpdateModal(props) {
           <Modal.Footer>
             <Button
               className="border border-2 border-black modal-btn-cls fw-bold"
-              onClick={props.onHide}
+              onClick={() => {
+                setRecipeName(props.title);
+                setIngredients(props.ingredients);
+                setDirections(props.directions);
+                setPrepTime(props.prepTime);
+                setImageUrl(props.image);
+                props.onHide();
+              }}
             >
               Close
             </Button>
