@@ -28,7 +28,7 @@ function AllRecipes(props) {
     if (props.jwt) {
       YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
     }
-  }, []);
+  }, [props.jwt]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();

@@ -28,6 +28,7 @@ function Navigation(props) {
         return { allRecipeRender: true, homeRender: true, myRecipe: false };
       });
     }
+    setUserIsLogged(sessionStorage.getItem("jwt"));
   }, [path]);
 
   return (

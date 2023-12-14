@@ -9,14 +9,18 @@ function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
+    let isFavorite = false;
+
     for (let i = 0; i < props.favoriteRecipes.length; i++) {
       if (props.id === props.favoriteRecipes[i].recipe.recipeId) {
-        setFavorite(true);
-      } else {
-        setFavorite(false);
+        console.log(props.favoriteRecipes[i].recipe.title);
+        isFavorite = true;
+        break;
       }
     }
-  }, []);
+
+    setFavorite(isFavorite);
+  }, [props.favoriteRecipes, props.id]);
 
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
