@@ -40,10 +40,6 @@ function AllRecipes(props) {
     setSearchValue(e.target.value);
   };
 
-  const favoriteHandler = (e) => {
-    // code here
-  };
-
   return (
     <div className="d-flex">
       <div className="w-100">
@@ -75,8 +71,8 @@ function AllRecipes(props) {
                   ingredients={recipe.ingredients}
                   directions={recipe.directions}
                   notInRecipePage={notInRecipePage}
-                  favoriteHandler={favoriteHandler}
                   favoriteRecipes={favoriteRecipes}
+                  jwt={props.jwt}
                 />
               );
             })

@@ -21,12 +21,16 @@ function RecipeCard(props) {
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
   const clickFavoriteHandler = () => {
-    setFavorite(!favorite);
+    if (props.jwt) {
+      setFavorite(!favorite);
 
-    if (!favorite) {
-      YummgyApi.addFavorite(props.id);
+      if (!favorite) {
+        YummgyApi.addFavorite(props.id);
+      } else {
+        YummgyApi.deleteFavorite(props.id);
+      }
     } else {
-      YummgyApi.deleteFavorite(props.id);
+      alert("You must be a user to favorite a recipe!");
     }
   };
   return (
