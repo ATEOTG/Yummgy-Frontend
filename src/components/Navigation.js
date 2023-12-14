@@ -50,7 +50,7 @@ function Navigation(props) {
         </Link>
       )}
 
-      {userIsLogged && renderLink.myRecipe && (
+      {userIsLogged && (
         <Link
           className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
           to="/user"
