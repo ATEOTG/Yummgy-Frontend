@@ -7,8 +7,13 @@ import Login from "./components/pages/user/Login";
 import Register from "./components/pages/user/Register";
 import NotFound from "./components/pages/NotFound";
 import UserPage from "./components/pages/user/UserPage";
+import { useState } from "react";
 
 function App() {
+  const [isUserLogged, setIsUserLogged] = useState(() => {
+    return sessionStorage.getItem("jwt") ? true : false;
+  });
+
   return (
     <div>
       <header>
@@ -16,14 +21,37 @@ function App() {
           <h1 className="text-center fw-bold">Yummgy</h1>
         </div>
 
-        <Navigation />
+        <Navigation
+          isUserLogged={isUserLogged}
+          setIsUserLogged={setIsUserLogged}
+        />
       </header>
       <main className="w-95 mt-4 m-auto mb-4">
         <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/recipe/*" element={<AllRecipes />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                isUserLogged={isUserLogged}
+                setIsUserLogged={setIsUserLogged}
+              />
+            }
+            exact
+          />
+          <Route
+            path="/recipe/*"
+            element={
+              <AllRecipes
+                isUserLogged={isUserLogged}
+                setIsUserLogged={setIsUserLogged}
+              />
+            }
+          />
           <Route path="/user" element={<UserPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setIsUserLogged={setIsUserLogged} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

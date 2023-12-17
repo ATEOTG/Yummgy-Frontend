@@ -8,28 +8,34 @@ function Navigation(props) {
     allRecipeRender: true,
     myRecipe: false,
   });
-  const [userIsLogged, setUserIsLogged] = useState(
-    sessionStorage.getItem("jwt")
-  );
+
   const location = useLocation();
   const path = location.pathname;
 
   useEffect(() => {
-    if (path === "/recipe") {
+    if (
+      path === "/recipe" ||
+      path === "/login" ||
+      path === "/register" ||
+      path === "/user"
+    ) {
       setRenderLink(() => {
-        return { allRecipeRender: true, homeRender: true, myRecipe: true };
+        return {
+          allRecipeRender: true,
+          homeRender: true,
+          myRecipe: props.isUserLogged,
+        };
       });
     } else if (path === "/") {
       setRenderLink(() => {
-        return { allRecipeRender: true, homeRender: false, myRecipe: false };
-      });
-    } else if (path === "/login" || path === "/register" || path === "/user") {
-      setRenderLink(() => {
-        return { allRecipeRender: true, homeRender: true, myRecipe: false };
+        return {
+          allRecipeRender: true,
+          homeRender: false,
+          myRecipe: props.isUserLogged,
+        };
       });
     }
-    setUserIsLogged(sessionStorage.getItem("jwt"));
-  }, [path]);
+  }, [path, props.isUserLogged]);
 
   return (
     <nav className="nav nav-pills nav-fill border border-2 w-95 m-auto rounded p-2 d-flex gap-4 mt-3 justify-content-center nav-cont border-black">
@@ -51,7 +57,7 @@ function Navigation(props) {
         </Link>
       )}
 
-      {userIsLogged && (
+      {renderLink.myRecipe && (
         <Link
           className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
           to="/user"
