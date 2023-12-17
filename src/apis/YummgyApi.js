@@ -189,7 +189,7 @@ const YummgyApi = {
     });
   },
 
-  loginUser: (credentials, setJwt) => {
+  loginUser: (credentials) => {
     return new Promise((resolve, reject) => {
       fetch(URL + "/authenticate", {
         method: "POST",
@@ -210,7 +210,6 @@ const YummgyApi = {
               token: data.jwt,
             })
           );
-          setJwt(sessionStorage.getItem("jwt"));
           resolve(); // Resolve the promise if login is successful
         })
         .catch((err) => {

@@ -33,10 +33,7 @@ function Login(props) {
     }
 
     try {
-      await YummgyApi.loginUser(
-        { username: username, password: password },
-        props.setJwt
-      );
+      await YummgyApi.loginUser({ username: username, password: password });
 
       setLoginSuccess(true);
       setTimeout(() => {

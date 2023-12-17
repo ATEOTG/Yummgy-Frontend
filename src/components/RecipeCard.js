@@ -24,7 +24,7 @@ function RecipeCard(props) {
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
   const clickFavoriteHandler = () => {
-    if (props.jwt) {
+    if (props.isUserLogged) {
       setFavorite(!favorite);
 
       if (!favorite) {

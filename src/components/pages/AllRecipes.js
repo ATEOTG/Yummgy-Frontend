@@ -11,6 +11,9 @@ function AllRecipes(props) {
   const [notInRecipePage, setNotInRecipePage] = useState(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [placeholder, setPlaceholder] = useState([]);
+  const [isUserLogged, setIsUserLogged] = useState(() => {
+    return sessionStorage.getItem("jwt") ? true : false;
+  });
 
   const location = useLocation();
   const path = location.pathname;
@@ -25,10 +28,10 @@ function AllRecipes(props) {
 
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
-    if (props.jwt) {
+    if (isUserLogged) {
       YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
     }
-  }, [props.jwt]);
+  }, [isUserLogged]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -72,7 +75,7 @@ function AllRecipes(props) {
                   directions={recipe.directions}
                   notInRecipePage={notInRecipePage}
                   favoriteRecipes={favoriteRecipes}
-                  jwt={props.jwt}
+                  isUserLogged={isUserLogged}
                 />
               );
             })
