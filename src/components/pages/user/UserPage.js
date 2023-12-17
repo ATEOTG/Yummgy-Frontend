@@ -65,6 +65,12 @@ function UserPage(props) {
     YummgyApi.deleteRecipe(id);
   };
 
+  const addRecipeHandler = (newRecipe) => {
+    setUserRecipe((prevState) => {
+      return [...prevState, newRecipe];
+    });
+  };
+
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
@@ -89,6 +95,7 @@ function UserPage(props) {
           <RecipeModal
             show={recipeModalShow}
             onHide={() => setRecipeModalShow(false)}
+            addRecipeHandler={addRecipeHandler}
           />
         </div>
         <ul className="p-0 d-flex flex-column gap-1 user-page-list">

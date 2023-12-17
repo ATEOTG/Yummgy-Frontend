@@ -13,7 +13,6 @@ function RecipeCard(props) {
 
     for (let i = 0; i < props.favoriteRecipes.length; i++) {
       if (props.id === props.favoriteRecipes[i].recipe.recipeId) {
-        console.log(props.favoriteRecipes[i].recipe.title);
         isFavorite = true;
         break;
       }

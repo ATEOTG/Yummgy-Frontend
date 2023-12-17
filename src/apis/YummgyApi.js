@@ -112,7 +112,7 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Recipe Deleted: " + data);
+        console.log("Recipe Deleted");
       })
       .catch((err) => {
         console.log(err);
@@ -122,21 +122,23 @@ const YummgyApi = {
   addRecipe: (recipe) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
-    fetch(URL + `/api/add/recipe`, {
-      method: "POST",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      }),
-      body: JSON.stringify(recipe),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Recipe Created: " + data);
+    return new Promise((resolve, reject) => {
+      fetch(URL + `/api/add/recipe`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        }),
+        body: JSON.stringify(recipe),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   },
 
   addFavorite: (recipeId) => {
@@ -151,7 +153,7 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Recipe Favorited: " + data);
+        console.log("Recipe Favorited");
       })
       .catch((err) => {
         console.log(err);
@@ -170,7 +172,7 @@ const YummgyApi = {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Favorite Deleted: " + data);
+        console.log("Favorite Deleted");
       })
       .catch((err) => {
         console.log(err);

@@ -37,7 +37,8 @@ function RecipeModal(props) {
     setImageUrl(e.target.value);
   };
 
-  const submitFormHandler = (e) => {
+  const submitFormHandler = async (e) => {
+    e.preventDefault();
     try {
       if (
         recipeName === "" ||
@@ -49,7 +50,7 @@ function RecipeModal(props) {
         throw new Error("Please complete all recipe fields.");
       }
 
-      YummgyApi.addRecipe({
+      const newRecipe = await YummgyApi.addRecipe({
         title: recipeName,
         prepTime: prepTime,
         ingredients: ingredients,
@@ -64,7 +65,7 @@ function RecipeModal(props) {
       setPrepTime("");
       setIngredients("");
 
-      e.preventDefault();
+      props.addRecipeHandler(newRecipe);
     } catch (err) {
       const errorMessage = err.message;
       setErrorMessage(errorMessage);
