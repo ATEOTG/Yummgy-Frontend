@@ -2,6 +2,10 @@
   background-color: #e7b790;
 }
 
+.recipe-card img {
+  height: 186.4px !important;
+}
+
 .recipe-card-icon {
   position: absolute !important;
   top: -10% !important;
@@ -17,11 +21,31 @@
 
 .recipe-card-text-cont {
   background-color: #f1dcab;
+  height: 186.4px;
+}
+
+.ingredients-cont {
+  height: 100px;
+  overflow-y: clip;
+}
+
+.tablet-title {
+  display: none;
 }
 
 @media (min-width: 1400px) {
   .recipe-card-icon {
     top: -7% !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .tablet-title {
+    display: block;
+  }
+
+  .desktop-title {
+    display: none;
   }
 }
 

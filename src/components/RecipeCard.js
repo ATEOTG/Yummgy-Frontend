@@ -44,7 +44,7 @@ function RecipeCard(props) {
             <img
               src={props.image}
               alt={`${props.title}`}
-              className="w-100 h-100 border border-2 border-black rounded"
+              className="w-100 border border-2 border-black rounded"
             />
           </Link>
 
@@ -55,10 +55,20 @@ function RecipeCard(props) {
               clickHandler={clickFavoriteHandler}
               favorite={favorite}
             />
-            <h2 className="text-center fw-bold">{props.title}</h2>
+            <h2 className="text-center fw-bold tablet-title">
+              {props.title.length < 25
+                ? props.title
+                : props.title.substring(0, 25) + "..."}
+            </h2>
+            <h2 className="text-center fw-bold desktop-title">{props.title}</h2>
             <div className="mt-4">
-              <div>
-                <p className="text-center">Ingredients: {props.ingredients}</p>
+              <div className="ingredients-cont">
+                <p className="text-center">
+                  Ingredients:{" "}
+                  {props.ingredients.length < 350
+                    ? props.ingredients
+                    : props.ingredients.substring(0, 350) + "..."}
+                </p>
               </div>
             </div>
           </div>

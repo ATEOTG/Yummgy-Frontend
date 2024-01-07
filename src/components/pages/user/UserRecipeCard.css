@@ -2,6 +2,14 @@
   max-width: 116px;
 }
 
+#user-recipe-img {
+  height: 120px !important;
+}
+
+.user-recipe-text-cont {
+  height: 120px !important;
+}
+
 .del-btn {
   position: absolute;
   top: -10%;

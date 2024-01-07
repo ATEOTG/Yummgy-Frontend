@@ -21,10 +21,11 @@ function UserRecipeCard(props) {
       <img
         src={recipeInfo.foodImageUrl}
         alt={`${recipeInfo.title}`}
-        className="w-50 h-50 border border-2 border-black rounded"
+        id="user-recipe-img"
+        className="w-50 border border-2 border-black rounded"
       />
 
-      <div className="border border-2 border-black rounded recipe-card-text-cont position-relative d-flex justify-content-center">
+      <div className="border border-2 border-black rounded recipe-card-text-cont position-relative d-flex justify-content-center user-recipe-text-cont">
         <button
           onClick={() => {
             props.deleteUserRecipeHandler(props.recipeId);

@@ -1,5 +1,9 @@
 .user-fav-img {
-  max-height: 155px;
+  max-height: 186px;
+}
+.user-favorite-text-cont {
+  height: 100px;
+  overflow-y: clip;
 }
 
 .fav-card-icon {

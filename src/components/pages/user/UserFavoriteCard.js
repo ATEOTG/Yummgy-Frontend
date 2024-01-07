@@ -20,9 +20,14 @@ function UserFavoriteCard(props) {
           isUserFavoriteCard={props.isUserFavoriteCard}
         />
         <h2 className="text-center fw-bold">{props.title}</h2>
-        <div className="mt-4">
+        <div className="mt-4 user-favorite-text-cont">
           <div>
-            <p className="text-center">Ingredients: {props.ingredients}</p>
+            <p className="text-center">
+              Ingredients:{" "}
+              {props.ingredients.length < 160
+                ? props.ingredients
+                : props.ingredients.substring(0, 160) + "..."}
+            </p>
           </div>
         </div>
       </div>
