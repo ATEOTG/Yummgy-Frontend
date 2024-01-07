@@ -14,7 +14,9 @@ Link to back-end application: [Back-end](https://github.com/droppingbamboo/Yummg
 
 
 ### All Recipe Page
-![yummgy-all-recipes-page](https://github.com/ATEOTG/Yummgy-Frontend/assets/25332391/e66a4a3e-4312-4252-87b8-6cf195aa318a)
+![allrecipepage](https://github.com/ATEOTG/Yummgy-Frontend/assets/25332391/6c4eb993-a0f4-445f-b903-3d4fe2cffdae)
+
 
 ### User Page
-![yummgy-user-page](https://github.com/ATEOTG/Yummgy-Frontend/assets/25332391/213b9f99-0ee2-4e26-b1ac-4fa3032e9c03)
+![userpage](https://github.com/ATEOTG/Yummgy-Frontend/assets/25332391/3e918561-a68c-4781-8035-70618e142422)
+
