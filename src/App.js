@@ -8,6 +8,7 @@ import Register from "./components/pages/user/Register";
 import NotFound from "./components/pages/NotFound";
 import UserPage from "./components/pages/user/UserPage";
 import { useState } from "react";
+import AccountsPage from "./components/pages/AccountsPage";
 
 function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
@@ -53,6 +54,7 @@ function App() {
             element={<Login setIsUserLogged={setIsUserLogged} />}
           />
           <Route path="/register" element={<Register />} />
+          <Route path="/accounts" element={<AccountsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

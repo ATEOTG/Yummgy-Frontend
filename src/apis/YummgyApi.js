@@ -12,6 +12,19 @@ const YummgyApi = {
       });
   },
 
+  getAllAccounts: (setAccountList) => {
+    fetch(URL + "/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("hello");
+        console.log(data);
+        setAccountList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  },
+
   getUserRecipes: (setUserRecipe) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
@@ -52,6 +65,17 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         setRecipeList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  },
+
+  searchAccount: (search, setAccountList) => {
+    fetch(URL + `/api/users/search/${search == null ? null : search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAccountList(data);
       })
       .catch((err) => {
         alert(err);
