@@ -14,7 +14,6 @@ function AccountsPage(props) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    // YummgyApi.getAllAccounts(setAccountList);
     YummgyApi.searchAccount(searchValue, setAccountList);
   };
 
@@ -38,15 +37,19 @@ function AccountsPage(props) {
 
       <div>
         <ul className="mt-5 d-flex  p-0 flex-wrap gap-4">
-          {accountList.map((account) => {
-            return (
-              <AccountCard
-                key={account.userId}
-                username={account.yumUsername}
-                id={account.userId}
-              />
-            );
-          })}
+          {accountList.length !== 0 ? (
+            accountList.map((account) => {
+              return (
+                <AccountCard
+                  key={account.userId}
+                  username={account.yumUsername}
+                  id={account.userId}
+                />
+              );
+            })
+          ) : (
+            <h2 className="fw-bold text-center">No Users Found! 😅</h2>
+          )}
         </ul>
       </div>
     </div>
