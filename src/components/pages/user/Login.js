@@ -38,6 +38,8 @@ function Login(props) {
         props.setIsUserLogged
       );
 
+      YummgyApi.getLoggedInUser(props.setCurrentUserInfo);
+
       setLoginSuccess(true);
       setTimeout(() => {
         setLoginSuccess(false);

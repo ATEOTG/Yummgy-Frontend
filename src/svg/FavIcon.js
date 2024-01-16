@@ -8,7 +8,11 @@ function FavIcon(props) {
         if (props.isUserFavoriteCard) {
           props.deleteFavoriteHandler(props.id);
         } else {
-          props.clickHandler();
+          if (props.clickHandler) {
+            props.clickHandler();
+          } else {
+            alert("Cannot unfavorite recipe! Must be the user to do this...");
+          }
         }
       }}
       className={props.className}

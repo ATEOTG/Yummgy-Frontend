@@ -25,7 +25,10 @@ function AllRecipes(props) {
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
     if (props.isUserLogged) {
-      YummgyApi.getUserFavoriteRecipes(setFavoriteRecipes, setPlaceholder);
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
     }
   }, [props.isUserLogged]);
 

@@ -25,7 +25,7 @@ const YummgyApi = {
       });
   },
 
-  getUserRecipes: (setUserRecipe) => {
+  getLoggedInUserRecipes: (setUserRecipe) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
     fetch(URL + "/api/users/recipes", {
@@ -43,7 +43,19 @@ const YummgyApi = {
       });
   },
 
-  getUserFavoriteRecipes: (setFavoriteRecipes, setSearchRecipeList) => {
+  getUserRecipes: (userId, setUserRecipe) => {
+    console.log("UserId: " + userId);
+    fetch(URL + `/api/users/${userId}/recipes`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserRecipe(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getLoggedInUserFavoriteRecipes: (setFavoriteRecipes, setSearchRecipeList) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 
     fetch(URL + "/api/users/favorites", {
@@ -58,6 +70,19 @@ const YummgyApi = {
         setSearchRecipeList(data);
       })
       .catch((err) => {});
+  },
+
+  getUserFavoriteRecipes: (userId, setFavoriteRecipes, setUserRecipe) => {
+    console.log("userId: " + userId);
+    fetch(URL + `/api/users/${userId}/favorites`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFavoriteRecipes(data);
+        setUserRecipe(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   searchRecipes: (search, setRecipeList) => {
@@ -137,6 +162,25 @@ const YummgyApi = {
       .then((res) => res.json())
       .then((data) => {
         console.log("Recipe Deleted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  deleteRecipeAdmin: (id) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+
+    fetch(URL + `/api/admin/delete/recipe/${id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Recipe Deleted (Admin)");
       })
       .catch((err) => {
         console.log(err);
