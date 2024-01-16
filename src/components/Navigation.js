@@ -5,7 +5,6 @@ import "./Navigation.css";
 function Navigation(props) {
   const [renderLink, setRenderLink] = useState({
     homeRender: false,
-    allRecipeRender: true,
     myRecipe: false,
   });
 
@@ -48,14 +47,19 @@ function Navigation(props) {
         </Link>
       )}
 
-      {renderLink.allRecipeRender && (
-        <Link
-          className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
-          to="/recipe"
-        >
-          All Recipes
-        </Link>
-      )}
+      <Link
+        className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
+        to="/recipe"
+      >
+        All Recipes
+      </Link>
+
+      <Link
+        className="text-decoration-none fs-4 text-black border border-2 px-5 py-2 rounded nav-links border-black"
+        to="/accounts"
+      >
+        Users
+      </Link>
 
       {renderLink.myRecipe && (
         <Link
