@@ -6,6 +6,7 @@ function Home(props) {
   const logoutHandler = () => {
     sessionStorage.setItem("jwt", "");
     props.setIsUserLogged(false);
+    props.setCurrentUserInfo({});
   };
 
   return (

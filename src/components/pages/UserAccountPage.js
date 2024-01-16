@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import SearchIcon from "../../../svg/SearchIcon";
-import "./UserPage.css";
-import UserRecipeCard from "./UserRecipeCard";
-import UserFavoriteCard from "./UserFavoriteCard";
-import RecipeModal from "../../RecipeModal";
-import YummgyApi from "../../../apis/YummgyApi";
+import SearchIcon from "../../svg/SearchIcon";
+import UserFavoriteCard from "./user/UserFavoriteCard";
+import UserRecipeCard from "./user/UserRecipeCard";
+import RecipeModal from "../RecipeModal";
+import YummgyApi from "../../apis/YummgyApi";
 
-function UserPage(props) {
-  const [userInfo, setUserInfo] = useState("");
+function UserAccountPage(props) {
+  //   const [userInfo, setUserInfo] = useState("");
   const [userRecipes, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
-  const [recipeModalShow, setRecipeModalShow] = useState(false);
+  //   const [recipeModalShow, setRecipeModalShow] = useState(false);
 
   useEffect(() => {
-    YummgyApi.getLoggedInUserRecipes(setUserRecipe);
-    YummgyApi.getLoggedInUser(setUserInfo);
-    YummgyApi.getLoggedInUserFavoriteRecipes(
+    YummgyApi.getUserRecipes(props.id, setUserRecipe);
+    YummgyApi.getUserFavoriteRecipes(
+      props.id,
       setFavoriteRecipes,
       setSearchRecipeList
     );
@@ -45,41 +44,22 @@ function UserPage(props) {
     setViewMore(!viewMore);
   };
 
-  const deleteFavoriteHandler = (recipeId) => {
-    setFavoriteRecipes(() => {
-      return favoriteRecipes.filter((el) => {
-        return el.recipe.recipeId !== recipeId;
-      });
-    });
-    setSearchRecipeList(() => {
-      return favoriteRecipes.filter((el) => {
-        return el.recipe.recipeId !== recipeId;
-      });
-    });
-    YummgyApi.deleteFavorite(recipeId);
-  };
-
   const deleteUserRecipeHandler = (id) => {
     setUserRecipe(() => {
       return userRecipes.filter((el) => {
         return el.recipeId !== id;
       });
     });
-    YummgyApi.deleteRecipe(id);
+    YummgyApi.deleteRecipeAdmin(id);
   };
 
-  const addRecipeHandler = (newRecipe) => {
-    setUserRecipe((prevState) => {
-      return [...prevState, newRecipe];
-    });
-  };
-
+  console.log("IsAdmin: " + props.isAdmin);
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
         <div>
           <h2 className="text-center border border-2 border-black rounded p-1 user-main-info-username">
-            {userInfo.yumUsername}
+            {props.username}
           </h2>
           <div className="border border-2 border-black rounded text-center user-main-info-user">
             <h2>User Info</h2>
@@ -87,20 +67,7 @@ function UserPage(props) {
             <p>Recipes Favorited: {favoriteRecipes.length}</p>
           </div>
         </div>
-        <div>
-          <button
-            onClick={() => setRecipeModalShow(true)}
-            className="border border-2 border-black rounded w-100"
-          >
-            Add Recipe
-          </button>
-
-          <RecipeModal
-            show={recipeModalShow}
-            onHide={() => setRecipeModalShow(false)}
-            addRecipeHandler={addRecipeHandler}
-          />
-        </div>
+        <div></div>
         <ul className="p-0 d-flex flex-column gap-1 user-page-list">
           {userRecipes.map((recipe, i) => {
             if (!viewMore) {
@@ -116,7 +83,7 @@ function UserPage(props) {
                     directions={recipe.directions}
                     notInRecipePage={true}
                     deleteUserRecipeHandler={deleteUserRecipeHandler}
-                    canModifyRecipe={true}
+                    canModifyRecipe={props.isAdmin}
                   />
                 );
               } else return null;
@@ -132,7 +99,7 @@ function UserPage(props) {
                   ingredients={recipe.ingredients}
                   notInRecipePage={true}
                   deleteUserRecipeHandler={deleteUserRecipeHandler}
-                  canModifyRecipe={true}
+                  canModifyRecipe={props.isAdmin}
                 />
               );
             }
@@ -156,7 +123,7 @@ function UserPage(props) {
             type="text"
             value={searchValue}
             name="search"
-            placeholder="Search in Favorites..."
+            placeholder="Search In User's Favorites..."
             onChange={onChangeHandler}
           />
         </form>
@@ -172,8 +139,7 @@ function UserPage(props) {
                   author={recipeObj.author}
                   image={recipeObj.foodImageUrl}
                   ingredients={recipeObj.ingredients}
-                  deleteFavoriteHandler={deleteFavoriteHandler}
-                  isUserFavoriteCard={true}
+                  isUserFavoriteCard={false}
                 />
               );
             })
@@ -186,4 +152,4 @@ function UserPage(props) {
   );
 }
 
-export default UserPage;
+export default UserAccountPage;

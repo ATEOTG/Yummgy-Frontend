@@ -14,6 +14,7 @@ function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
     return sessionStorage.getItem("jwt") ? true : false;
   });
+  const [currUserInfo, setCurrentUserInfo] = useState({});
 
   return (
     <div>
@@ -35,6 +36,7 @@ function App() {
               <Home
                 isUserLogged={isUserLogged}
                 setIsUserLogged={setIsUserLogged}
+                setCurrentUserInfo={setCurrentUserInfo}
               />
             }
             exact
@@ -51,10 +53,23 @@ function App() {
           <Route path="/user" element={<UserPage />} />
           <Route
             path="/login"
-            element={<Login setIsUserLogged={setIsUserLogged} />}
+            element={
+              <Login
+                setIsUserLogged={setIsUserLogged}
+                setCurrentUserInfo={setCurrentUserInfo}
+              />
+            }
           />
           <Route path="/register" element={<Register />} />
-          <Route path="/accounts" element={<AccountsPage />} />
+          <Route
+            path="/accounts/*"
+            element={
+              <AccountsPage
+                isUserLogged={isUserLogged}
+                currUserInfo={currUserInfo}
+              />
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
