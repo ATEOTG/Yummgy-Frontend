@@ -149,6 +149,32 @@ const YummgyApi = {
         console.log(err);
       });
   },
+
+  updateRecipeAdmin: (recipeObj) => {
+    const token = JSON.parse(sessionStorage.getItem("jwt")).token;
+    fetch(URL + "/api/admin/patch/recipe", {
+      method: "PATCH",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }),
+      body: JSON.stringify(recipeObj),
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          alert("Did not update since Prep Time must be a string!");
+          throw new Error("Invalid input in prep time");
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   deleteRecipe: (id) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
 

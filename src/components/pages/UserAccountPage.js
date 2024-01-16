@@ -44,20 +44,6 @@ function UserAccountPage(props) {
     setViewMore(!viewMore);
   };
 
-  const deleteFavoriteHandler = (recipeId) => {
-    setFavoriteRecipes(() => {
-      return favoriteRecipes.filter((el) => {
-        return el.recipe.recipeId !== recipeId;
-      });
-    });
-    setSearchRecipeList(() => {
-      return favoriteRecipes.filter((el) => {
-        return el.recipe.recipeId !== recipeId;
-      });
-    });
-    YummgyApi.deleteFavorite(recipeId);
-  };
-
   const deleteUserRecipeHandler = (id) => {
     setUserRecipe(() => {
       return userRecipes.filter((el) => {
@@ -153,7 +139,6 @@ function UserAccountPage(props) {
                   author={recipeObj.author}
                   image={recipeObj.foodImageUrl}
                   ingredients={recipeObj.ingredients}
-                  deleteFavoriteHandler={deleteFavoriteHandler}
                   isUserFavoriteCard={false}
                 />
               );

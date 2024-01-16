@@ -57,6 +57,7 @@ function UserRecipeCard(props) {
           editRecipeHandler={props.editRecipeHandler}
           updatedValueHandler={updatedValueHandler}
           onHide={() => setUserRecipeModal(false)}
+          isAdmin={props.canModifyRecipe}
         />
         <h4 className="text-center fw-bold mt-3 overflow-hidden user-recipe-title">
           {recipeInfo.title}

@@ -51,7 +51,11 @@ function UpdateModal(props) {
       return null;
     }
 
-    YummgyApi.updateRecipe(formInfo);
+    if (props.isAdmin) {
+      YummgyApi.updateRecipeAdmin(formInfo);
+    } else {
+      YummgyApi.updateRecipe(formInfo);
+    }
 
     props.updatedValueHandler(formInfo);
     e.preventDefault();
