@@ -50,7 +50,7 @@ function AllRecipes(props) {
               type="text"
               value={searchValue}
               name="search"
-              placeholder="Search..."
+              placeholder="Search for Recipe..."
               onChange={onChangeHandler}
             />
           </form>
