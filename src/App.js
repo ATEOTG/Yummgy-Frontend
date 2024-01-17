@@ -47,6 +47,7 @@ function App() {
               <AllRecipes
                 isUserLogged={isUserLogged}
                 setIsUserLogged={setIsUserLogged}
+                currUserInfo={currUserInfo}
               />
             }
           />

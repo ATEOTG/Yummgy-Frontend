@@ -54,7 +54,6 @@ function UserRecipeCard(props) {
           directions={recipeInfo.directions}
           prepTime={recipeInfo.prepTime}
           show={userRecipeModal}
-          editRecipeHandler={props.editRecipeHandler}
           updatedValueHandler={updatedValueHandler}
           onHide={() => setUserRecipeModal(false)}
           isAdmin={props.canModifyRecipe}
