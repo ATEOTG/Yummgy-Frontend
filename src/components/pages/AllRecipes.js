@@ -23,7 +23,7 @@ function AllRecipes(props) {
   }, [path]);
 
   useEffect(() => {
-    YummgyApi.getAllRecipes(setRecipeList);
+    YummgyApi.recipesSortByLatest(setRecipeList);
     if (props.isUserLogged) {
       YummgyApi.getLoggedInUserFavoriteRecipes(
         setFavoriteRecipes,
@@ -51,6 +51,15 @@ function AllRecipes(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
+
+  const sortByPrepTime = () => { 
+    YummgyApi.recipesSortByPrep(setRecipeList);
+  }
+
+  console.log("CurrentUserInfo: " + props.currUserInfo.role);
+
+
+
   return (
     <div className="d-flex">
       <div className="w-100">
@@ -67,6 +76,16 @@ function AllRecipes(props) {
             />
           </form>
         )}
+        <div className="d-flex justify-content-center mt-5 w-90 m-auto">
+          <button
+            type="submit"
+            onClick={sortByPrepTime}
+            className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn"
+          >
+            Sort Recipes by Prep Time
+          </button>
+        </div>
+       
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.length !== 0 ? (

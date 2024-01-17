@@ -12,6 +12,28 @@ const YummgyApi = {
       });
   },
 
+  recipesSortByLatest: (setRecipeList) => {
+    fetch(URL + "/api/recipes/latest/20")
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipeList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }, 
+
+  recipesSortByPrep: (setRecipeList) => {
+    fetch(URL + "/api/recipes/search/preptime/")
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipeList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }, 
+
   getAllAccounts: (setAccountList) => {
     fetch(URL + "/api/users")
       .then((res) => res.json())
