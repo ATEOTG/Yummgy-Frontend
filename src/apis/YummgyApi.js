@@ -313,6 +313,17 @@ const YummgyApi = {
         });
     });
   },
+
+  getRecipeFavoritedList: (setUserFavoritedList, recipeId) => {
+    fetch(URL + `/api/recipes/favorites/users/${recipeId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserFavoritedList(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default YummgyApi;

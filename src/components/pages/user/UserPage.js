@@ -3,7 +3,7 @@ import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
-import RecipeModal from "../../RecipeModal";
+import RecipeModal from "../../modals/RecipeModal";
 import YummgyApi from "../../../apis/YummgyApi";
 
 function UserPage(props) {

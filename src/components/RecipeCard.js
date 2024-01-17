@@ -4,11 +4,15 @@ import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
 import YummgyApi from "../apis/YummgyApi";
-import UpdateModal from "./UpdateModal";
+import UpdateModal from "./modals/UpdateModal";
+import UsersListModal from "./modals/UsersListModal";
+import NumberFavorited from "./NumberFavorited";
 
 function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
+  const [userFavoritedList, setUserFavoritedList] = useState([]);
   const [userRecipeModal, setUserRecipeModal] = useState(false);
+  const [userListModal, setUserListModal] = useState(false);
   const [recipeInfo, setRecipeInfo] = useState({
     prepTime: props.prepTime,
     directions: props.directions,
@@ -30,6 +34,10 @@ function RecipeCard(props) {
 
     setFavorite(isFavorite);
   }, [props.favoriteRecipes, props.id]);
+
+  useEffect(() => {
+    YummgyApi.getRecipeFavoritedList(setUserFavoritedList, props.id);
+  }, []);
 
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
@@ -54,6 +62,13 @@ function RecipeCard(props) {
     <Fragment>
       {props.notInRecipePage && (
         <li className="list-unstyled p-3 d-flex gap-4 border border-2 border-black rounded recipe-card">
+          <UsersListModal
+            show={userListModal}
+            onHide={() => setUserListModal(false)}
+            title={recipeInfo.title}
+            userlist={userFavoritedList}
+            userId={props.userId}
+          />
           <Link className="w-50" to={`${pathName}`}>
             <img
               src={recipeInfo.foodImageUrl}
@@ -63,6 +78,10 @@ function RecipeCard(props) {
           </Link>
 
           <div className="border border-2 border-black rounded recipe-card-text-cont p-3  position-relative">
+            <NumberFavorited
+              setUserListModal={setUserListModal}
+              numberOfUsersWhoFavorited={userFavoritedList.length}
+            />
             {props.isAdmin && (
               <button
                 onClick={() => {

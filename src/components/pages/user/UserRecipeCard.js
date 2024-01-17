@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./UserRecipeCard.css";
-import UpdateModal from "../../UpdateModal";
+import UpdateModal from "../../modals/UpdateModal";
 
 function UserRecipeCard(props) {
   const [userRecipeModal, setUserRecipeModal] = useState(false);

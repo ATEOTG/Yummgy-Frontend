@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./AccountCard.css";
 import { Link, Route, Routes } from "react-router-dom";
-import YummgyApi from "../apis/YummgyApi";
 import UserAccountPage from "./pages/UserAccountPage";
 
 function AccountCard(props) {

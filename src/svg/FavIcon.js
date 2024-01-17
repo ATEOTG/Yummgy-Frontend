@@ -10,14 +10,16 @@ function FavIcon(props) {
         } else {
           if (props.clickHandler) {
             props.clickHandler();
+          } else if (props.setUserListModal) {
+            props.setUserListModal(true);
           } else {
             alert("Cannot unfavorite recipe! Must be the user to do this...");
           }
         }
       }}
-      className={props.className}
-      width="38px"
-      height="38px"
+      className={props.className ? props.className : "position-relative"}
+      width={props.numberDisplay ? "24px" : "38px"}
+      height={props.numberDisplay ? "24px" : "38px"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

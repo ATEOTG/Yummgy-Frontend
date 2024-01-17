@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import YummgyApi from "../apis/YummgyApi";
+import YummgyApi from "../../apis/YummgyApi";
 
 function UpdateModal(props) {
   const [recipeName, setRecipeName] = useState(props.title);
@@ -9,8 +9,6 @@ function UpdateModal(props) {
   const [directions, setDirections] = useState(props.directions);
   const [prepTime, setPrepTime] = useState(props.prepTime);
   const [imageUrl, setImageUrl] = useState(props.image);
-
-  console.log(props.id);
 
   const recipeNameHandler = (e) => {
     setRecipeName(e.target.value);

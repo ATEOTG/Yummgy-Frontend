@@ -52,8 +52,6 @@ function AllRecipes(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
-  console.log("CurrentUserInfo: " + props.currUserInfo.role);
-
   return (
     <div className="d-flex">
       <div className="w-100">
@@ -77,6 +75,7 @@ function AllRecipes(props) {
               return (
                 <RecipeCard
                   key={`${recipe.recipeId} + ${i}`}
+                  userId={props.currUserInfo.userId}
                   id={recipe.recipeId}
                   title={recipe.title}
                   prepTime={recipe.prepTime}
