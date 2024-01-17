@@ -1,19 +1,31 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import FavIcon from "../svg/FavIcon";
 import "./NumberFavorited.css";
+import UsersListModal from "./modals/UsersListModal";
 
 function NumberFavorited(props) {
+  const [userListModal, setUserListModal] = useState(false);
+
   return (
-    <div className="position-absolute d-flex number-display-cont gap-1">
-      <FavIcon
-        favorite={true}
-        setUserListModal={props.setUserListModal}
-        numberDisplay={true}
+    <Fragment>
+      <UsersListModal
+        show={userListModal}
+        onHide={() => setUserListModal(false)}
+        title={props.title}
+        userlist={props.userlist}
+        userId={props.userId}
       />
-      <p className="fw-bold number-display-text">
-        {props.numberOfUsersWhoFavorited}
-      </p>
-    </div>
+      <div className="position-absolute d-flex number-display-cont gap-1">
+        <FavIcon
+          favorite={true}
+          setUserListModal={setUserListModal}
+          numberDisplay={true}
+        />
+        <p className="fw-bold number-display-text">
+          {props.numberOfUsersWhoFavorited}
+        </p>
+      </div>
+    </Fragment>
   );
 }
 
