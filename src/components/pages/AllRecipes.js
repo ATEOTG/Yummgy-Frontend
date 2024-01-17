@@ -11,7 +11,6 @@ function AllRecipes(props) {
   const [notInRecipePage, setNotInRecipePage] = useState(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [placeholder, setPlaceholder] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const path = location.pathname;
 
@@ -53,7 +52,6 @@ function AllRecipes(props) {
   };
 
   const sortByPrepTime = () => {
-    console.log("event tri");
     YummgyApi.recipesSortByPrep(setRecipeList);
   };
 
@@ -81,23 +79,16 @@ function AllRecipes(props) {
               className="btn btn-secondary dropdown-toggle"
               type="button"
               id="dropdownMenu2"
-              data-toggle="dropdown"
+              data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="true"
-              onClick={() => setIsOpen(!isOpen)}
             >
               Dropdown
             </button>
-            <div
-              className={`dropdown-menu ${isOpen ? "show" : ""}`}
-              aria-labelledby="dropdownMenu2"
-            >
+            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button
                 type="button"
-                onClick={() => {
-                  setIsOpen(false);
-                  sortByPrepTime();
-                }}
+                onClick={sortByPrepTime}
                 className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn dropdown-item"
               >
                 Sort Recipes by Prep Time
