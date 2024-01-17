@@ -25,6 +25,7 @@ function AllRecipes(props) {
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
     if (props.isUserLogged) {
+      console.log("User is Logged");
       YummgyApi.getLoggedInUserFavoriteRecipes(
         setFavoriteRecipes,
         setPlaceholder
@@ -50,6 +51,8 @@ function AllRecipes(props) {
     });
     YummgyApi.deleteRecipeAdmin(id);
   };
+
+  console.log("CurrentUserInfo: " + props.currUserInfo.role);
 
   return (
     <div className="d-flex">

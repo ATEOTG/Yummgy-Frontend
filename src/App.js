@@ -7,8 +7,9 @@ import Login from "./components/pages/user/Login";
 import Register from "./components/pages/user/Register";
 import NotFound from "./components/pages/NotFound";
 import UserPage from "./components/pages/user/UserPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountsPage from "./components/pages/AccountsPage";
+import YummgyApi from "./apis/YummgyApi";
 
 function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
@@ -16,6 +17,9 @@ function App() {
   });
   const [currUserInfo, setCurrentUserInfo] = useState({});
 
+  useEffect(() => {
+    YummgyApi.getLoggedInUser(setCurrentUserInfo);
+  }, []);
   return (
     <div>
       <header>
