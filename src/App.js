@@ -22,6 +22,7 @@ function App() {
       YummgyApi.getLoggedInUser(setCurrentUserInfo);
     }
   }, []);
+  // console.log(currUserInfo);
   return (
     <div>
       <header>
