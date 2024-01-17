@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./RecipeModal.css";
-import YummgyApi from "../apis/YummgyApi";
+import YummgyApi from "../../apis/YummgyApi";
 
 function RecipeModal(props) {
   const [recipeName, setRecipeName] = useState("");

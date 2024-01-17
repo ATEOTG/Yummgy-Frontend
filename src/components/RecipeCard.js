@@ -4,7 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
 import YummgyApi from "../apis/YummgyApi";
-import UpdateModal from "./UpdateModal";
+import UpdateModal from "./modals/UpdateModal";
 
 function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
