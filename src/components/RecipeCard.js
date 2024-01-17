@@ -4,9 +4,19 @@ import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
 import YummgyApi from "../apis/YummgyApi";
+import UpdateModal from "./UpdateModal";
 
 function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
+  const [userRecipeModal, setUserRecipeModal] = useState(false);
+  const [recipeInfo, setRecipeInfo] = useState({
+    prepTime: props.prepTime,
+    directions: props.directions,
+    title: props.title,
+    ingredients: props.ingredients,
+    foodImageUrl: props.image,
+    author: props.author,
+  });
 
   useEffect(() => {
     let isFavorite = false;
@@ -36,19 +46,56 @@ function RecipeCard(props) {
       alert("You must be a user to favorite a recipe!");
     }
   };
+  const updatedValueHandler = (updatedObj) => {
+    setRecipeInfo(updatedObj);
+  };
+
   return (
     <Fragment>
       {props.notInRecipePage && (
         <li className="list-unstyled p-3 d-flex gap-4 border border-2 border-black rounded recipe-card">
           <Link className="w-50" to={`${pathName}`}>
             <img
-              src={props.image}
-              alt={`${props.title}`}
+              src={recipeInfo.foodImageUrl}
+              alt={`${recipeInfo.title}`}
               className="w-100 border border-2 border-black rounded"
             />
           </Link>
 
           <div className="border border-2 border-black rounded recipe-card-text-cont p-3  position-relative">
+            {props.isAdmin && (
+              <button
+                onClick={() => {
+                  props.deleteRecipeHandler(props.id);
+                }}
+                className="del-btn del-btn-2 border border-2 border-black rounded"
+              >
+                Delete
+              </button>
+            )}
+
+            {props.isAdmin && (
+              <button
+                onClick={() => setUserRecipeModal(true)}
+                className="edit-btn edit-btn-2 border border-2 border-black rounded"
+              >
+                Edit
+              </button>
+            )}
+
+            <UpdateModal
+              id={props.id}
+              title={recipeInfo.title}
+              ingredients={recipeInfo.ingredients}
+              image={recipeInfo.foodImageUrl}
+              directions={recipeInfo.directions}
+              prepTime={recipeInfo.prepTime}
+              show={userRecipeModal}
+              updatedValueHandler={updatedValueHandler}
+              onHide={() => setUserRecipeModal(false)}
+              isAdmin={props.isAdmin}
+            />
+
             <FavIcon
               className={"recipe-card-icon"}
               favoriteHandler={props.favoriteHandler}
@@ -56,18 +103,20 @@ function RecipeCard(props) {
               favorite={favorite}
             />
             <h2 className="text-center fw-bold tablet-title">
-              {props.title.length < 25
-                ? props.title
-                : props.title.substring(0, 25) + "..."}
+              {recipeInfo.title.length < 25
+                ? recipeInfo.title
+                : recipeInfo.title.substring(0, 25) + "..."}
             </h2>
-            <h2 className="text-center fw-bold desktop-title">{props.title}</h2>
+            <h2 className="text-center fw-bold desktop-title">
+              {recipeInfo.title}
+            </h2>
             <div className="mt-4">
               <div className="ingredients-cont">
                 <p className="text-center">
                   Ingredients:{" "}
-                  {props.ingredients.length < 350
-                    ? props.ingredients
-                    : props.ingredients.substring(0, 350) + "..."}
+                  {recipeInfo.ingredients.length < 350
+                    ? recipeInfo.ingredients
+                    : recipeInfo.ingredients.substring(0, 350) + "..."}
                 </p>
               </div>
             </div>
@@ -79,12 +128,12 @@ function RecipeCard(props) {
           path={`${pathName}`}
           element={
             <RecipePage
-              title={props.title}
-              prepTime={props.prepTime}
-              author={props.author}
-              image={props.image}
-              ingredients={props.ingredients}
-              directions={props.directions}
+              title={recipeInfo.title}
+              prepTime={recipeInfo.prepTime}
+              author={recipeInfo.author}
+              image={recipeInfo.foodImageUrl}
+              ingredients={recipeInfo.ingredients}
+              directions={recipeInfo.directions}
             />
           }
         />

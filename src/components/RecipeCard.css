@@ -33,6 +33,15 @@
   display: none;
 }
 
+.edit-btn-2 {
+  top: 8% !important;
+  right: -4.5% !important;
+}
+
+.delete-btn-2 {
+  top: 14% !important;
+}
+
 @media (min-width: 1400px) {
   .recipe-card-icon {
     top: -7% !important;

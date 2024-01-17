@@ -10,6 +10,8 @@ function UpdateModal(props) {
   const [prepTime, setPrepTime] = useState(props.prepTime);
   const [imageUrl, setImageUrl] = useState(props.image);
 
+  console.log(props.id);
+
   const recipeNameHandler = (e) => {
     setRecipeName(e.target.value);
   };

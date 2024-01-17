@@ -42,6 +42,15 @@ function AllRecipes(props) {
     setSearchValue(e.target.value);
   };
 
+  const deleteRecipeHandler = (id) => {
+    setRecipeList(() => {
+      return recipeList.filter((el) => {
+        return el.recipeId !== id;
+      });
+    });
+    YummgyApi.deleteRecipeAdmin(id);
+  };
+
   return (
     <div className="d-flex">
       <div className="w-100">
@@ -75,6 +84,8 @@ function AllRecipes(props) {
                   notInRecipePage={notInRecipePage}
                   favoriteRecipes={favoriteRecipes}
                   isUserLogged={props.isUserLogged}
+                  isAdmin={props.currUserInfo.role === "ROLE_ADMIN"}
+                  deleteRecipeHandler={deleteRecipeHandler}
                 />
               );
             })
