@@ -5,3 +5,8 @@
 .w-95 {
   width: 95%;
 }
+
+.username-link:hover {
+  transition: 0.2s;
+  color: blue !important;
+}

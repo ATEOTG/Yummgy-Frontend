@@ -4,10 +4,12 @@ import { Link, Route, Routes } from "react-router-dom";
 import RecipePage from "./pages/RecipePage";
 import FavIcon from "../svg/FavIcon";
 import YummgyApi from "../apis/YummgyApi";
-import UpdateModal from "./UpdateModal";
+import UpdateModal from "./modals/UpdateModal";
+import NumberFavorited from "./NumberFavorited";
 
 function RecipeCard(props) {
   const [favorite, setFavorite] = useState(false);
+  const [userFavoritedList, setUserFavoritedList] = useState([]);
   const [userRecipeModal, setUserRecipeModal] = useState(false);
   const [recipeInfo, setRecipeInfo] = useState({
     prepTime: props.prepTime,
@@ -30,6 +32,10 @@ function RecipeCard(props) {
 
     setFavorite(isFavorite);
   }, [props.favoriteRecipes, props.id]);
+
+  useEffect(() => {
+    YummgyApi.getRecipeFavoritedList(setUserFavoritedList, props.id);
+  }, []);
 
   const pathName = props.title.toLocaleLowerCase().split(" ").join("_");
 
@@ -63,6 +69,12 @@ function RecipeCard(props) {
           </Link>
 
           <div className="border border-2 border-black rounded recipe-card-text-cont p-3  position-relative">
+            <NumberFavorited
+              numberOfUsersWhoFavorited={userFavoritedList.length}
+              title={recipeInfo.title}
+              userlist={userFavoritedList}
+              userId={props.userId}
+            />
             {props.isAdmin && (
               <button
                 onClick={() => {

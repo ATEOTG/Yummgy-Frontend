@@ -25,7 +25,6 @@ function AllRecipes(props) {
   useEffect(() => {
     YummgyApi.recipesSortByLatest(setRecipeList);
     if (props.isUserLogged) {
-      console.log("User is Logged");
       YummgyApi.getLoggedInUserFavoriteRecipes(
         setFavoriteRecipes,
         setPlaceholder
@@ -52,11 +51,14 @@ function AllRecipes(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
+
   const sortByPrepTime = () => { 
     YummgyApi.recipesSortByPrep(setRecipeList);
   }
 
   console.log("CurrentUserInfo: " + props.currUserInfo.role);
+
+
 
   return (
     <div className="d-flex">
@@ -91,6 +93,7 @@ function AllRecipes(props) {
               return (
                 <RecipeCard
                   key={`${recipe.recipeId} + ${i}`}
+                  userId={props.currUserInfo.userId}
                   id={recipe.recipeId}
                   title={recipe.title}
                   prepTime={recipe.prepTime}

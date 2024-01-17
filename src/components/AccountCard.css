@@ -2,8 +2,3 @@
   flex: 0 0 23.5%;
   background-color: #f1dcab;
 }
-
-.username-link:hover {
-  transition: 0.2s;
-  color: blue !important;
-}

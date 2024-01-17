@@ -1,0 +1,9 @@
+.number-display-cont {
+  bottom: -2%;
+  left: 0.5%;
+}
+
+.number-display-text {
+  color: rgb(100, 100, 100);
+  font-size: 13px;
+}

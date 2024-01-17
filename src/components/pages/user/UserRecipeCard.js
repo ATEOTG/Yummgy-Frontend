@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserRecipeCard.css";
-import UpdateModal from "../../UpdateModal";
+import UpdateModal from "../../modals/UpdateModal";
+import NumberFavorited from "../../NumberFavorited";
+import YummgyApi from "../../../apis/YummgyApi";
 
 function UserRecipeCard(props) {
   const [userRecipeModal, setUserRecipeModal] = useState(false);
+  const [userFavoritedList, setUserFavoritedList] = useState([]);
   const [recipeInfo, setRecipeInfo] = useState({
     prepTime: props.prepTime,
     directions: props.directions,
@@ -16,6 +19,10 @@ function UserRecipeCard(props) {
     setRecipeInfo(updatedObj);
   };
 
+  useEffect(() => {
+    YummgyApi.getRecipeFavoritedList(setUserFavoritedList, props.recipeId);
+  }, []);
+
   return (
     <li className="list-unstyled p-3 d-flex gap-2 border border-2 border-black rounded recipe-card w-100">
       <img
@@ -26,6 +33,12 @@ function UserRecipeCard(props) {
       />
 
       <div className="border border-2 border-black rounded recipe-card-text-cont position-relative d-flex justify-content-center user-recipe-text-cont">
+        <NumberFavorited
+          title={props.title}
+          numberOfUsersWhoFavorited={userFavoritedList.length}
+          userlist={userFavoritedList}
+          userId={props.userId}
+        />
         {props.canModifyRecipe && (
           <button
             onClick={() => {

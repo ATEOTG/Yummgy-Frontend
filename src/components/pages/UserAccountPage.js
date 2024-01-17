@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "../../svg/SearchIcon";
 import UserFavoriteCard from "./user/UserFavoriteCard";
 import UserRecipeCard from "./user/UserRecipeCard";
-import RecipeModal from "../RecipeModal";
 import YummgyApi from "../../apis/YummgyApi";
 
 function UserAccountPage(props) {
-  //   const [userInfo, setUserInfo] = useState("");
   const [userRecipes, setUserRecipe] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
-  //   const [recipeModalShow, setRecipeModalShow] = useState(false);
 
   useEffect(() => {
     YummgyApi.getUserRecipes(props.id, setUserRecipe);
@@ -53,7 +50,6 @@ function UserAccountPage(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
-  console.log("IsAdmin: " + props.isAdmin);
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">

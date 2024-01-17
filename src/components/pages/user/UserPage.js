@@ -3,7 +3,7 @@ import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
 import UserFavoriteCard from "./UserFavoriteCard";
-import RecipeModal from "../../RecipeModal";
+import RecipeModal from "../../modals/RecipeModal";
 import YummgyApi from "../../../apis/YummgyApi";
 
 function UserPage(props) {
@@ -117,6 +117,7 @@ function UserPage(props) {
                     notInRecipePage={true}
                     deleteUserRecipeHandler={deleteUserRecipeHandler}
                     canModifyRecipe={true}
+                    userId={userInfo.userId}
                   />
                 );
               } else return null;
@@ -133,6 +134,7 @@ function UserPage(props) {
                   notInRecipePage={true}
                   deleteUserRecipeHandler={deleteUserRecipeHandler}
                   canModifyRecipe={true}
+                  userId={userInfo.userId}
                 />
               );
             }
