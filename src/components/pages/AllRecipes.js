@@ -11,6 +11,7 @@ function AllRecipes(props) {
   const [notInRecipePage, setNotInRecipePage] = useState(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [placeholder, setPlaceholder] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const path = location.pathname;
 
@@ -51,14 +52,12 @@ function AllRecipes(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
-
-  const sortByPrepTime = () => { 
+  const sortByPrepTime = () => {
+    console.log("event tri");
     YummgyApi.recipesSortByPrep(setRecipeList);
-  }
+  };
 
   console.log("CurrentUserInfo: " + props.currUserInfo.role);
-
-
 
   return (
     <div className="d-flex">
@@ -77,15 +76,41 @@ function AllRecipes(props) {
           </form>
         )}
         <div className="d-flex justify-content-center mt-5 w-90 m-auto">
-          <button
-            type="submit"
-            onClick={sortByPrepTime}
-            className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn"
-          >
-            Sort Recipes by Prep Time
-          </button>
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenu2"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              Dropdown
+            </button>
+            <div
+              className={`dropdown-menu ${isOpen ? "show" : ""}`}
+              aria-labelledby="dropdownMenu2"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  sortByPrepTime();
+                }}
+                className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn dropdown-item"
+              >
+                Sort Recipes by Prep Time
+              </button>
+              <button className="dropdown-item" type="button">
+                Another action
+              </button>
+              <button className="dropdown-item" type="button">
+                Something else here
+              </button>
+            </div>
+          </div>
         </div>
-       
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.length !== 0 ? (
