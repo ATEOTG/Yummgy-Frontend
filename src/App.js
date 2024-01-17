@@ -18,12 +18,10 @@ function App() {
   const [currUserInfo, setCurrentUserInfo] = useState({});
 
   useEffect(() => {
-  if(isUserLogged){
-    YummgyApi.getLoggedInUser(setCurrentUserInfo);
-  }
-  
+    if (isUserLogged) {
+      YummgyApi.getLoggedInUser(setCurrentUserInfo);
+    }
   }, []);
-  // console.log(currUserInfo);
   return (
     <div>
       <header>

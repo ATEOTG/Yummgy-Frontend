@@ -25,7 +25,6 @@ function AllRecipes(props) {
   useEffect(() => {
     YummgyApi.getAllRecipes(setRecipeList);
     if (props.isUserLogged) {
-      console.log("User is Logged");
       YummgyApi.getLoggedInUserFavoriteRecipes(
         setFavoriteRecipes,
         setPlaceholder

@@ -50,7 +50,6 @@ function UserAccountPage(props) {
     YummgyApi.deleteRecipeAdmin(id);
   };
 
-  console.log("IsAdmin: " + props.isAdmin);
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">

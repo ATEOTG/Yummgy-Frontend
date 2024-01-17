@@ -16,7 +16,6 @@ const YummgyApi = {
     fetch(URL + "/api/users")
       .then((res) => res.json())
       .then((data) => {
-        console.log("hello");
         console.log(data);
         setAccountList(data);
       })
@@ -305,7 +304,6 @@ const YummgyApi = {
             })
           );
           setIsUserLogged(true);
-          console.log("logged is true");
           resolve(); // Resolve the promise if login is successful
         })
         .catch((err) => {
