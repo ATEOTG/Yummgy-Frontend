@@ -1,0 +1,11 @@
+.sort-dropdown {
+  background-color: #e7b790;
+  color: black;
+}
+
+.sort-dropdown:active,
+.sort-dropdown:hover,
+.sort-dropdown:focus {
+  background-color: #c59b79;
+  color: black;
+}

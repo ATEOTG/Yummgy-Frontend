@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import SearchIcon from "../../svg/SearchIcon";
 import "./AllRecipes.css";
 import RecipeCard from "../RecipeCard";
 import { useLocation } from "react-router-dom";
 import YummgyApi from "../../apis/YummgyApi";
+import DropdownMenu from "../DropdownMenu";
 
 function AllRecipes(props) {
   const [searchValue, setSearchValue] = useState("");
@@ -61,47 +62,24 @@ function AllRecipes(props) {
     <div className="d-flex">
       <div className="w-100">
         {notInRecipePage && (
-          <form className="input-group search-form" onSubmit={onSubmitHandler}>
-            <SearchIcon />
-            <input
-              className="form-control border border-2 border-black rounded-pill text-input"
-              type="text"
-              value={searchValue}
-              name="search"
-              placeholder="Search for Recipe..."
-              onChange={onChangeHandler}
-            />
-          </form>
-        )}
-        <div className="d-flex justify-content-center mt-5 w-90 m-auto">
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenu2"
-              data-bs-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="true"
+          <Fragment>
+            <form
+              className="input-group search-form"
+              onSubmit={onSubmitHandler}
             >
-              Dropdown
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button
-                type="button"
-                onClick={sortByPrepTime}
-                className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn dropdown-item"
-              >
-                Sort Recipes by Prep Time
-              </button>
-              <button className="dropdown-item" type="button">
-                Another action
-              </button>
-              <button className="dropdown-item" type="button">
-                Something else here
-              </button>
-            </div>
-          </div>
-        </div>
+              <SearchIcon />
+              <input
+                className="form-control border border-2 border-black rounded-pill text-input"
+                type="text"
+                value={searchValue}
+                name="search"
+                placeholder="Search for Recipe..."
+                onChange={onChangeHandler}
+              />
+            </form>
+            <DropdownMenu sortByPrepTime={sortByPrepTime} />
+          </Fragment>
+        )}
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.length !== 0 ? (
