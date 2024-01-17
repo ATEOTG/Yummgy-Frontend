@@ -1,8 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 function UsersListModal(props) {
+  const path = useLocation();
+  console.log(path);
   return (
     <Modal
       {...props}

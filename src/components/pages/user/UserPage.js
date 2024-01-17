@@ -117,6 +117,7 @@ function UserPage(props) {
                     notInRecipePage={true}
                     deleteUserRecipeHandler={deleteUserRecipeHandler}
                     canModifyRecipe={true}
+                    userId={userInfo.userId}
                   />
                 );
               } else return null;
@@ -133,6 +134,7 @@ function UserPage(props) {
                   notInRecipePage={true}
                   deleteUserRecipeHandler={deleteUserRecipeHandler}
                   canModifyRecipe={true}
+                  userId={userInfo.userId}
                 />
               );
             }
