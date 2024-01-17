@@ -24,9 +24,9 @@ function UserFavoriteCard(props) {
           <div>
             <p className="text-center">
               Ingredients:{" "}
-              {props.ingredients.length < 160
+              {props.ingredients.length < 150
                 ? props.ingredients
-                : props.ingredients.substring(0, 160) + "..."}
+                : props.ingredients.substring(0, 150) + "..."}
             </p>
           </div>
         </div>
