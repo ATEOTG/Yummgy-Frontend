@@ -79,7 +79,8 @@ function UserAccountPage(props) {
                     directions={recipe.directions}
                     notInRecipePage={true}
                     deleteUserRecipeHandler={deleteUserRecipeHandler}
-                    canModifyRecipe={props.isAdmin}
+                    canModifyRecipe={props.role === "ROLE_ADMIN"}
+                    role={props.role}
                   />
                 );
               } else return null;
@@ -95,7 +96,8 @@ function UserAccountPage(props) {
                   ingredients={recipe.ingredients}
                   notInRecipePage={true}
                   deleteUserRecipeHandler={deleteUserRecipeHandler}
-                  canModifyRecipe={props.isAdmin}
+                  canModifyRecipe={props.role === "ROLE_ADMIN"}
+                  role={props.role}
                 />
               );
             }
