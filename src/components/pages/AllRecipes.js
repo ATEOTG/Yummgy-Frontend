@@ -62,7 +62,36 @@ function AllRecipes(props) {
   };
 
   const sortByPrepTime = () => {
-    YummgyApi.recipesSortByPrep(setRecipeList);
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+    YummgyApi.searchRecipes(
+      "prepTime",
+      isAscending,
+      10,
+      searchValue,
+      setRecipeList
+    );
+  };
+
+  const sortByFavorites = () => {
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+    console.log("isAcending: " + isAscending + "SearchVAlue: " + searchValue);
+    YummgyApi.searchRecipes(
+      "favoriteCount",
+      isAscending,
+      10,
+      searchValue,
+      setRecipeList
+    );
   };
 
   console.log("CurrentUserInfo: " + props.currUserInfo.role);
@@ -84,24 +113,18 @@ function AllRecipes(props) {
                 name="search"
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
-              />              
-            </form>
-           
-          </Fragment>
-        )}
-        <div className="container">
-          <div className="row"> 
-            <div className="col col-sm-auto">
-            <DropdownMenu sortByPrepTime={sortByPrepTime} />
-            </div>
-            <div className="col">
+              />
               <AscendingRadioButtons
                 setIsAscending={setIsAscending}
                 isAscending={isAscending}
               />
-              </div>
-          </div>
-        </div>
+            </form>
+            <DropdownMenu
+              sortByPrepTime={sortByPrepTime}
+              sortByFavorites={sortByFavorites}
+            />
+          </Fragment>
+        )}
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.length !== 0 ? (
@@ -130,7 +153,8 @@ function AllRecipes(props) {
           )}
         </ul>
       </div>
-    </div>
+      </div>
+    
   );
 }
 
