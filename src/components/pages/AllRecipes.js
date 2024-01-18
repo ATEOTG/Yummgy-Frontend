@@ -5,6 +5,7 @@ import RecipeCard from "../RecipeCard";
 import { useLocation } from "react-router-dom";
 import YummgyApi from "../../apis/YummgyApi";
 import DropdownMenu from "../DropdownMenu";
+import AscendingRadioButtons from "../AscendingRadioButtons";
 
 function AllRecipes(props) {
   const [searchValue, setSearchValue] = useState("");
@@ -83,37 +84,10 @@ function AllRecipes(props) {
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
               />
-              <div className="d-flex gap-3">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label
-                    class="form-check-label fw-bold"
-                    for="flexRadioDefault1"
-                  >
-                    DESC
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
-                  />
-                  <label
-                    class="form-check-label fw-bold"
-                    for="flexRadioDefault2"
-                  >
-                    ASC
-                  </label>
-                </div>
-              </div>
+              <AscendingRadioButtons
+                setIsAscending={setIsAscending}
+                isAscending={isAscending}
+              />
             </form>
             <DropdownMenu sortByPrepTime={sortByPrepTime} />
           </Fragment>
