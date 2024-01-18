@@ -5,6 +5,7 @@ import RecipeCard from "../RecipeCard";
 import { useLocation } from "react-router-dom";
 import YummgyApi from "../../apis/YummgyApi";
 import DropdownMenu from "../DropdownMenu";
+import AscendingRadioButtons from "../AscendingRadioButtons";
 
 function AllRecipes(props) {
   const [searchValue, setSearchValue] = useState("");
@@ -71,7 +72,7 @@ function AllRecipes(props) {
         {notInRecipePage && (
           <Fragment>
             <form
-              className="input-group search-form"
+              className="input-group search-form d-flex align-items-center gap-2"
               onSubmit={onSubmitHandler}
             >
               <SearchIcon />
@@ -82,6 +83,10 @@ function AllRecipes(props) {
                 name="search"
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
+              />
+              <AscendingRadioButtons
+                setIsAscending={setIsAscending}
+                isAscending={isAscending}
               />
             </form>
             <DropdownMenu sortByPrepTime={sortByPrepTime} />
