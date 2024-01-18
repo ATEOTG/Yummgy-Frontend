@@ -11,6 +11,7 @@ function AllRecipes(props) {
   const [recipeList, setRecipeList] = useState([]);
   const [notInRecipePage, setNotInRecipePage] = useState(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [isAscending, setIsAscending] = useState(false);
   const [placeholder, setPlaceholder] = useState([]);
   const location = useLocation();
   const path = location.pathname;
@@ -24,7 +25,7 @@ function AllRecipes(props) {
   }, [path]);
 
   useEffect(() => {
-    YummgyApi.recipesSortByLatest(setRecipeList);
+    YummgyApi.searchRecipesAll(setRecipeList);
     if (props.isUserLogged) {
       YummgyApi.getLoggedInUserFavoriteRecipes(
         setFavoriteRecipes,
@@ -36,7 +37,13 @@ function AllRecipes(props) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    YummgyApi.searchRecipes(searchValue, setRecipeList);
+    YummgyApi.searchRecipes(
+      "recipeId",
+      isAscending,
+      10,
+      searchValue,
+      setRecipeList
+    );
   };
 
   const onChangeHandler = (e) => {
