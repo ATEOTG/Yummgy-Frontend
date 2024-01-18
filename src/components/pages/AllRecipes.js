@@ -61,7 +61,36 @@ function AllRecipes(props) {
   };
 
   const sortByPrepTime = () => {
-    YummgyApi.recipesSortByPrep(setRecipeList);
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+    YummgyApi.searchRecipes(
+      "prepTime",
+      isAscending,
+      10,
+      searchValue,
+      setRecipeList
+    );
+  };
+
+  const sortByFavorites = () => {
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+    console.log("isAcending: " + isAscending + "SearchVAlue: " + searchValue);
+    YummgyApi.searchRecipes(
+      "favoriteCount",
+      isAscending,
+      10,
+      searchValue,
+      setRecipeList
+    );
   };
 
   console.log("CurrentUserInfo: " + props.currUserInfo.role);
@@ -89,7 +118,10 @@ function AllRecipes(props) {
                 isAscending={isAscending}
               />
             </form>
-            <DropdownMenu sortByPrepTime={sortByPrepTime} />
+            <DropdownMenu
+              sortByPrepTime={sortByPrepTime}
+              sortByFavorites={sortByFavorites}
+            />
           </Fragment>
         )}
 
