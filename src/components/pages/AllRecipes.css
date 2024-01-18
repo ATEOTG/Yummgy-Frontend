@@ -5,6 +5,10 @@
   padding-left: 2.8rem;
 }
 
+.row {
+  height: 40 px;
+}
+
 svg {
   z-index: 999;
   position: absolute;

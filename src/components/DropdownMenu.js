@@ -3,7 +3,7 @@ import "./DropdownMenu.css";
 
 function DropdownMenu(props) {
   return (
-    <div className="d-flex justify-content-center mt-5 w-90 m-auto">
+    <div className="d-flex justify-content-left mt-5 w-90">
       <div className="dropdown">
         <button
           className="btn btn-secondary dropdown-toggle border border-2 border-black sort-dropdown fw-bold"
@@ -13,15 +13,15 @@ function DropdownMenu(props) {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Dropdown
+          Sort Options
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button
             type="button"
             onClick={props.sortByPrepTime}
-            className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn dropdown-item"
+            className="border border-2 border-black rounded fs-5 dropdown-item"
           >
-            Sort Recipes by Prep Time
+            Prep Time
           </button>
           <button className="dropdown-item" type="button">
             Another action

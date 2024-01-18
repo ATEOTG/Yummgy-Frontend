@@ -56,7 +56,8 @@ function AllRecipes(props) {
       return recipeList.filter((el) => {
         return el.recipeId !== id;
       });
-    });
+    }); 
+    
     YummgyApi.deleteRecipeAdmin(id);
   };
 
@@ -72,7 +73,7 @@ function AllRecipes(props) {
         {notInRecipePage && (
           <Fragment>
             <form
-              className="input-group search-form d-flex align-items-center gap-2"
+              className="input-group search-form d-flex align-items-center"
               onSubmit={onSubmitHandler}
             >
               <SearchIcon />
@@ -83,15 +84,24 @@ function AllRecipes(props) {
                 name="search"
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
-              />
+              />              
+            </form>
+           
+          </Fragment>
+        )}
+        <div className="container">
+          <div className="row"> 
+            <div className="col col-sm-auto">
+            <DropdownMenu sortByPrepTime={sortByPrepTime} />
+            </div>
+            <div className="col">
               <AscendingRadioButtons
                 setIsAscending={setIsAscending}
                 isAscending={isAscending}
               />
-            </form>
-            <DropdownMenu sortByPrepTime={sortByPrepTime} />
-          </Fragment>
-        )}
+              </div>
+          </div>
+        </div>
 
         <ul className="mt-5 d-flex flex-column p-0 gap-4">
           {recipeList.length !== 0 ? (
