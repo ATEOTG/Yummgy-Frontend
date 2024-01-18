@@ -74,6 +74,7 @@ function UserPage(props) {
     });
   };
 
+  console.log(userInfo);
   return (
     <div className="d-flex gap-3">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
@@ -117,6 +118,7 @@ function UserPage(props) {
                     notInRecipePage={true}
                     deleteUserRecipeHandler={deleteUserRecipeHandler}
                     canModifyRecipe={true}
+                    role={userInfo.role}
                     userId={userInfo.userId}
                   />
                 );
@@ -134,6 +136,7 @@ function UserPage(props) {
                   notInRecipePage={true}
                   deleteUserRecipeHandler={deleteUserRecipeHandler}
                   canModifyRecipe={true}
+                  role={userInfo.role}
                   userId={userInfo.userId}
                 />
               );
