@@ -263,10 +263,8 @@ const YummgyApi = {
         body: JSON.stringify(recipe),
       })
         .then((res) => res.json())
-        .then((data) => {
-          resolve(data);
-        })
         .catch((err) => {
+          console.log("ERROR BLOCK");
           reject(err);
         });
     });
@@ -306,12 +304,24 @@ const YummgyApi = {
   },
 
   registerUser: (user) => {
-    fetch(URL + "/api/add/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    }).catch((err) => {
-      console.log(err);
+    return new Promise((resolve, reject) => {
+      fetch(URL + "/api/add/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      })
+        .then((res) => {
+          if (res.status === 403) {
+            throw new Error("User with that Username already exists!");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   },
 

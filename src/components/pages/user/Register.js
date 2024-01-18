@@ -25,7 +25,7 @@ function Register(props) {
     setConfirmPassword(e.target.value);
   };
 
-  const registerSubmitHandler = (e) => {
+  const registerSubmitHandler = async (e) => {
     e.preventDefault();
 
     try {
@@ -37,7 +37,7 @@ function Register(props) {
         throw new Error("Password and Confirm Password do not Match!");
       }
 
-      YummgyApi.registerUser({
+      await YummgyApi.registerUser({
         yumUsername: username,
         yumPassword: password,
       });

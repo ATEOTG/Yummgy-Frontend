@@ -68,6 +68,7 @@ function RecipeModal(props) {
       props.addRecipeHandler(newRecipe);
     } catch (err) {
       const errorMessage = err.message;
+      console.log("Eror: ");
       setErrorMessage(errorMessage);
     }
 
