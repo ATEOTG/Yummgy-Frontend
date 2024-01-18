@@ -2,7 +2,7 @@ import React from "react";
 
 function AscendingRadioButtons(props) {
   return (
-    <div className="d-flex gap-3">
+    <div className=" d-flex flex-column gap-2 mt-5">
       <div class="form-check">
         <input
           class="form-check-input"
@@ -13,7 +13,7 @@ function AscendingRadioButtons(props) {
           checked={props.isAscending ? false : true}
         />
         <label class="form-check-label fw-bold" for="flexRadioDefault1">
-          DESC
+          Descending
         </label>
       </div>
       <div class="form-check">
@@ -26,7 +26,7 @@ function AscendingRadioButtons(props) {
           checked={props.isAscending ? true : false}
         />
         <label class="form-check-label fw-bold" for="flexRadioDefault2">
-          ASC
+          Ascending
         </label>
       </div>
     </div>

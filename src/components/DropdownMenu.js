@@ -3,7 +3,7 @@ import "./DropdownMenu.css";
 
 function DropdownMenu(props) {
   return (
-    <div className="d-flex justify-content-center mt-5 w-90 m-auto">
+    <div className="mt-5">
       <div className="dropdown">
         <button
           className="btn btn-secondary dropdown-toggle border border-2 border-black sort-dropdown fw-bold"

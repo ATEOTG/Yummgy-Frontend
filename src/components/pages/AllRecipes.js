@@ -120,15 +120,17 @@ function AllRecipes(props) {
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
               />
+            </form>
+            <div className="d-flex justify-content-start gap-4">
+              <DropdownMenu
+                sortByPrepTime={sortByPrepTime}
+                sortByFavorites={sortByFavorites}
+              />
               <AscendingRadioButtons
                 setIsAscending={setIsAscending}
                 isAscending={isAscending}
               />
-            </form>
-            <DropdownMenu
-              sortByPrepTime={sortByPrepTime}
-              sortByFavorites={sortByFavorites}
-            />
+            </div>
           </Fragment>
         )}
 
