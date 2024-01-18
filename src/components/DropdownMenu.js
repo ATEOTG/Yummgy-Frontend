@@ -13,21 +13,22 @@ function DropdownMenu(props) {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Dropdown
+          Sort Recipes By
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button
             type="button"
             onClick={props.sortByPrepTime}
-            className="border border-2 border-black rounded p-3 px-5 fs-5 register-btn dropdown-item"
+            className="dropdown-item"
           >
-            Sort Recipes by Prep Time
+            Prep Time
           </button>
-          <button className="dropdown-item" type="button">
-            Another action
-          </button>
-          <button className="dropdown-item" type="button">
-            Something else here
+          <button
+            className="dropdown-item"
+            type="button"
+            onClick={props.sortByFavorites}
+          >
+            Favorites
           </button>
         </div>
       </div>
