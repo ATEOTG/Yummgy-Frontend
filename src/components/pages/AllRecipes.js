@@ -84,7 +84,7 @@ function AllRecipes(props) {
         setPlaceholder
       );
     }
-    console.log("isAcending: " + isAscending + "SearchVAlue: " + searchValue);
+    console.log("isAscending: " + isAscending + "SearchValue: " + searchValue);
     YummgyApi.searchRecipes(
       "favoriteCount",
       isAscending,
@@ -153,7 +153,7 @@ function AllRecipes(props) {
           )}
         </ul>
       </div>
-      </div>
+    </div>
     
   );
 }
