@@ -71,7 +71,7 @@ function AllRecipes(props) {
         {notInRecipePage && (
           <Fragment>
             <form
-              className="input-group search-form"
+              className="input-group search-form d-flex align-items-center gap-2"
               onSubmit={onSubmitHandler}
             >
               <SearchIcon />
@@ -83,6 +83,37 @@ function AllRecipes(props) {
                 placeholder="Search for Recipe..."
                 onChange={onChangeHandler}
               />
+              <div className="d-flex gap-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault1"
+                  />
+                  <label
+                    class="form-check-label fw-bold"
+                    for="flexRadioDefault1"
+                  >
+                    DESC
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault2"
+                    checked
+                  />
+                  <label
+                    class="form-check-label fw-bold"
+                    for="flexRadioDefault2"
+                  >
+                    ASC
+                  </label>
+                </div>
+              </div>
             </form>
             <DropdownMenu sortByPrepTime={sortByPrepTime} />
           </Fragment>
