@@ -300,14 +300,9 @@ const YummgyApi = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Favorite Deleted");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
   },
 
   registerUser: (user) => {

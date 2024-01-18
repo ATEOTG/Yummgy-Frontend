@@ -38,10 +38,17 @@ function AllRecipes(props) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+
     YummgyApi.searchRecipes(
       "recipeId",
       isAscending,
-      10,
+      15,
       searchValue,
       setRecipeList
     );
@@ -71,7 +78,7 @@ function AllRecipes(props) {
     YummgyApi.searchRecipes(
       "prepTime",
       isAscending,
-      10,
+      15,
       searchValue,
       setRecipeList
     );
@@ -88,7 +95,7 @@ function AllRecipes(props) {
     YummgyApi.searchRecipes(
       "favoriteCount",
       isAscending,
-      10,
+      15,
       searchValue,
       setRecipeList
     );

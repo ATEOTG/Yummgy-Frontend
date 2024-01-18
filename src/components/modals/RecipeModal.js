@@ -57,7 +57,6 @@ function RecipeModal(props) {
         directions: directions,
         foodImageUrl: imageUrl,
         author: userInfo,
-        favoriteCount: 0,
       });
 
       setRecipeName("");

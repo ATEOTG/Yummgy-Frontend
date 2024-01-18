@@ -44,8 +44,10 @@ function AccountCard(props) {
           path={`${accountUsername}`}
           element={
             <UserAccountPage
-              isAdmin={
+              role={
                 props.isUserLogged && props.currUserInfo.role === "ROLE_ADMIN"
+                  ? "ROLE_ADMIN"
+                  : ""
               }
               id={props.id}
               username={props.username}
