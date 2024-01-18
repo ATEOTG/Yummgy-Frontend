@@ -30,6 +30,13 @@ function DropdownMenu(props) {
           >
             Favorites
           </button>
+          <button
+            className="dropdown-item"
+            type="button"
+            onClick={props.sortByTitle}
+          >
+            Title
+          </button>
         </div>
       </div>
     </div>

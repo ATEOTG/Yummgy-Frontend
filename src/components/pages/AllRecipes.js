@@ -90,9 +90,24 @@ function AllRecipes(props) {
         setPlaceholder
       );
     }
-    console.log("isAcending: " + isAscending + "SearchVAlue: " + searchValue);
     YummgyApi.searchRecipes(
       "favoriteCount",
+      isAscending,
+      15,
+      searchValue,
+      setRecipeList
+    );
+  };
+
+  const sortByTitle = () => {
+    if (props.isUserLogged) {
+      YummgyApi.getLoggedInUserFavoriteRecipes(
+        setFavoriteRecipes,
+        setPlaceholder
+      );
+    }
+    YummgyApi.searchRecipes(
+      "title",
       isAscending,
       15,
       searchValue,
@@ -125,6 +140,7 @@ function AllRecipes(props) {
               <DropdownMenu
                 sortByPrepTime={sortByPrepTime}
                 sortByFavorites={sortByFavorites}
+                sortByTitle={sortByTitle}
               />
               <AscendingRadioButtons
                 setIsAscending={setIsAscending}
