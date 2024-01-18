@@ -262,10 +262,21 @@ const YummgyApi = {
         }),
         body: JSON.stringify(recipe),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.ok) return res.json();
+          return res.text().then((text) => {
+            if (!text) {
+              throw new Error('{ "message": "Prep Time must be a number" }');
+            }
+            throw new Error(text);
+          });
+        })
+        .then((data) => {
+          resolve(data);
+        })
         .catch((err) => {
-          console.log("ERROR BLOCK");
-          reject(err);
+          const data = JSON.parse(err.message);
+          reject(data);
         });
     });
   },

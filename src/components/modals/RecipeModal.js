@@ -11,6 +11,7 @@ function RecipeModal(props) {
   const [prepTime, setPrepTime] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [userInfo, setUserInfo] = useState("");
+  const [recipeAddedFailure, setRecipeAddedFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -58,7 +59,6 @@ function RecipeModal(props) {
         foodImageUrl: imageUrl,
         author: userInfo,
       });
-
       setRecipeName("");
       setDirections("");
       setImageUrl("");
@@ -66,13 +66,15 @@ function RecipeModal(props) {
       setIngredients("");
 
       props.addRecipeHandler(newRecipe);
+      props.onHide();
     } catch (err) {
       const errorMessage = err.message;
-      console.log("Eror: ");
       setErrorMessage(errorMessage);
+      setRecipeAddedFailure(true);
+      setTimeout(() => {
+        setRecipeAddedFailure(false);
+      }, 2000);
     }
-
-    props.onHide();
   };
 
   return (
@@ -184,6 +186,13 @@ function RecipeModal(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
+        {recipeAddedFailure && (
+          <div className="w-100 d-flex justify-content-center mt-4">
+            <div className="alert alert-danger w-50 text-center" role="alert">
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <Button
           className="border border-2 border-black modal-btn-cls fw-bold"
           onClick={props.onHide}
