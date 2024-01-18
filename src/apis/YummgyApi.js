@@ -20,8 +20,8 @@ const YummgyApi = {
       })
       .catch((err) => {
         alert(err);
-      })
-  }, 
+      });
+  },
 
   recipesSortByPrep: (setRecipeList) => {
     fetch(URL + "/api/recipes/search/preptime/")
@@ -31,8 +31,8 @@ const YummgyApi = {
       })
       .catch((err) => {
         alert(err);
-      })
-  }, 
+      });
+  },
 
   getAllAccounts: (setAccountList) => {
     fetch(URL + "/api/users")
@@ -106,8 +106,24 @@ const YummgyApi = {
       });
   },
 
-  searchRecipes: (search, setRecipeList) => {
-    fetch(URL + `/api/recipes/search/${search == null ? null : search}`)
+  searchRecipes: (ordering, isAscending, amount, search, setRecipeList) => {
+    fetch(
+      URL +
+        `/api/recipes/search/${ordering}/${
+          isAscending ? "ASC" : "DESC"
+        }/${amount}/${search == null ? null : search}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipeList(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  },
+
+  searchRecipesAll: (setRecipeList) => {
+    fetch(URL + `/api/recipes/search/recipeId/DESC/100/`)
       .then((res) => res.json())
       .then((data) => {
         setRecipeList(data);
