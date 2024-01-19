@@ -9,6 +9,8 @@ function UpdateModal(props) {
   const [directions, setDirections] = useState(props.directions);
   const [prepTime, setPrepTime] = useState(props.prepTime);
   const [imageUrl, setImageUrl] = useState(props.image);
+  const [recipeUpdatedFailure, setRecipeUpdatedFailure] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const recipeNameHandler = (e) => {
     setRecipeName(e.target.value);
@@ -30,36 +32,44 @@ function UpdateModal(props) {
     setImageUrl(e.target.value);
   };
 
-  const submitFormHandler = (e) => {
-    const formInfo = {
-      prepTime: prepTime,
-      directions: directions,
-      recipeId: props.id,
-      title: recipeName,
-      ingredients: ingredients,
-      foodImageUrl: imageUrl,
-    };
-
-    if (
-      recipeName === "" ||
-      directions === "" ||
-      recipeName === "" ||
-      ingredients === "" ||
-      prepTime === ""
-    ) {
-      alert("The fields must not be empty!");
-      return null;
-    }
-
-    if (props.isAdmin) {
-      YummgyApi.updateRecipeAdmin(formInfo);
-    } else {
-      YummgyApi.updateRecipe(formInfo);
-    }
-
-    props.updatedValueHandler(formInfo);
+  const submitFormHandler = async (e) => {
     e.preventDefault();
-    props.onHide();
+    try {
+      if (
+        recipeName === "" ||
+        directions === "" ||
+        recipeName === "" ||
+        ingredients === "" ||
+        prepTime === ""
+      ) {
+        throw new Error("Please complete all recipe fields.");
+      }
+
+      const formInfo = {
+        prepTime: prepTime,
+        directions: directions,
+        recipeId: props.id,
+        title: recipeName,
+        ingredients: ingredients,
+        foodImageUrl: imageUrl,
+      };
+
+      if (props.isAdmin) {
+        await YummgyApi.updateRecipeAdmin(formInfo);
+      } else {
+        await YummgyApi.updateRecipe(formInfo);
+      }
+
+      props.updatedValueHandler(formInfo);
+      props.onHide();
+    } catch (err) {
+      const errorMessage = err.message;
+      setErrorMessage(errorMessage);
+      setRecipeUpdatedFailure(true);
+      setTimeout(() => {
+        setRecipeUpdatedFailure(false);
+      }, 2000);
+    }
   };
 
   return (
@@ -168,6 +178,16 @@ function UpdateModal(props) {
             ></textarea>
           </div>{" "}
           <Modal.Footer>
+            {recipeUpdatedFailure && (
+              <div className="w-100 d-flex justify-content-center mt-4">
+                <div
+                  className="alert alert-danger w-50 text-center"
+                  role="alert"
+                >
+                  {errorMessage}
+                </div>
+              </div>
+            )}
             <Button
               className="border border-2 border-black modal-btn-cls fw-bold"
               onClick={() => {
@@ -182,7 +202,6 @@ function UpdateModal(props) {
               Close
             </Button>
             <Button
-              type="submit"
               onClick={submitFormHandler}
               className="border border-2 border-black modal-btn-add fw-bold"
             >

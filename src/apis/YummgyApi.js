@@ -163,54 +163,68 @@ const YummgyApi = {
 
   updateRecipe: (recipeObj) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
-    fetch(URL + "/api/patch/recipe", {
-      method: "PATCH",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      }),
-      body: JSON.stringify(recipeObj),
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          alert("Did not update since Prep Time must be a string!");
-          throw new Error("Invalid input in prep time");
-        }
 
-        return res.json();
+    return new Promise((resolve, reject) => {
+      fetch(URL + "/api/patch/recipe", {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        }),
+        body: JSON.stringify(recipeObj),
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return res.text().then((text) => {
+            if (!text) {
+              throw new Error('{ "message": "Prep Time must be a number" }');
+            }
+            throw new Error(text);
+          });
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          const data = JSON.parse(err.message);
+          reject(data);
+        });
+    });
   },
 
   updateRecipeAdmin: (recipeObj) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;
-    fetch(URL + "/api/admin/patch/recipe", {
-      method: "PATCH",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      }),
-      body: JSON.stringify(recipeObj),
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          alert("Did not update since Prep Time must be a string!");
-          throw new Error("Invalid input in prep time");
-        }
 
-        return res.json();
+    return new Promise((resolve, reject) => {
+      fetch(URL + "/api/admin/patch/recipe", {
+        method: "PATCH",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        }),
+        body: JSON.stringify(recipeObj),
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return res.text().then((text) => {
+            if (!text) {
+              throw new Error('{ "message": "Prep Time must be a number" }');
+            }
+            throw new Error(text);
+          });
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          const data = JSON.parse(err.message);
+          reject(data);
+        });
+    });
   },
   deleteRecipe: (id) => {
     const token = JSON.parse(sessionStorage.getItem("jwt")).token;

@@ -76,7 +76,7 @@ function UserPage(props) {
 
   console.log(userInfo);
   return (
-    <div className="d-flex gap-3">
+    <div className="d-flex gap-3 w-100">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
         <div>
           <h2 className="text-center border border-2 border-black rounded p-1 user-main-info-username">
