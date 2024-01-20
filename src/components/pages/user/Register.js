@@ -1,50 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Register.css";
 import YummgyApi from "../../../apis/YummgyApi";
 import { useNavigate } from "react-router-dom";
 
 function Register(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [registerFailure, setRegisterFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const usernameValueHandler = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const passwordValueHandler = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const confirmPasswordHandler = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
   const registerSubmitHandler = async (e) => {
     e.preventDefault();
 
     try {
-      if (confirmPassword === "" || password === "" || username === "") {
+      if (
+        confirmPasswordRef.current.value === "" ||
+        passwordRef.current.value === "" ||
+        usernameRef.current.value === ""
+      ) {
         throw new Error(
           "Username, Password, or Confirm Password cannot be Blank!"
         );
-      } else if (confirmPassword !== password) {
+      } else if (
+        confirmPasswordRef.current.value !== passwordRef.current.value
+      ) {
         throw new Error("Password and Confirm Password do not Match!");
       }
 
       await YummgyApi.registerUser({
-        yumUsername: username,
-        yumPassword: password,
+        yumUsername: usernameRef.current.value,
+        yumPassword: passwordRef.current.value,
       });
-
-      setUsername("");
-      setPassword("");
-      setConfirmPassword("");
 
       setRegisterSuccess(true);
       setTimeout(() => {
@@ -76,9 +67,8 @@ function Register(props) {
             type="text"
             id="username"
             name="username"
-            value={username}
+            ref={usernameRef}
             placeholder="Enter your Username..."
-            onChange={usernameValueHandler}
             required
           />
         </div>
@@ -94,9 +84,8 @@ function Register(props) {
             type="password"
             id="password"
             name="password"
-            value={password}
+            ref={passwordRef}
             placeholder="Enter your Password..."
-            onChange={passwordValueHandler}
             required
           />
         </div>
@@ -112,9 +101,8 @@ function Register(props) {
             type="password"
             id="confirmPassword"
             name="confirmPassword"
-            value={confirmPassword}
+            ref={confirmPasswordRef}
             placeholder="Re-enter your Password..."
-            onChange={confirmPasswordHandler}
             required
           />
         </div>
