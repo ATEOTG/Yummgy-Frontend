@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import SearchIcon from "../../svg/SearchIcon";
 import "./AllRecipes.css";
 import RecipeCard from "../RecipeCard";
@@ -8,7 +8,7 @@ import DropdownMenu from "../DropdownMenu";
 import AscendingRadioButtons from "../AscendingRadioButtons";
 
 function AllRecipes(props) {
-  const [searchValue, setSearchValue] = useState("");
+  const searchInputRef = useRef(null);
   const [recipeList, setRecipeList] = useState([]);
   const [notInRecipePage, setNotInRecipePage] = useState(true);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -49,13 +49,9 @@ function AllRecipes(props) {
       "recipeId",
       isAscending,
       15,
-      searchValue,
+      searchInputRef.current.value,
       setRecipeList
     );
-  };
-
-  const onChangeHandler = (e) => {
-    setSearchValue(e.target.value);
   };
 
   const deleteRecipeHandler = (id) => {
@@ -78,7 +74,7 @@ function AllRecipes(props) {
       "prepTime",
       isAscending,
       15,
-      searchValue,
+      searchInputRef.current.value,
       setRecipeList
     );
   };
@@ -94,7 +90,7 @@ function AllRecipes(props) {
       "favoriteCount",
       isAscending,
       15,
-      searchValue,
+      searchInputRef.current.value,
       setRecipeList
     );
   };
@@ -110,12 +106,10 @@ function AllRecipes(props) {
       "title",
       isAscending,
       15,
-      searchValue,
+      searchInputRef.current.value,
       setRecipeList
     );
   };
-
-  console.log("CurrentUserInfo: " + props.currUserInfo.role);
 
   return (
     <div className="d-flex">
@@ -130,10 +124,9 @@ function AllRecipes(props) {
               <input
                 className="form-control border border-2 border-black rounded-pill text-input"
                 type="text"
-                value={searchValue}
+                ref={searchInputRef}
                 name="search"
                 placeholder="Search for Recipe..."
-                onChange={onChangeHandler}
               />
             </form>
             <div className="d-flex justify-content-start gap-4">
