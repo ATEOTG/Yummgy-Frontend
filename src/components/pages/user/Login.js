@@ -49,7 +49,6 @@ function Login(props) {
     }
   };
 
-  console.log("Re-Rendered");
   return (
     <div className="border border-2 border-black rounded p-3 login-cont">
       <form onSubmit={loginSubmitHandler}>
