@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "../../svg/SearchIcon";
 import UserFavoriteCard from "./user/UserFavoriteCard";
 import UserRecipeCard from "./user/UserRecipeCard";
@@ -6,7 +6,7 @@ import YummgyApi from "../../apis/YummgyApi";
 
 function UserAccountPage(props) {
   const [userRecipes, setUserRecipe] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  const searchInputRef = useRef(null);
   const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
@@ -28,13 +28,9 @@ function UserAccountPage(props) {
         const recipe = el.recipe;
         return recipe.title
           .toLocaleLowerCase()
-          .includes(searchValue.toLocaleLowerCase());
+          .includes(searchInputRef.current.value.toLocaleLowerCase());
       });
     });
-  };
-
-  const onChangeHandler = (e) => {
-    setSearchValue(e.target.value);
   };
 
   const viewMoreHandler = () => {
@@ -119,10 +115,9 @@ function UserAccountPage(props) {
           <input
             className="form-control border border-2 border-black rounded-pill text-input"
             type="text"
-            value={searchValue}
+            ref={searchInputRef}
             name="search"
             placeholder="Search In User's Favorites..."
-            onChange={onChangeHandler}
           />
         </form>
         <ul className="p-0 d-flex flex-column gap-2 user-page-list-cont">

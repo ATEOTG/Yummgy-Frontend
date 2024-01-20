@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./RecipeModal.css";
 import YummgyApi from "../../apis/YummgyApi";
 
 function RecipeModal(props) {
-  const [recipeName, setRecipeName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [directions, setDirections] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const recipeNameRef = useRef(null);
+  const ingredientsRef = useRef(null);
+  const directionsRef = useRef(null);
+  const prepTimeRef = useRef(null);
+  const imageUrlRef = useRef(null);
   const [userInfo, setUserInfo] = useState("");
   const [recipeAddedFailure, setRecipeAddedFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,52 +18,27 @@ function RecipeModal(props) {
     YummgyApi.getLoggedInUser(setUserInfo);
   }, []);
 
-  const recipeNameHandler = (e) => {
-    setRecipeName(e.target.value);
-  };
-
-  const ingredientsHandler = (e) => {
-    setIngredients(e.target.value);
-  };
-
-  const directionHandler = (e) => {
-    setDirections(e.target.value);
-  };
-
-  const prepTimeHandler = (e) => {
-    setPrepTime(e.target.value);
-  };
-
-  const imageUrlHandler = (e) => {
-    setImageUrl(e.target.value);
-  };
-
   const submitFormHandler = async (e) => {
     e.preventDefault();
     try {
       if (
-        recipeName === "" ||
-        ingredients === "" ||
-        directions === "" ||
-        prepTime === "" ||
-        imageUrl === ""
+        recipeNameRef.current.value === "" ||
+        ingredientsRef.current.value === "" ||
+        directionsRef.current.value === "" ||
+        prepTimeRef.current.value === "" ||
+        imageUrlRef.current.value === ""
       ) {
         throw new Error("Please complete all recipe fields.");
       }
 
       const newRecipe = await YummgyApi.addRecipe({
-        title: recipeName,
-        prepTime: prepTime,
-        ingredients: ingredients,
-        directions: directions,
-        foodImageUrl: imageUrl,
+        title: recipeNameRef.current.value,
+        prepTime: prepTimeRef.current.value,
+        ingredients: ingredientsRef.current.value,
+        directions: directionsRef.current.value,
+        foodImageUrl: imageUrlRef.current.value,
         author: userInfo,
       });
-      setRecipeName("");
-      setDirections("");
-      setImageUrl("");
-      setPrepTime("");
-      setIngredients("");
 
       props.addRecipeHandler(newRecipe);
       props.onHide();
@@ -103,9 +78,8 @@ function RecipeModal(props) {
               type="text"
               id="name"
               name="name"
-              value={recipeName}
+              ref={recipeNameRef}
               placeholder="Recipe Name..."
-              onChange={recipeNameHandler}
               required
             />
           </div>
@@ -121,9 +95,8 @@ function RecipeModal(props) {
               type="text"
               id="ingredients"
               name="ingredients"
-              value={ingredients}
+              ref={ingredientsRef}
               placeholder="Butter, Milk, Sugar..."
-              onChange={ingredientsHandler}
               required
             />
           </div>
@@ -140,9 +113,8 @@ function RecipeModal(props) {
               type="text"
               id="prep"
               name="prep"
-              value={prepTime}
+              ref={prepTimeRef}
               placeholder="Prep time..."
-              onChange={prepTimeHandler}
               required
             />
           </div>
@@ -158,9 +130,8 @@ function RecipeModal(props) {
               type="text"
               id="imageUrl"
               name="imageUrl"
-              value={imageUrl}
+              ref={imageUrlRef}
               placeholder="example.png..."
-              onChange={imageUrlHandler}
               required
             />
           </div>
@@ -175,9 +146,8 @@ function RecipeModal(props) {
               className="form-control border border-2 border-black rounded"
               id="directions"
               name="directions"
-              value={directions}
+              ref={directionsRef}
               placeholder="Directions..."
-              onChange={directionHandler}
               required
               cols="30"
               rows="4"

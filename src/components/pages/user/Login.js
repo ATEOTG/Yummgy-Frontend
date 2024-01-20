@@ -1,29 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import YummgyApi from "../../../apis/YummgyApi";
 
 function Login(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginFailure, setLoginFailure] = useState(false);
   const [failureMessage, setFailureMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const usernameValueHandler = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const passwordValueHandler = (e) => {
-    setPassword(e.target.value);
-  };
-
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
 
-    if (username === "" || password === "") {
+    if (usernameRef.current.value === "" || passwordRef.current.value === "") {
       setFailureMessage("Cannot leave fields blank!");
       setLoginFailure(true);
       setTimeout(() => {
@@ -34,7 +26,10 @@ function Login(props) {
 
     try {
       await YummgyApi.loginUser(
-        { username: username, password: password },
+        {
+          username: usernameRef.current.value,
+          password: passwordRef.current.value,
+        },
         props.setIsUserLogged
       );
 
@@ -69,9 +64,8 @@ function Login(props) {
             type="text"
             id="username"
             name="username"
-            value={username}
+            ref={usernameRef}
             placeholder="Enter your Username..."
-            onChange={usernameValueHandler}
             required
           />
         </div>
@@ -87,9 +81,8 @@ function Login(props) {
             type="password"
             id="password"
             name="password"
-            value={password}
+            ref={passwordRef}
             placeholder="Enter your Password..."
-            onChange={passwordValueHandler}
             required
           />
         </div>
