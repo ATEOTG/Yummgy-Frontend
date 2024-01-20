@@ -57,7 +57,10 @@ function App() {
               />
             }
           />
-          <Route path="/user" element={<UserPage />} />
+          <Route
+            path="/user"
+            element={<UserPage isUserLogged={isUserLogged} />}
+          />
           <Route
             path="/login"
             element={
