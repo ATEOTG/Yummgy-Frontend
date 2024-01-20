@@ -13,6 +13,7 @@ function RecipeModal(props) {
   const [userInfo, setUserInfo] = useState("");
   const [recipeAddedFailure, setRecipeAddedFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { addRecipeHandler, ...rest } = props;
 
   useEffect(() => {
     YummgyApi.getLoggedInUser(setUserInfo);
@@ -40,7 +41,7 @@ function RecipeModal(props) {
         author: userInfo,
       });
 
-      props.addRecipeHandler(newRecipe);
+      addRecipeHandler(newRecipe);
       props.onHide();
     } catch (err) {
       const errorMessage = err.message;
@@ -54,7 +55,7 @@ function RecipeModal(props) {
 
   return (
     <Modal
-      {...props}
+      {...rest}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered

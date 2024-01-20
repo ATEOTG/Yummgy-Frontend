@@ -4,10 +4,16 @@ import Modal from "react-bootstrap/Modal";
 import YummgyApi from "../../apis/YummgyApi";
 
 function UpdateModal(props) {
+  const {
+    isAdmin,
+    updatedValueHandler,
+    prepTime: prepTimeProp,
+    ...rest
+  } = props;
   const [recipeName, setRecipeName] = useState(props.title);
   const [ingredients, setIngredients] = useState(props.ingredients);
   const [directions, setDirections] = useState(props.directions);
-  const [prepTime, setPrepTime] = useState(props.prepTime);
+  const [prepTime, setPrepTime] = useState(prepTimeProp);
   const [imageUrl, setImageUrl] = useState(props.image);
   const [recipeUpdatedFailure, setRecipeUpdatedFailure] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -54,13 +60,13 @@ function UpdateModal(props) {
         foodImageUrl: imageUrl,
       };
 
-      if (props.isAdmin) {
+      if (isAdmin) {
         await YummgyApi.updateRecipeAdmin(formInfo);
       } else {
         await YummgyApi.updateRecipe(formInfo);
       }
 
-      props.updatedValueHandler(formInfo);
+      updatedValueHandler(formInfo);
       props.onHide();
     } catch (err) {
       const errorMessage = err.message;
@@ -74,7 +80,7 @@ function UpdateModal(props) {
 
   return (
     <Modal
-      {...props}
+      {...rest}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -194,7 +200,7 @@ function UpdateModal(props) {
                 setRecipeName(props.title);
                 setIngredients(props.ingredients);
                 setDirections(props.directions);
-                setPrepTime(props.prepTime);
+                setPrepTime(prepTimeProp);
                 setImageUrl(props.image);
                 props.onHide();
               }}
