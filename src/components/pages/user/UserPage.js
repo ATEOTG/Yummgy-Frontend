@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "../../../svg/SearchIcon";
 import "./UserPage.css";
 import UserRecipeCard from "./UserRecipeCard";
@@ -9,7 +9,7 @@ import YummgyApi from "../../../apis/YummgyApi";
 function UserPage(props) {
   const [userInfo, setUserInfo] = useState("");
   const [userRecipes, setUserRecipe] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  const searchInputRef = useRef(null);
   const [searchRecipeList, setSearchRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [viewMore, setViewMore] = useState(false);
@@ -32,13 +32,9 @@ function UserPage(props) {
         const recipe = el.recipe;
         return recipe.title
           .toLocaleLowerCase()
-          .includes(searchValue.toLocaleLowerCase());
+          .includes(searchInputRef.current.value.toLocaleLowerCase());
       });
     });
-  };
-
-  const onChangeHandler = (e) => {
-    setSearchValue(e.target.value);
   };
 
   const viewMoreHandler = () => {
@@ -74,7 +70,6 @@ function UserPage(props) {
     });
   };
 
-  console.log(userInfo);
   return (
     <div className="d-flex gap-3 w-100">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
@@ -159,10 +154,9 @@ function UserPage(props) {
           <input
             className="form-control border border-2 border-black rounded-pill text-input"
             type="text"
-            value={searchValue}
+            ref={searchInputRef}
             name="search"
             placeholder="Search in Favorites..."
-            onChange={onChangeHandler}
           />
         </form>
         <ul className="p-0 d-flex flex-column gap-2 user-page-list-cont">
