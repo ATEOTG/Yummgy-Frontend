@@ -3,9 +3,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 function UsersListModal(props) {
+  const { userId, ...rest } = props;
   return (
     <Modal
-      {...props}
+      {...rest}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -25,7 +26,7 @@ function UsersListModal(props) {
                   <Link
                     className="text-decoration-none fs-4 text-black username-link fw-bold"
                     to={
-                      props.userId === user.userId
+                      userId === user.userId
                         ? `/user`
                         : `/accounts/${user.yumUsername
                             .toLocaleLowerCase()
