@@ -30,12 +30,15 @@ function Home(props) {
           </Link>
         )}
 
-        <Link
-          className="btn btn-lg py-4 px-3 home-btn border border-2 border-black"
-          to="/register"
-        >
-          New User? Register
-        </Link>
+        {!props.isUserLogged && (
+          <Link
+            className="btn btn-lg py-4 px-3 home-btn border border-2 border-black"
+            to="/register"
+          >
+            New User? Register
+          </Link>
+        )}
+
         <div className="home-text-cont rounded border border-2 border-black fs-5 text-center">
           <p>Welcome to Yummgy</p>
           <p>Find All your favorite Food Co Recipes and more!</p>
