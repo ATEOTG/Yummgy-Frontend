@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register(props) {
   const usernameRef = useRef(null);
+  const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
 
@@ -21,15 +22,24 @@ function Register(props) {
       if (
         confirmPasswordRef.current.value === "" ||
         passwordRef.current.value === "" ||
-        usernameRef.current.value === ""
+        usernameRef.current.value === "" ||
+        emailRef.current.value === ""
       ) {
         throw new Error(
-          "Username, Password, or Confirm Password cannot be Blank!"
+          "Username, Email, Password, or Confirm Password cannot be Blank!"
         );
       } else if (
         confirmPasswordRef.current.value !== passwordRef.current.value
       ) {
         throw new Error("Password and Confirm Password do not Match!");
+      } else if (
+        !emailRef.current.value.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        throw new Error(
+          "Email not properly formatted as it should! Exmaple: email@gmail.com"
+        );
       }
 
       await YummgyApi.registerUser({
@@ -69,6 +79,24 @@ function Register(props) {
             name="username"
             ref={usernameRef}
             placeholder="Enter your Username..."
+            required
+          />
+        </div>
+        <div className="d-flex gap-4 mb-3">
+          <label
+            htmlFor="email"
+            className="border border-2 border-black rounded login-label fs-4 text-center py-1"
+          >
+            Email
+          </label>
+          <input
+            className="form-control border border-2 border-black rounded"
+            type="email"
+            id="email"
+            name="email"
+            ref={emailRef}
+            placeholder="Enter your email..."
+            pattern=".+@example\.com"
             required
           />
         </div>
