@@ -19,14 +19,25 @@ function UserFavoriteCard(props) {
           id={props.id}
           isUserFavoriteCard={props.isUserFavoriteCard}
         />
-        <h2 className="text-center fw-bold">{props.title}</h2>
-        <div className="mt-4 user-favorite-text-cont">
+        <h2 className="text-center fw-bold">
+          {" "}
+          {props.title.length < 18
+            ? props.title
+            : props.title.substring(0, 18) + "..."}
+        </h2>
+        <div className="mt-4 user-favorite-text-cont text-center">
           <div>
-            <p className="text-center">
+            <p className="text-center-desktop">
               Ingredients:{" "}
               {props.ingredients.length < 150
                 ? props.ingredients
                 : props.ingredients.substring(0, 150) + "..."}
+            </p>
+            <p className="text-center-tablet">
+              Ingredients:{" "}
+              {props.ingredients.length < 75
+                ? props.ingredients
+                : props.ingredients.substring(0, 75) + "..."}
             </p>
           </div>
         </div>
