@@ -64,7 +64,7 @@ function RecipeCard(props) {
             <img
               src={recipeInfo.foodImageUrl}
               alt={`${recipeInfo.title}`}
-              className="w-100 border border-2 border-black rounded"
+              className="w-100 border border-2 border-black rounded recipe-card-img"
             />
           </Link>
 
@@ -123,12 +123,18 @@ function RecipeCard(props) {
               {recipeInfo.title}
             </h2>
             <div className="mt-4">
-              <div className="ingredients-cont">
-                <p className="text-center">
+              <div className="ingredients-cont text-center">
+                <p className="text-center-desktop">
                   Ingredients:{" "}
                   {recipeInfo.ingredients.length < 350
                     ? recipeInfo.ingredients
                     : recipeInfo.ingredients.substring(0, 350) + "..."}
+                </p>
+                <p className="text-center-tablet">
+                  Ingredients:{" "}
+                  {recipeInfo.ingredients.length < 140
+                    ? recipeInfo.ingredients
+                    : recipeInfo.ingredients.substring(0, 140) + "..."}
                 </p>
               </div>
             </div>
