@@ -18,6 +18,11 @@
   background-color: #f1dcab;
 }
 
-/* @media(){
-
-} */
+@media (max-width: 991px) {
+  .user-main-info-cont {
+    width: 40% !important;
+  }
+  .user-main-favorite-info-cont {
+    width: 57.5% !important;
+  }
+}
