@@ -42,6 +42,34 @@
   top: 14% !important;
 }
 
+.text-center-tablet {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .text-center-desktop {
+    display: none;
+  }
+
+  .text-center-tablet {
+    display: inline;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .recipe-card-img {
+    width: 156.3px !important;
+  }
+  .recipe-card-text-cont {
+    width: 444.9px;
+  }
+
+  .recipe-card-text-cont h2 {
+    font-size: 25px;
+  }
+}
+
 @media (min-width: 1400px) {
   .recipe-card-icon {
     top: -7% !important;

@@ -14,3 +14,11 @@
 .home-btn {
   background-color: #e7b790;
 }
+
+@media (max-width: 767px) {
+  .home-text-cont,
+  .home-btn {
+    font-size: 16px !important;
+    font-weight: 700;
+  }
+}

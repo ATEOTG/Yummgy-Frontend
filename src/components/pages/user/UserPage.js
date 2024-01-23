@@ -153,7 +153,7 @@ function UserPage(props) {
               {!viewMore ? `View More` : `View Less`}
             </button>
           </div>
-          <div className="w-75">
+          <div className="w-75 user-main-favorite-info-cont">
             <form
               className="input-group search-form mb-2"
               onSubmit={onSubmitHandler}

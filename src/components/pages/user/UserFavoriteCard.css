@@ -13,3 +13,17 @@
   border: 5px;
   border-color: black;
 }
+
+.text-center-tablet {
+  display: none;
+}
+
+@media (max-width: 1399px) {
+  .text-center-desktop {
+    display: none;
+  }
+
+  .text-center-tablet {
+    display: inline;
+  }
+}
