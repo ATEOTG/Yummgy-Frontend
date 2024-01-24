@@ -10,12 +10,17 @@ import UserPage from "./components/pages/user/UserPage";
 import { useEffect, useState } from "react";
 import AccountsPage from "./components/pages/AccountsPage";
 import YummgyApi from "./apis/YummgyApi";
+import PersonIcon from "./svg/PersonIcon";
+import HamburgerIcon from "./svg/HamburgerIcon";
+import MobileMenu from "./components/MobileMenu";
+import MobileMenuContent from "./components/MobileMenuContent";
 
 function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
     return sessionStorage.getItem("jwt") ? true : false;
   });
   const [currUserInfo, setCurrentUserInfo] = useState({});
+  const [isCollapse, setIsCollapse] = useState(false);
 
   useEffect(() => {
     if (isUserLogged) {
@@ -26,9 +31,15 @@ function App() {
     <div>
       <header>
         <div className="border border-2 p-2 w-95 rounded m-auto mt-4 title-cont border-black">
+          <MobileMenu setIsCollapse={setIsCollapse} />
           <h1 className="text-center fw-bold">Yummgy</h1>
+          <PersonIcon />
         </div>
-
+        <MobileMenuContent
+          isUserLogged={isUserLogged}
+          setIsCollapse={setIsCollapse}
+          isCollapse={isCollapse}
+        />
         <Navigation
           isUserLogged={isUserLogged}
           setIsUserLogged={setIsUserLogged}

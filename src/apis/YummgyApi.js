@@ -38,7 +38,6 @@ const YummgyApi = {
     fetch(URL + "/api/users")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setAccountList(data);
       })
       .catch((err) => {

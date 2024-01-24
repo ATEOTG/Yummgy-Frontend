@@ -1,0 +1,11 @@
+.person-icon {
+  display: none;
+  position: relative !important;
+  margin-right: 2rem;
+}
+
+@media (max-width: 767px) {
+  .person-icon {
+    display: block;
+  }
+}
