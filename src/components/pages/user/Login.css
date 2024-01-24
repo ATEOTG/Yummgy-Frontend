@@ -21,3 +21,42 @@
 button {
   background-color: #e7b790;
 }
+
+.login-btn-mobile {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .login-cont {
+    background-color: #e7b790;
+  }
+
+  .login-text-cont {
+    gap: 0px !important;
+    flex-direction: column;
+  }
+
+  .login-label {
+    padding: 0px 10px;
+    width: 60%;
+    background-color: #f1dcab;
+  }
+
+  .login-btn-mobile {
+    width: 100% !important;
+    margin: 25px 0px 0px 0px !important;
+    display: block;
+  }
+
+  .login-btn-mobile button {
+    display: inline-block;
+    width: 100%;
+    font-size: 30px !important;
+  }
+
+  .login-btn {
+    display: none;
+  }
+}
