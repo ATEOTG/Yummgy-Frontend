@@ -2,9 +2,15 @@ div.border {
   scrollbar-width: thin;
 }
 
-.recipe-page-cont {
+.recipe-page-cont-desktop {
   margin-top: -45px;
 }
+
+.recipe-page-cont-mobile {
+  margin-top: -30px;
+  display: none;
+}
+
 .recipe-main-page-cont {
   height: 65vh;
 }
@@ -18,4 +24,18 @@ div.border {
 
 .directions-cont {
   background-color: #f1dcab;
+}
+
+@media (max-width: 767px) {
+  .recipe-page-cont-desktop {
+    display: none;
+  }
+
+  .recipe-page-cont-mobile {
+    display: block;
+  }
+
+  #accordionExample {
+    --bs-accordion-bg: none;
+  }
 }
