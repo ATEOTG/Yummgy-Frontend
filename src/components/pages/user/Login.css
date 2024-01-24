@@ -23,8 +23,20 @@ button {
 }
 
 .login-btn-mobile {
-  padding-left: 4rem !important;
-  padding-right: 4rem !important;
+  padding: 0.5rem 0rem !important;
+  display: none;
+}
+
+.login-btn-mobile button {
+  display: none;
+}
+
+.register-btn-mobile-login {
+  margin-top: 0.5rem;
+  font-size: 21px !important;
+  padding: 0.5rem 3rem !important;
+  font-weight: 400;
+  width: 100%;
   display: none;
 }
 
@@ -42,6 +54,11 @@ button {
     padding: 0px 10px;
     width: 60%;
     background-color: #f1dcab;
+    font-size: 18px !important;
+  }
+
+  .register-btn-mobile-login {
+    display: block;
   }
 
   .login-btn-mobile {

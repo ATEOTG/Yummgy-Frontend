@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import YummgyApi from "../../../apis/YummgyApi";
 
 function Login(props) {
@@ -116,11 +116,18 @@ function Login(props) {
       <div className="d-flex justify-content-center mt-4 w-90 m-auto login-btn-mobile">
         <button
           onClick={loginSubmitHandler}
-          className="border border-2 border-black rounded p-3 px-5 fs-5 "
+          className="border border-2 border-black rounded p-3 px-5 fs-5"
         >
           Login
         </button>
       </div>
+
+      <Link
+        className="btn btn-lg py-4 home-btn border border-2 border-black register-btn-mobile-login"
+        to="/register"
+      >
+        New User? Register Here
+      </Link>
     </Fragment>
   );
 }
