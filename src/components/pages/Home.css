@@ -15,10 +15,48 @@
   background-color: #e7b790;
 }
 
+.register-btn-mobile {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .home-text-cont,
   .home-btn {
     font-size: 16px !important;
     font-weight: 700;
+  }
+
+  .home-text-cont {
+    background-color: #e7b790;
+    padding: 1rem 0.5rem;
+  }
+
+  .home-info-cont {
+    width: 100% !important;
+  }
+
+  .home-cont {
+    width: 100% !important;
+    height: 350px;
+    display: block;
+    flex: none;
+  }
+
+  .home-login-btn,
+  .home-logout-btn {
+    display: none;
+  }
+
+  .home-cont-gen {
+    flex-direction: column;
+  }
+
+  .register-btn-mobile {
+    margin-top: 1rem;
+    display: block;
+  }
+
+  .register-btn-desktop {
+    display: none;
   }
 }
