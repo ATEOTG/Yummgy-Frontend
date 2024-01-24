@@ -3,6 +3,7 @@ import SearchIcon from "../../svg/SearchIcon";
 import AccountCard from "../AccountCard";
 import YummgyApi from "../../apis/YummgyApi";
 import { useLocation } from "react-router-dom";
+import "./AccountsPage.css";
 
 function AccountsPage(props) {
   const [searchValue, setSearchValue] = useState("");
@@ -53,7 +54,7 @@ function AccountsPage(props) {
         )}
 
         <div>
-          <ul className="mt-5 d-flex  p-0 flex-wrap gap-4">
+          <ul className="mt-5 d-flex  p-0 flex-wrap gap-4 account-user-page-list">
             {accountList.length !== 0 ? (
               accountList.map((account) => {
                 return (
