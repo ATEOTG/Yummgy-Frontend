@@ -26,3 +26,37 @@
     width: 57.5% !important;
   }
 }
+
+@media (max-width: 767px) {
+  .user-page-cont {
+    flex-direction: column;
+  }
+  .user-main-info-cont {
+    width: 100% !important;
+  }
+
+  .user-main-info-username,
+  .user-main-info-user h2,
+  .add-recipe-btn,
+  .view-btn {
+    font-weight: 700;
+  }
+
+  .add-recipe-btn,
+  .view-btn {
+    padding: 0.5rem;
+  }
+
+  .view-btn {
+    margin-top: -2%;
+  }
+
+  .user-main-info-user {
+    font-weight: 700;
+    padding-top: 1rem;
+  }
+
+  .user-main-favorite-info-cont {
+    width: 100% !important;
+  }
+}
