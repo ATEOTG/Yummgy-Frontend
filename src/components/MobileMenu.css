@@ -1,0 +1,20 @@
+.navbar-toggler {
+  border: none;
+  box-shadow: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.nav-hamburger-menu {
+  display: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .nav-hamburger-menu {
+    display: block;
+  }
+}

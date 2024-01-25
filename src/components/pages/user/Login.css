@@ -21,3 +21,59 @@
 button {
   background-color: #e7b790;
 }
+
+.login-btn-mobile {
+  padding: 0.5rem 0rem !important;
+  display: none;
+}
+
+.login-btn-mobile button {
+  display: none;
+}
+
+.register-btn-mobile-login {
+  margin-top: 0.5rem;
+  font-size: 21px !important;
+  padding: 0.5rem 3rem !important;
+  font-weight: 400;
+  width: 100%;
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .login-cont {
+    background-color: #e7b790;
+  }
+
+  .login-text-cont {
+    gap: 0px !important;
+    flex-direction: column;
+  }
+
+  .login-label {
+    padding: 0px 10px;
+    width: 60%;
+    background-color: #f1dcab;
+    font-size: 18px !important;
+  }
+
+  .register-btn-mobile-login {
+    display: block;
+  }
+
+  .login-btn-mobile {
+    width: 100% !important;
+    margin: 25px 0px 0px 0px !important;
+    display: block;
+  }
+
+  .login-btn-mobile button {
+    display: inline-block;
+    width: 100%;
+    font-size: 30px !important;
+  }
+
+  .login-btn {
+    display: none;
+  }
+}

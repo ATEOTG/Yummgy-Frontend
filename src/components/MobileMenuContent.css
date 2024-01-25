@@ -1,0 +1,12 @@
+.mobile-menu-content-cont {
+  background-color: white;
+  margin: 0 auto;
+  width: 95%;
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-content-cont {
+    display: block;
+  }
+}

@@ -1,3 +1,24 @@
 .register-btn {
   padding: 0.5rem 7rem !important;
 }
+
+.register-btn-mobile {
+  display: none;
+  padding: 0.5rem 7rem !important;
+  font-size: 30px !important;
+}
+
+@media (max-width: 767px) {
+  .register-btn {
+    display: none;
+  }
+
+  .register-text-cont {
+    gap: 0px !important;
+    flex-direction: column;
+  }
+
+  .register-btn-mobile {
+    display: block;
+  }
+}

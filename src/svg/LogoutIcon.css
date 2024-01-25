@@ -1,0 +1,12 @@
+.logout-icon {
+  display: none;
+  position: relative !important;
+  margin-right: 2rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  .logout-icon {
+    display: block;
+  }
+}

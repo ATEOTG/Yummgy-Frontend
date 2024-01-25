@@ -5,3 +5,9 @@
 .nav-links {
   background-color: #dae1b6;
 }
+
+@media (max-width: 767px) {
+  .nav-cont {
+    display: none !important;
+  }
+}

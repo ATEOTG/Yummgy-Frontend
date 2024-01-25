@@ -114,6 +114,11 @@ function RecipeCard(props) {
               clickHandler={clickFavoriteHandler}
               favorite={favorite}
             />
+            <h2 className="text-center fw-bold mobile-title">
+              {recipeInfo.title.length < 20
+                ? recipeInfo.title
+                : recipeInfo.title.substring(0, 20) + "..."}
+            </h2>
             <h2 className="text-center fw-bold tablet-title">
               {recipeInfo.title.length < 25
                 ? recipeInfo.title
