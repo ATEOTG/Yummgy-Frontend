@@ -83,7 +83,7 @@ function Register(props) {
               required
             />
           </div>
-          <div className="d-flex gap-4 mb-3">
+          <div className="d-flex gap-4 mb-3 register-text-cont">
             <label
               htmlFor="email"
               className="border border-2 border-black rounded login-label fs-4 text-center py-1"
