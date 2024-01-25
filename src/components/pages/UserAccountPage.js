@@ -47,7 +47,7 @@ function UserAccountPage(props) {
   };
 
   return (
-    <div className="d-flex gap-3 w-100">
+    <div className="d-flex gap-3 w-100 user-page-cont">
       <div className="user-main-info-cont w-50 d-flex flex-column gap-2">
         <div>
           <h2 className="text-center border border-2 border-black rounded p-1 user-main-info-username">
@@ -100,7 +100,7 @@ function UserAccountPage(props) {
           })}
         </ul>
         <button
-          className="border border-2 border-black rounded w-100"
+          className="border border-2 border-black rounded w-100 view-btn"
           onClick={viewMoreHandler}
         >
           {!viewMore ? `View More` : `View Less`}

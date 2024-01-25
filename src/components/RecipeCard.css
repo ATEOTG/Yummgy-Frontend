@@ -33,6 +33,10 @@
   display: none;
 }
 
+.mobile-title {
+  display: none;
+}
+
 .edit-btn-2 {
   top: 8% !important;
   right: -4.5% !important;
@@ -93,6 +97,41 @@
 
   .recipe-card-text-cont {
     width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .recipe-card {
+    gap: 1rem !important;
+    padding: 0.5rem 0.5rem !important;
+  }
+
+  .ingredients-cont {
+    display: none;
+  }
+
+  .recipe-card-text-cont {
+    height: 131.4px !important;
+  }
+
+  .recipe-card-img {
+    width: 117.3px !important;
+  }
+
+  .recipe-card img {
+    height: 131.4px !important;
+  }
+
+  .tablet-title {
+    display: none;
+  }
+
+  .mobile-title {
+    display: block;
+  }
+
+  .edit-btn-2 {
+    top: 15% !important;
   }
 }
 

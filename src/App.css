@@ -10,3 +10,12 @@
   transition: 0.2s;
   color: blue !important;
 }
+
+@media (max-width: 767px) {
+  .title-cont {
+    display: flex;
+    gap: 0rem;
+    background-color: #abceab;
+    justify-content: space-evenly;
+  }
+}
