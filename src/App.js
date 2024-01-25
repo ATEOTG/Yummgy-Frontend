@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/pages/Home";
 import AllRecipes from "./components/pages/AllRecipes";
 import Navigation from "./components/Navigation";
@@ -14,6 +14,7 @@ import PersonIcon from "./svg/PersonIcon";
 import HamburgerIcon from "./svg/HamburgerIcon";
 import MobileMenu from "./components/MobileMenu";
 import MobileMenuContent from "./components/MobileMenuContent";
+import LogoutIcon from "./svg/LogoutIcon";
 
 function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
@@ -22,18 +23,32 @@ function App() {
   const [currUserInfo, setCurrentUserInfo] = useState({});
   const [isCollapse, setIsCollapse] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isUserLogged) {
       YummgyApi.getLoggedInUser(setCurrentUserInfo);
     }
   }, []);
+
+  const logoutHandler = () => {
+    sessionStorage.setItem("jwt", "");
+    setIsUserLogged(false);
+    setCurrentUserInfo({});
+    navigate("/", { replace: true });
+  };
+
   return (
     <div>
       <header>
         <div className="border border-2 p-2 w-95 rounded m-auto mt-4 title-cont border-black">
           <MobileMenu setIsCollapse={setIsCollapse} />
           <h1 className="text-center fw-bold">Yummgy</h1>
-          <PersonIcon />
+          {isUserLogged ? (
+            <LogoutIcon logoutHandler={logoutHandler} />
+          ) : (
+            <PersonIcon />
+          )}
         </div>
         <MobileMenuContent
           isUserLogged={isUserLogged}
