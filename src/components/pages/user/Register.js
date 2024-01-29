@@ -38,7 +38,7 @@ function Register(props) {
         )
       ) {
         throw new Error(
-          "Email not properly formatted as it should! Exmaple: email@gmail.com"
+          "Email not properly formatted as it should! Example: email@gmail.com"
         );
       }
 
@@ -51,7 +51,7 @@ function Register(props) {
       setTimeout(() => {
         setRegisterSuccess(false);
         navigate("/login", { replace: true });
-      }, 2000);
+      }, 4000);
     } catch (err) {
       const errorMessage = err.message;
       setErrorMessage(errorMessage);
@@ -148,7 +148,8 @@ function Register(props) {
         {registerSuccess && (
           <div className="w-100 d-flex justify-content-center mt-4">
             <div className="alert alert-success w-50 text-center" role="alert">
-              Successfully Registered!
+              Successfully Registered! A verification email has been sent to{" "}
+              {emailRef.current.value}.
             </div>
           </div>
         )}
