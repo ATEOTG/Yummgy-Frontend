@@ -41,7 +41,8 @@ function Login(props) {
         navigate("/user", { replace: true });
       }, 2000);
     } catch (err) {
-      setFailureMessage("Username and Password Do Not Match.");
+      const errorMessage = err.message;
+      setFailureMessage(errorMessage);
       setLoginFailure(true);
       setTimeout(() => {
         setLoginFailure(false);

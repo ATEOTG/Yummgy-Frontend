@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 import AccountsPage from "./components/pages/AccountsPage";
 import YummgyApi from "./apis/YummgyApi";
 import PersonIcon from "./svg/PersonIcon";
-import HamburgerIcon from "./svg/HamburgerIcon";
 import MobileMenu from "./components/MobileMenu";
 import MobileMenuContent from "./components/MobileMenuContent";
 import LogoutIcon from "./svg/LogoutIcon";
+import VerificationPage from "./components/pages/VerificationPage";
 
 function App() {
   const [isUserLogged, setIsUserLogged] = useState(() => {
@@ -106,6 +106,7 @@ function App() {
               />
             }
           />
+          <Route path="/verification/*" element={<VerificationPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
