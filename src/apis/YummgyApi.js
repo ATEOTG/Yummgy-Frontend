@@ -329,22 +329,25 @@ const YummgyApi = {
 
   registerUser: (user) => {
     return new Promise((resolve, reject) => {
-      fetch(URL + "/api/add/user", {
+      fetch(URL + "/api/register/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       })
         .then((res) => {
-          if (res.status === 403) {
-            throw new Error("User with that Username already exists!");
+          if (res.ok) {
+            return res;
           }
-          return res.json();
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         })
         .then((data) => {
-          resolve();
+          resolve("success");
         })
         .catch((err) => {
-          reject(err);
+          const data = JSON.parse(err.message);
+          reject(data);
         });
     });
   },
@@ -357,11 +360,10 @@ const YummgyApi = {
         body: JSON.stringify(credentials),
       })
         .then((res) => {
-          if (res.status !== 201) {
-            throw new Error("invalid login");
-          }
-
-          return res.json();
+          if (res.ok) return res.json();
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         })
         .then((data) => {
           sessionStorage.setItem(
@@ -371,10 +373,11 @@ const YummgyApi = {
             })
           );
           setIsUserLogged(true);
-          resolve(); // Resolve the promise if login is successful
+          resolve();
         })
         .catch((err) => {
-          reject(err); // Reject the promise if there is an error
+          const data = JSON.parse(err.message);
+          reject(data);
         });
     });
   },
@@ -387,6 +390,25 @@ const YummgyApi = {
       })
       .catch((err) => {
         console.log(err);
+      });
+  },
+
+  confirmToken: (tokenId, setVerificationMessage) => {
+    fetch(URL + `/api/registration/confirm?token=${tokenId}`, {
+      method: "PATCH",
+    })
+      .then((res) => {
+        if (res.ok) {
+          setVerificationMessage("Account is Verified! Can now login.");
+          return;
+        }
+        return res.text().then((text) => {
+          throw new Error(text);
+        });
+      })
+      .catch((err) => {
+        const data = JSON.parse(err.message);
+        setVerificationMessage(data.message);
       });
   },
 };

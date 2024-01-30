@@ -45,6 +45,7 @@ function Register(props) {
       await YummgyApi.registerUser({
         yumUsername: usernameRef.current.value,
         yumPassword: passwordRef.current.value,
+        email: emailRef.current.value,
       });
 
       setRegisterSuccess(true);
@@ -148,8 +149,8 @@ function Register(props) {
         {registerSuccess && (
           <div className="w-100 d-flex justify-content-center mt-4">
             <div className="alert alert-success w-50 text-center" role="alert">
-              Successfully Registered! A verification email has been sent to{" "}
-              {emailRef.current.value}.
+              A verification email has been sent to {emailRef.current.value},
+              click on it to activate your account!
             </div>
           </div>
         )}
